@@ -204,6 +204,43 @@
   .quicklink .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute)}
   .quicklink b{font-family:'Big Shoulders Display'; font-size:1.25rem; text-transform:uppercase; color:var(--ink); font-weight:800}
   .quicklink em{font-style:normal; font-size:.82rem; color:var(--ink-mute)}
+  .quicklink-primary{border-color:var(--amber); background:var(--teal-soft)}
+
+  /* ============ CALCULADORA DE ENVÍO ============ */
+  .configurator{display:grid; gap:32px; grid-template-columns:1fr 340px; align-items:start}
+  @media (max-width:900px){ .configurator{grid-template-columns:1fr} }
+  .config-block{margin-bottom:32px}
+  .config-label{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute); display:block; margin-bottom:14px}
+  .tier-cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .tier-card{background:var(--surface); border:1.5px solid var(--line); border-radius:6px; padding:22px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:6px; font-family:inherit; color:var(--ink); transition:border-color .15s ease, transform .15s ease}
+  .tier-card:hover{border-color:var(--teal); transform:translateY(-2px)}
+  .tier-card.active{border-color:var(--amber); background:var(--teal-soft)}
+  .tier-card-icon{font-size:1.8rem}
+  .tier-card b{font-family:'Big Shoulders Display'; font-size:1.2rem; text-transform:uppercase}
+  .tier-card span{font-size:.82rem; color:var(--ink-mute)}
+  .tier-card-price{font-family:'IBM Plex Mono'; font-weight:700; color:var(--ink); margin-top:6px}
+  .tier-card-price em{font-style:normal; font-weight:400; color:var(--ink-mute); font-size:.78rem}
+  .config-row{display:flex; flex-wrap:wrap; gap:12px}
+  .included-toggle{background:none; border:1px solid var(--line); border-radius:3px; padding:10px 16px; font-family:'IBM Plex Sans'; font-size:.86rem; font-weight:600; color:var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:8px}
+  .included-list{margin:12px 0 0; padding-left:20px; color:var(--ink-mute); font-size:.88rem; line-height:1.8}
+  .configurator-summary{background:var(--navy); color:#fff; border-radius:6px; padding:26px; position:sticky; top:90px}
+  .summary-vehicle{font-family:'Big Shoulders Display'; font-size:1.4rem; margin-top:8px; text-transform:uppercase; text-wrap:balance}
+  .summary-rows{margin-top:18px; border-top:1px solid rgba(255,255,255,.15)}
+  .summary-row{display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:.85rem; color:#C9DBE0}
+  .summary-row .strike{text-decoration:line-through; opacity:.6}
+  .summary-row.highlight{color:#fff; font-weight:700}
+  .summary-row.save span:last-child{color:var(--amber-strong); font-weight:700}
+  .summary-total{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0 4px; font-family:'Big Shoulders Display'; font-size:1.5rem; color:#fff}
+  .summary-disclaimer{font-size:.72rem; color:#9FC1C9; margin-top:6px; line-height:1.5}
+  .summary-ctas{display:flex; flex-direction:column; gap:10px; margin-top:18px}
+  .summary-ctas .btn-ghost{color:#fff; border-color:rgba(255,255,255,.4)}
+  .cfg-contact{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:32px; margin-top:48px}
+  .cfg-contact-form{display:grid; gap:0; margin-top:20px; max-width:480px}
+  .cfg-faq{margin-top:48px}
+  .cfg-faq h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.3rem; font-weight:700; color:var(--ink); margin-bottom:6px}
+  .cfg-faq details{border-top:1px solid var(--line); padding:16px 0}
+  .cfg-faq summary{cursor:pointer; font-weight:600; color:var(--ink)}
+  .cfg-faq details p{margin-top:10px; font-size:.88rem}
 
   /* ============ PROCESS TIMELINE ============ */
   .phase-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px; margin:38px 0 2px}
@@ -321,13 +358,14 @@
       <a href="#grupo">Grupo</a>
       <a href="#proceso">Cómo funciona</a>
       <a href="#vehiculos">Vehículos</a>
+      <a href="#calculadora">Cotizar</a>
       <a href="#remolques">Remolques</a>
       <a href="#galeria">Galería</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
       <a class="phone-link mono" href="tel:+17862390289">+1 786 239 0289</a>
-      <a class="btn btn-primary" href="#contacto" style="padding:10px 18px">Cotizar envío</a>
+      <a class="btn btn-primary" href="#calculadora" style="padding:10px 18px">Cotizar envío</a>
       <button class="navburger" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav"><span></span></button>
     </div>
   </div>
@@ -366,11 +404,12 @@
       <h2>Explora el grupo</h2>
     </div>
     <div class="quicklinks">
-      <a class="quicklink reveal" href="#grupo"><span class="code">01</span><b>El grupo</b><em>Cinco empresas, una misma red</em></a>
-      <a class="quicklink reveal" href="#proceso"><span class="code">02</span><b>Cómo funciona</b><em>El envío, paso a paso</em></a>
-      <a class="quicklink reveal" href="#vehiculos"><span class="code">03</span><b>Vehículos autorizados</b><em>468 modelos · 25 marcas</em></a>
-      <a class="quicklink reveal" href="#remolques"><span class="code">04</span><b>Remolques y plataformas</b><em>Equipo comercial nuevo</em></a>
-      <a class="quicklink reveal" href="#contacto"><span class="code">05</span><b>Contacto</b><em>Solicita tu cotización</em></a>
+      <a class="quicklink quicklink-primary reveal" href="#calculadora"><span class="code">01</span><b>Configura tu envío</b><em>Cotización instantánea · hasta $500 de descuento</em></a>
+      <a class="quicklink reveal" href="#grupo"><span class="code">02</span><b>El grupo</b><em>Cinco empresas, una misma red</em></a>
+      <a class="quicklink reveal" href="#proceso"><span class="code">03</span><b>Cómo funciona</b><em>El envío, paso a paso</em></a>
+      <a class="quicklink reveal" href="#vehiculos"><span class="code">04</span><b>Vehículos autorizados</b><em>468 modelos · 25 marcas</em></a>
+      <a class="quicklink reveal" href="#remolques"><span class="code">05</span><b>Remolques y plataformas</b><em>Equipo comercial nuevo</em></a>
+      <a class="quicklink reveal" href="#contacto"><span class="code">06</span><b>Contacto</b><em>Solicita tu cotización</em></a>
     </div>
   </div>
 </section>
@@ -505,8 +544,100 @@
   </div>
 </section>
 
+<!-- ============ CALCULADORA DE ENVÍO ============ -->
+<section id="calculadora" data-page="calculadora" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Macias Logistics · Cotización instantánea</span>
+      <h2>Configura tu envío</h2>
+      <p>Elige tu vehículo y obtén el costo de tu flete al instante. Configurando tu envío aquí, en la web, obtienes hasta $500 de descuento sobre el precio regular.</p>
+    </div>
+
+    <div class="configurator">
+      <div class="configurator-main">
+
+        <div class="config-block reveal">
+          <span class="config-label">Paso 1 · Tipo de vehículo</span>
+          <div class="tier-cards" id="tier-cards">
+            <button type="button" class="tier-card" data-tier="regular">
+              <span class="tier-card-icon" aria-hidden="true">🚗</span>
+              <b>Vehículo regular / turismo</b>
+              <span>Autos, SUV, pick up, paneles, microbuses, ómnibus…</span>
+              <span class="tier-card-price">$4,250 <em>flete regular</em></span>
+            </button>
+            <button type="button" class="tier-card" data-tier="camion">
+              <span class="tier-card-icon" aria-hidden="true">🚛</span>
+              <b>Camión / tracto-camión</b>
+              <span>Freightliner, Kenworth, Peterbilt, Western Star, Volvo, Hino, International, Isuzu…</span>
+              <span class="tier-card-price">$10,500 <em>flete regular</em></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-block reveal" id="block-model" hidden>
+          <span class="config-label">Paso 2 · Marca y modelo</span>
+          <div class="config-row">
+            <select id="cfg-marca" class="cat-select" style="flex:1; min-width:180px"><option value="">Selecciona la marca…</option></select>
+            <select id="cfg-modelo" class="cat-select" style="flex:1; min-width:180px" disabled><option value="">Selecciona el modelo…</option></select>
+          </div>
+        </div>
+
+        <div class="config-block reveal" id="block-included" hidden>
+          <button type="button" class="included-toggle" id="included-toggle">¿Qué incluye el flete? <span>▾</span></button>
+          <ul class="included-list" id="included-list" hidden>
+            <li>Transporte marítimo puerto a puerto (Puerto Everglades → Puerto de Mariel)</li>
+            <li>Contratos y acreditaciones de exportación</li>
+            <li>Gestión NVOCC y documentación de embarque</li>
+            <li>Impuestos de exportación en Estados Unidos</li>
+            <li>Validaciones y trámites aduanales</li>
+            <li>Manejos portuarios en origen y destino</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <aside class="configurator-summary" id="cfg-summary" hidden>
+        <span class="eyebrow" style="color:var(--amber-strong)">Tu cotización</span>
+        <div class="summary-vehicle" id="summary-vehicle">—</div>
+        <div class="summary-rows">
+          <div class="summary-row"><span>Flete — precio regular</span><span class="strike" id="summary-base">$0</span></div>
+          <div class="summary-row highlight"><span>Flete configurando online</span><span id="summary-online">$0</span></div>
+          <div class="summary-row save"><span>Ahorras configurando aquí</span><span id="summary-save">$0</span></div>
+          <div class="summary-row"><span>Impuestos estimados en Cuba*</span><span id="summary-tax">Por confirmar</span></div>
+        </div>
+        <div class="summary-total"><span>Total estimado</span><span id="summary-total">$0</span></div>
+        <p class="summary-disclaimer">*Impuestos aproximados de Cuba — se pagan en Cuba mediante tarjeta clásica y pueden variar hasta $500 por encima o por debajo según el contrato final.</p>
+        <div class="summary-ctas">
+          <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17862390289" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+          <a class="btn btn-ghost" href="#cfg-contact-anchor">Prefiero que me escriban</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="cfg-contact reveal" id="cfg-contact-anchor">
+      <h3>Envíanos un email y nuestro equipo se pondrá en contacto contigo</h3>
+      <p style="margin-top:6px">O si prefieres, escríbenos directo por WhatsApp con tu cotización ya lista.</p>
+      <form class="cfg-contact-form" id="cfg-contact-form" onsubmit="event.preventDefault(); this.querySelector('.sent').hidden=false;">
+        <div class="field"><label for="cfg-name">Nombre</label><input id="cfg-name" type="text" placeholder="Tu nombre completo"></div>
+        <div class="field"><label for="cfg-email">Correo electrónico*</label><input id="cfg-email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
+        <div class="field"><label for="cfg-phone">Teléfono / WhatsApp</label><input id="cfg-phone" type="tel" placeholder="+1 786 000 0000"></div>
+        <button class="btn btn-primary" type="submit">Enviar mi cotización</button>
+        <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos en breve con los siguientes pasos.</p>
+      </form>
+    </div>
+
+    <div class="cfg-faq reveal">
+      <h3>Preguntas frecuentes</h3>
+      <details><summary>¿Cómo se paga el flete?</summary><p>El flete se contrata y se paga en Estados Unidos, antes del embarque del vehículo.</p></details>
+      <details><summary>¿Cómo se pagan los impuestos en Cuba?</summary><p>Los impuestos de importación se pagan directamente en Cuba, mediante tarjeta clásica, al momento de la entrega. Son estimados y pueden variar hasta $500 por encima o por debajo según el contrato final.</p></details>
+      <details><summary>¿Por qué el flete configurando online es más barato?</summary><p>Al configurar y confirmar tu pedido directamente en la web nos ahorras trabajo administrativo, y trasladamos ese ahorro a ti: $250 en vehículos regulares y $500 en camiones.</p></details>
+      <details><summary>¿No encuentro mi modelo exacto?</summary><p>Escríbenos por WhatsApp — la mayoría de las marcas y modelos del año 2016 en adelante son elegibles, y seguimos ampliando el catálogo.</p></details>
+    </div>
+  </div>
+</section>
+
 <!-- ============ REMOLQUES ============ -->
-<section id="remolques" data-page="remolques" style="background:var(--surface-2)">
+<section id="remolques" data-page="remolques">
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Macias Logistics · Equipo nuevo</span>
@@ -635,7 +766,7 @@
       </div>
       <div>
         <h4>Macias Logistics</h4>
-        <a href="#vehiculos">Envío de autos</a>
+        <a href="#calculadora">Configura tu envío</a>
         <a href="#vehiculos">Vehículos autorizados</a>
         <a href="#remolques">Remolques y plataformas</a>
       </div>
@@ -674,8 +805,8 @@
   }));
 
   // ===== Router de páginas =====
-  const PAGES = ['inicio','grupo','proceso','vehiculos','remolques','galeria','contacto'];
-  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', remolques:'Remolques y plataformas', galeria:'Galería', contacto:'Contacto'};
+  const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','remolques','galeria','contacto'];
+  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', contacto:'Contacto'};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function showPage(page){
@@ -941,4 +1072,115 @@
     renderCatalog();
   });
   renderCatalog();
+
+  // ===== Calculadora de envío =====
+  const TIER_PRICING = {
+    regular: { base: 4250, online: 4000, discount: 250, label: 'Vehículo regular / turismo' },
+    camion:  { base: 10500, online: 10000, discount: 500, label: 'Camión / tracto-camión' }
+  };
+  const TIER_TIPOS = {
+    regular: ['Auto','SUV','Pick up','Camioneta','Panel','Microbús','Ómnibus','Rural'],
+    camion: ['Camión','Cuña']
+  };
+  // Impuestos aproximados en Cuba por vehículo ('MARCA|MODELO' -> monto en USD).
+  // Vacío hasta recibir la tabla oficial del cliente — la interfaz muestra
+  // "por confirmar" mientras un modelo no tenga entrada aquí.
+  const CUBA_TAXES = {};
+
+  function fmtUSD(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function safeStorage(fn){ try { return fn(); } catch(e){ return null; } }
+
+  const tierCards = document.querySelectorAll('.tier-card');
+  const blockModel = document.getElementById('block-model');
+  const blockIncluded = document.getElementById('block-included');
+  const includedList = document.getElementById('included-list');
+  const includedToggle = document.getElementById('included-toggle');
+  const cfgMarca = document.getElementById('cfg-marca');
+  const cfgModelo = document.getElementById('cfg-modelo');
+  const cfgSummary = document.getElementById('cfg-summary');
+  let currentTier = null;
+
+  function selectTier(tier, persist){
+    currentTier = tier;
+    tierCards.forEach(c => c.classList.toggle('active', c.dataset.tier === tier));
+    const tipos = TIER_TIPOS[tier];
+    const marcas = [...new Set(CATALOG.filter(r => tipos.includes(r[1])).map(r => r[0]))].sort();
+    cfgMarca.innerHTML = '<option value="">Selecciona la marca…</option>' + marcas.map(m => `<option value="${m}">${m}</option>`).join('');
+    cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
+    cfgModelo.disabled = true;
+    blockModel.hidden = false;
+    blockIncluded.hidden = true;
+    cfgSummary.hidden = true;
+    if (persist !== false) safeStorage(() => localStorage.setItem('cc_cfg_tier', tier));
+  }
+
+  tierCards.forEach(card => card.addEventListener('click', () => selectTier(card.dataset.tier)));
+
+  cfgMarca.addEventListener('change', () => {
+    const marca = cfgMarca.value;
+    cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
+    blockIncluded.hidden = true;
+    cfgSummary.hidden = true;
+    if (!marca) { cfgModelo.disabled = true; return; }
+    const tipos = TIER_TIPOS[currentTier];
+    const modelos = CATALOG.filter(r => r[0] === marca && tipos.includes(r[1]));
+    cfgModelo.innerHTML += modelos.map(r => `<option value="${r[2]}">${r[2]}</option>`).join('');
+    cfgModelo.disabled = false;
+    safeStorage(() => localStorage.setItem('cc_cfg_marca', marca));
+  });
+
+  cfgModelo.addEventListener('change', () => {
+    if (!cfgModelo.value) { blockIncluded.hidden = true; cfgSummary.hidden = true; return; }
+    safeStorage(() => localStorage.setItem('cc_cfg_modelo', cfgModelo.value));
+    showSummary();
+  });
+
+  function showSummary(){
+    const marca = cfgMarca.value, modelo = cfgModelo.value;
+    const pricing = TIER_PRICING[currentTier];
+    const tax = CUBA_TAXES[marca + '|' + modelo];
+
+    document.getElementById('summary-vehicle').textContent = marca + ' ' + modelo;
+    document.getElementById('summary-base').textContent = fmtUSD(pricing.base);
+    document.getElementById('summary-online').textContent = fmtUSD(pricing.online);
+    document.getElementById('summary-save').textContent = fmtUSD(pricing.discount);
+    const taxEl = document.getElementById('summary-tax');
+    const totalEl = document.getElementById('summary-total');
+    let waTaxPart;
+    if (tax != null) {
+      taxEl.textContent = fmtUSD(tax) + ' aprox.';
+      totalEl.textContent = fmtUSD(pricing.online + tax) + ' aprox.';
+      waTaxPart = `, más impuestos aproximados de ${fmtUSD(tax)} en Cuba`;
+    } else {
+      taxEl.textContent = 'Por confirmar';
+      totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos';
+      waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
+    }
+
+    const waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Precio configurando online: ${fmtUSD(pricing.online)}${waTaxPart}.`);
+    document.getElementById('summary-whatsapp').href = `https://wa.me/17862390289?text=${waText}`;
+
+    blockIncluded.hidden = false;
+    cfgSummary.hidden = false;
+  }
+
+  includedToggle?.addEventListener('click', () => {
+    includedList.hidden = !includedList.hidden;
+    includedToggle.querySelector('span').textContent = includedList.hidden ? '▾' : '▴';
+  });
+
+  // Restaura la última configuración del visitante (si la hay)
+  (function restoreConfig(){
+    const savedTier = safeStorage(() => localStorage.getItem('cc_cfg_tier'));
+    if (!savedTier || !TIER_TIPOS[savedTier]) return;
+    selectTier(savedTier, false);
+    const savedMarca = safeStorage(() => localStorage.getItem('cc_cfg_marca'));
+    if (!savedMarca) return;
+    cfgMarca.value = savedMarca;
+    cfgMarca.dispatchEvent(new Event('change'));
+    const savedModelo = safeStorage(() => localStorage.getItem('cc_cfg_modelo'));
+    if (!savedModelo) return;
+    cfgModelo.value = savedModelo;
+    if (cfgModelo.value === savedModelo) cfgModelo.dispatchEvent(new Event('change'));
+  })();
 </script>
