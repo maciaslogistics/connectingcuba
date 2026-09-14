@@ -1,0 +1,944 @@
+<!doctype html>
+<title>ConnectingCuba</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --paper:#F1F4F3;
+    --surface:#FFFFFF;
+    --surface-2:#E7EEEC;
+    --line:#D5DFDC;
+    --ink:#0F2530;
+    --ink-mute:#4E6670;
+    --navy:#0C2233;
+    --navy-2:#12354A;
+    --teal:#0E7C82;
+    --teal-strong:#0A5F64;
+    --teal-soft:#E1F1F0;
+    --amber:#B8711A;
+    --amber-strong:#9C5E14;
+    --shadow: 0 1px 2px rgba(12,34,51,.06);
+    --route-line: repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 20px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0A1B26;
+      --surface:#102A38;
+      --surface-2:#0D2330;
+      --line:#1E3D4C;
+      --ink:#E9F1EF;
+      --ink-mute:#93AEB6;
+      --navy:#071620;
+      --navy-2:#0C2233;
+      --teal:#3BC8C0;
+      --teal-strong:#5AD9D1;
+      --teal-soft:#123C3D;
+      --amber:#F2A93B;
+      --amber-strong:#F7C169;
+      --shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0A1B26;
+    --surface:#102A38;
+    --surface-2:#0D2330;
+    --line:#1E3D4C;
+    --ink:#E9F1EF;
+    --ink-mute:#93AEB6;
+    --navy:#071620;
+    --navy-2:#0C2233;
+    --teal:#3BC8C0;
+    --teal-strong:#5AD9D1;
+    --teal-soft:#123C3D;
+    --amber:#F2A93B;
+    --amber-strong:#F7C169;
+    --shadow: 0 1px 2px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  [hidden]{display:none !important}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+  h1,h2,h3{font-family:'Big Shoulders Display', 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:.01em; text-wrap:balance; margin:0; line-height:.98}
+  .eyebrow{font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-strong); font-weight:600}
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace}
+  p{line-height:1.6; color:var(--ink-mute); max-width:62ch}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; justify-content:center;
+    font-family:'IBM Plex Sans'; font-weight:600; font-size:.92rem;
+    padding:14px 24px; border-radius:3px; border:1.5px solid transparent; cursor:pointer;
+    text-decoration:none; white-space:nowrap; transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--amber); color:#1A0F00}
+  .btn-primary:hover{background:var(--amber-strong)}
+  .btn-ghost{background:transparent; border-color:currentColor; color:var(--ink)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  section{padding:88px 0}
+  @media (max-width:720px){ section{padding:56px 0} }
+
+  .reveal{transform:translateY(14px); transition:transform .55s ease}
+  .reveal.in{transform:none}
+
+  /* ============ ROUTE STRIP ============ */
+  .route-strip{background:var(--navy); color:#CBDDE3; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em}
+  .route-strip .wrap{display:flex; align-items:center; gap:16px; padding:9px 24px; overflow-x:auto; white-space:nowrap; scrollbar-width:none}
+  .route-strip .wrap::-webkit-scrollbar{display:none}
+  .route-strip .port{font-weight:600; color:#fff; flex:none}
+  .route-strip .track{flex:none; width:60px; height:2px; background-image:var(--route-line); background-size:20px 2px; position:relative}
+  @media (min-width:960px){ .route-strip .track{flex:1; width:auto; min-width:40px} }
+  .route-strip .track::after{content:'▸'; position:absolute; right:-2px; top:50%; transform:translateY(-50%); color:var(--amber)}
+  .route-strip .tag{flex:none; color:#7FA3AF; display:none}
+  @media (min-width:760px){ .route-strip .tag{display:inline} }
+
+  /* ============ HEADER ============ */
+  header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:20px}
+  @media (max-width:480px){ header.site .wrap{padding:12px 16px; gap:10px} }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+  .brand-logo{height:38px; width:auto; flex:none; display:block}
+  .brand-logo-dark{display:none}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .brand-logo-light{display:none}
+    :root:not([data-theme="light"]) .brand-logo-dark{display:block}
+  }
+  :root[data-theme="dark"] .brand-logo-light{display:none}
+  :root[data-theme="dark"] .brand-logo-dark{display:block}
+  .brand-tag{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.08em; color:var(--ink-mute); text-transform:uppercase; white-space:nowrap}
+  @media (max-width:640px){ .brand-tag{display:none} }
+  @media (max-width:480px){ .brand-logo{height:30px} }
+  nav.primary{display:flex; align-items:center; gap:28px}
+  nav.primary a{font-size:.88rem; font-weight:500; text-decoration:none; color:var(--ink-mute); white-space:nowrap}
+  nav.primary a:hover{color:var(--teal-strong)}
+  @media (min-width:960px){
+    nav.primary a{padding-bottom:5px; border-bottom:2px solid transparent}
+    nav.primary a.active{color:var(--ink); font-weight:700; border-bottom-color:var(--amber)}
+  }
+  @media (max-width:959px){
+    nav.primary a.active{color:var(--teal-strong); border-left:3px solid var(--amber); padding-left:12px; margin-left:-15px}
+  }
+  .header-actions{display:flex; align-items:center; gap:14px}
+  @media (max-width:560px){ .header-actions > .btn-primary{display:none} }
+  .phone-link{font-family:'IBM Plex Mono'; font-size:.85rem; font-weight:600; text-decoration:none; color:var(--ink); display:none; white-space:nowrap}
+  @media (min-width:1180px){ .phone-link{display:inline} }
+  .navburger{display:none; background:none; border:1px solid var(--line); border-radius:3px; width:42px; height:38px; align-items:center; justify-content:center; cursor:pointer}
+  .navburger span, .navburger span::before, .navburger span::after{content:''; display:block; width:18px; height:2px; background:var(--ink); position:relative; transition:transform .2s ease, opacity .2s ease}
+  .navburger span::before{position:absolute; top:-6px}
+  .navburger span::after{position:absolute; top:6px}
+  @media (max-width:959px){
+    nav.primary{position:fixed; inset:61px 0 0 0; background:var(--paper); flex-direction:column; align-items:flex-start; padding:28px 24px; gap:4px; transform:translateX(100%); transition:transform .25s ease; overflow-y:auto}
+    nav.primary a{padding:14px 0; width:100%; border-bottom:1px solid var(--line); font-size:1.05rem}
+    body.nav-open nav.primary{transform:translateX(0)}
+    .navburger{display:flex}
+  }
+  body.nav-open .navburger span{background:transparent}
+  body.nav-open .navburger span::before{transform:rotate(45deg); top:0}
+  body.nav-open .navburger span::after{transform:rotate(-45deg); top:0}
+
+  /* ============ HERO ============ */
+  .hero{position:relative; background:var(--navy); color:#fff; overflow:hidden}
+  .hero-media{position:absolute; inset:0}
+  .hero-media img{width:100%; height:100%; object-fit:cover; opacity:.55}
+  .hero-media::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,22,32,.55) 0%, rgba(7,22,32,.72) 45%, rgba(7,22,32,.96) 100%)}
+  .hero-inner{position:relative; padding:72px 0 56px}
+  @media (min-width:720px){ .hero-inner{padding:110px 0 76px} }
+  .hero .eyebrow{color:var(--amber-strong)}
+  .hero h1{font-size:clamp(2.5rem, 8vw, 5.2rem); font-weight:900; margin-top:10px; color:#fff}
+  .hero h1 em{font-style:normal; color:var(--amber-strong)}
+  .hero p.lead{color:#C9DBE0; font-size:1.05rem; margin-top:18px; max-width:56ch}
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
+  .hero-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.14); border-radius:4px; margin-top:52px; overflow:hidden}
+  @media (min-width:640px){ .hero-stats{grid-template-columns:repeat(4,1fr)} }
+  .hero-stat{background:rgba(9,26,37,.55); padding:18px 20px}
+  .hero-stat b{display:block; font-family:'Big Shoulders Display'; font-size:2.1rem; font-weight:800; color:#fff}
+  .hero-stat span{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; color:#9FC1C9; text-transform:uppercase}
+
+  /* ============ SECTION HEADS ============ */
+  .head{max-width:56ch; margin-bottom:44px}
+  .head h2{font-size:clamp(1.9rem,4.4vw,2.9rem); margin-top:8px; color:var(--ink)}
+  .head p{margin-top:14px}
+
+  /* ============ DIVISIONS ============ */
+  .division-flagship{background:var(--navy); color:#fff; border-radius:6px; padding:32px; margin-bottom:20px; position:relative; overflow:hidden}
+  .division-flagship::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(242,169,59,.22), transparent 62%); pointer-events:none}
+  .division-flagship > *{position:relative}
+  .division-flagship .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:#9FC1C9; letter-spacing:.08em}
+  .division-flagship .role{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--amber-strong); background:rgba(242,169,59,.16); padding:4px 9px; border-radius:2px; display:inline-block; margin-top:10px}
+  .division-flagship h3{font-size:clamp(1.8rem,4vw,2.6rem); color:#fff; margin-top:12px}
+  .division-flagship p{color:#C9DBE0; margin-top:12px; max-width:60ch; font-size:.95rem}
+  .division-flagship .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
+  .division-flagship .tag-row span{font-family:'IBM Plex Mono'; font-size:.68rem; color:#D3E2E5; border:1px solid rgba(255,255,255,.25); border-radius:2px; padding:4px 9px}
+  .divisions-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow)}
+  .division .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute); letter-spacing:.08em}
+  .division h3{font-size:1.35rem; color:var(--ink)}
+  .division .role{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-strong); background:var(--teal-soft); padding:4px 9px; border-radius:2px; align-self:flex-start}
+  .division p{font-size:.88rem; margin:0}
+  .division .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px}
+  .division .tag-row span{font-family:'IBM Plex Mono'; font-size:.64rem; color:var(--ink-mute); border:1px solid var(--line); border-radius:2px; padding:3px 7px}
+  .division.soon{opacity:.8}
+  .division.soon .role{background:var(--teal-soft); color:var(--teal-strong)}
+  .division-logo{height:38px; width:auto; align-self:flex-start; display:block}
+  .division-flagship .division-logo{height:42px; margin-bottom:2px}
+  .division-logo-chip{background:var(--navy); border-radius:4px; padding:9px 14px; display:inline-flex; align-self:flex-start}
+  .division-logo-chip .division-logo{height:26px}
+
+  /* ============ QUICKLINKS (inicio) ============ */
+  .quicklinks{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .quicklink{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:22px; text-decoration:none; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .15s ease; box-shadow:var(--shadow)}
+  .quicklink:hover{border-color:var(--teal); transform:translateY(-2px)}
+  .quicklink .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute)}
+  .quicklink b{font-family:'Big Shoulders Display'; font-size:1.25rem; text-transform:uppercase; color:var(--ink); font-weight:800}
+  .quicklink em{font-style:normal; font-size:.82rem; color:var(--ink-mute)}
+
+  /* ============ PROCESS TIMELINE ============ */
+  .phase-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px; margin:38px 0 2px}
+  .phase-head:first-child{margin-top:0}
+  .phase-tag{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--amber-strong); font-weight:700}
+  .phase-owner{font-family:'IBM Plex Mono'; font-size:.74rem; color:var(--ink-mute)}
+  .timeline{display:grid; gap:0}
+  .step{display:grid; grid-template-columns:52px 1fr; gap:20px; padding:24px 0; border-top:1px solid var(--line); position:relative}
+  .phase-head + .timeline .step:first-child{border-top:none}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step-num{font-family:'Big Shoulders Display'; font-weight:800; font-size:2.1rem; color:var(--line); line-height:1}
+  .step:hover .step-num, .step.in .step-num{color:var(--amber)}
+  .step h3{font-size:1.15rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
+  .step p{margin-top:6px; font-size:.92rem}
+  .requirements{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:28px; margin-top:44px}
+  .requirements h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.1rem; font-weight:700; color:var(--ink)}
+  .requirements ul{margin:14px 0 20px; padding-left:20px; color:var(--ink-mute); font-size:.9rem; line-height:1.8}
+  .requirements li{margin-bottom:2px}
+
+  /* ============ VEHICLES CATALOG ============ */
+  .catalog-controls{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px}
+  .cat-search{flex:1; min-width:220px; font-family:'IBM Plex Sans'; font-size:.95rem; padding:12px 14px; border:1px solid var(--line); border-radius:3px; background:var(--surface); color:var(--ink)}
+  .cat-select{font-family:'IBM Plex Mono'; font-size:.82rem; padding:12px 14px; border:1px solid var(--line); border-radius:3px; background:var(--surface); color:var(--ink)}
+  .brand-pills{display:flex; flex-wrap:nowrap; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:6px; scrollbar-width:thin}
+  .brand-pill{flex:none; font-family:'IBM Plex Mono'; font-size:.74rem; font-weight:600; letter-spacing:.03em; padding:8px 14px; border:1px solid var(--line); background:var(--surface); border-radius:20px; cursor:pointer; color:var(--ink-mute); white-space:nowrap}
+  .brand-pill.active{background:var(--navy); border-color:var(--navy); color:#fff}
+  .catalog-summary{font-family:'IBM Plex Mono'; font-size:.76rem; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-mute); margin:12px 0 14px}
+  .catalog-summary b, .catalog-summary span{color:var(--teal-strong); font-weight:600}
+  .catalog-table-wrap{border:1px solid var(--line); border-radius:4px; overflow:auto; max-height:560px; background:var(--surface)}
+  table.catalog-table{width:100%; border-collapse:collapse; font-size:.86rem}
+  .catalog-table thead th{position:sticky; top:0; background:var(--navy); color:#fff; text-align:left; padding:10px 16px; font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; z-index:1}
+  .catalog-table tbody td{padding:9px 16px; border-top:1px solid var(--line); vertical-align:top}
+  .catalog-table tbody tr:nth-child(even){background:var(--surface-2)}
+  .catalog-table td.t-marca{font-weight:700; white-space:nowrap; color:var(--ink)}
+  .catalog-table td.t-tipo{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-mute); white-space:nowrap}
+  .catalog-empty{padding:32px 16px; text-align:center; color:var(--ink-mute); font-size:.9rem}
+
+  /* ============ TRAILERS ============ */
+  .trailer-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .trailer-card{background:var(--surface); border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:var(--shadow)}
+  .trailer-card img{height:170px; object-fit:cover; width:100%}
+  .trailer-card .body{padding:18px}
+  .trailer-card h3{font-size:1.1rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
+  .trailer-card p{font-size:.85rem; margin-top:6px}
+
+  /* ============ TRUST STRIP ============ */
+  .trust{background:var(--navy); color:#fff}
+  .trust .wrap{display:grid; gap:28px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .trust-item{display:flex; gap:14px; align-items:flex-start}
+  .trust-item svg{flex:none; margin-top:2px; color:var(--amber-strong)}
+  .trust-item h3{font-size:1rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:#fff}
+  .trust-item p{color:#AEC7CD; font-size:.85rem; margin-top:4px}
+
+  /* ============ GALLERY ============ */
+  .gallery-scroll{display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+  .gallery-scroll img{flex:none; width:260px; height:320px; object-fit:cover; border-radius:4px; scroll-snap-align:start}
+  .gallery-scroll::-webkit-scrollbar{height:6px}
+  .gallery-scroll::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px}
+
+  /* ============ CONTACT ============ */
+  .contact-grid{display:grid; gap:40px; grid-template-columns:1.1fr 1fr}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr} }
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:16px}
+  .field label{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-mute)}
+  .field input, .field select, .field textarea{
+    font-family:'IBM Plex Sans'; font-size:.95rem; padding:12px 13px; border:1px solid var(--line); border-radius:3px; background:var(--surface); color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:110px}
+  .contact-card{background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:18px; height:fit-content}
+  .contact-row{display:flex; gap:12px; align-items:flex-start}
+  .contact-row svg{flex:none; color:var(--teal-strong); margin-top:2px}
+  .contact-row b{display:block; font-size:.92rem}
+  .contact-row span{font-size:.85rem; color:var(--ink-mute)}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--navy-2); color:#B9CDD3; padding:56px 0 26px}
+  .footer-grid{display:grid; gap:32px; grid-template-columns:1.4fr 1fr 1fr 1fr}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr} }
+  .footer-grid h4{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
+  .footer-grid a{display:block; font-size:.86rem; color:#D3E2E5; text-decoration:none; margin-bottom:9px}
+  .footer-grid a:hover{color:#fff}
+  .footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; border-top:1px solid rgba(255,255,255,.1); margin-top:44px; padding-top:22px; font-size:.78rem; color:#7FA3AF}
+  .social-row{display:flex; gap:10px}
+  .social-row button{width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:transparent; color:#D3E2E5; display:flex; align-items:center; justify-content:center; cursor:pointer}
+  .social-row button:hover{background:rgba(255,255,255,.1)}
+
+  /* ============ WHATSAPP FAB ============ */
+  .fab{position:fixed; right:20px; bottom:20px; z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28); text-decoration:none}
+  .fab:hover{filter:brightness(1.06)}
+
+  ::selection{background:var(--amber); color:#1A0F00}
+</style>
+
+<!-- ============ ROUTE STRIP ============ -->
+<div class="route-strip">
+  <div class="wrap">
+    <span class="port">PUERTO EVERGLADES, FL</span>
+    <span class="track" aria-hidden="true"></span>
+    <span class="tag">EXPORTACIÓN LEGAL DE VEHÍCULOS · DESDE 2023</span>
+    <span class="track" aria-hidden="true"></span>
+    <span class="port">PUERTO DE MARIEL, CUBA</span>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
+      <span class="brand-tag">connectingcuba.com</span>
+    </a>
+    <nav class="primary" id="primaryNav">
+      <a href="#inicio">Inicio</a>
+      <a href="#grupo">Grupo</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#vehiculos">Vehículos</a>
+      <a href="#remolques">Remolques</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="phone-link mono" href="tel:+17862390289">+1 786 239 0289</a>
+      <a class="btn btn-primary" href="#contacto" style="padding:10px 18px">Cotizar envío</a>
+      <button class="navburger" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" data-page="inicio" style="padding:0">
+  <div class="hero-media">
+    <img src="img/hero.jpg" alt="Autos y camiones listos para embarcar en Puerto Everglades">
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Grupo ConnectingCuba · Desde 2017</span>
+    <h1>Conectamos<br>Estados Unidos<br>con <em>Cuba</em></h1>
+    <p class="lead">ConnectingCuba es la plataforma que reúne a las empresas del grupo: <strong style="color:#fff">Macias Logistics</strong> exporta vehículos comerciales y utilitarios con todas las licencias BIS, <strong style="color:#fff">Ola International Trading</strong> gestiona comercio internacional entre Europa, Cuba y Estados Unidos, y <strong style="color:#fff">Henex Worldwide Group</strong> opera la estructura logística en Cuba.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://wa.me/17862390289" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+        WhatsApp directo
+      </a>
+      <a class="btn btn-ghost" href="#grupo" style="color:#fff; border-color:rgba(255,255,255,.5)">Conocer el grupo ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>2017</b><span>Grupo operando en EE.UU.</span></div>
+      <div class="hero-stat"><b>5</b><span>Empresas del grupo</span></div>
+      <div class="hero-stat"><b>BIS</b><span>Licencias vigentes</span></div>
+      <div class="hero-stat"><b>2</b><span>Puertos · una ruta</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACCESOS RÁPIDOS (inicio) ============ -->
+<section data-page="inicio">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Accesos rápidos</span>
+      <h2>Explora el grupo</h2>
+    </div>
+    <div class="quicklinks">
+      <a class="quicklink reveal" href="#grupo"><span class="code">01</span><b>El grupo</b><em>Cinco empresas, una misma red</em></a>
+      <a class="quicklink reveal" href="#proceso"><span class="code">02</span><b>Cómo funciona</b><em>El envío, paso a paso</em></a>
+      <a class="quicklink reveal" href="#vehiculos"><span class="code">03</span><b>Vehículos autorizados</b><em>468 modelos · 25 marcas</em></a>
+      <a class="quicklink reveal" href="#remolques"><span class="code">04</span><b>Remolques y plataformas</b><em>Equipo comercial nuevo</em></a>
+      <a class="quicklink reveal" href="#contacto"><span class="code">05</span><b>Contacto</b><em>Solicita tu cotización</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRUPO / DIVISIONS ============ -->
+<section id="grupo" data-page="grupo">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">El grupo</span>
+      <h2>Cinco empresas, una misma red</h2>
+      <p>ConnectingCuba es la plataforma que conecta a las empresas del grupo, cada una con un rol distinto en la cadena de comercio entre Estados Unidos, Europa y Cuba.</p>
+    </div>
+    <div class="division-flagship reveal">
+      <img class="division-logo" src="img/logo-macias-white.png" alt="Macias Logistics">
+      <span class="code">EMPRESA · 01 · LA OPERADORA</span>
+      <span class="role">Exportadora · Miami, FL</span>
+      <h3>Macias Logistics</h3>
+      <p>Con sede en Miami y todas las licencias BIS vigentes, es la exportadora oficial del grupo hacia Cuba: proveedor directo de vehículos comerciales de prácticamente todas las marcas y de vehículos utilitarios de gama media, premium y lujo. Es la empresa que ejecuta el envío de principio a fin.</p>
+      <div class="tag-row"><span>Licencias BIS</span><span>Exportación de vehículos</span><span>Miami, FL</span><span>Sin intermediarios</span></div>
+    </div>
+    <div class="divisions-grid">
+      <div class="division reveal">
+        <img class="division-logo brand-logo-light" src="img/logo-ola.png" alt="Ola International Trading">
+        <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" alt="Ola International Trading">
+        <span class="code">EMPRESA · 02</span>
+        <span class="role">Comercio internacional</span>
+        <h3>Ola International Trading</h3>
+        <p>Gestiona importaciones desde Europa hacia Cuba y hacia Estados Unidos, ampliando la red comercial del grupo más allá de la ruta Miami–Mariel.</p>
+        <div class="tag-row"><span>Europa</span><span>Cuba</span><span>Estados Unidos</span></div>
+      </div>
+      <div class="division reveal">
+        <img class="division-logo brand-logo-light" src="img/logo-henex.png" alt="Henex Worldwide Group">
+        <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" alt="Henex Worldwide Group">
+        <span class="code">EMPRESA · 03</span>
+        <span class="role">Operaciones en Cuba</span>
+        <h3>Henex Worldwide Group</h3>
+        <p>Opera toda la estructura logística del grupo dentro de Cuba: recepción, gestión y soporte en destino para cada envío.</p>
+        <div class="tag-row"><span>Logística en destino</span><span>Estructura en Cuba</span></div>
+      </div>
+      <div class="division soon reveal">
+        <img class="division-logo" src="img/logo-metele.png" alt="Metele">
+        <span class="code">EMPRESA · 04</span>
+        <span class="role">En construcción</span>
+        <h3>Metele</h3>
+        <p>Marketplace de comercio electrónico para Cuba, al estilo Amazon — actualmente en desarrollo.</p>
+        <div class="tag-row"><span>E-commerce</span><span>Próximamente</span></div>
+      </div>
+      <div class="division soon reveal">
+        <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" alt="Prime Truck USA"></span>
+        <span class="code">EMPRESA · 05</span>
+        <span class="role">En construcción</span>
+        <h3>Prime Truck USA</h3>
+        <p>Nueva línea de transporte y logística terrestre en Estados Unidos — actualmente en desarrollo.</p>
+        <div class="tag-row"><span>Transporte</span><span>Próximamente</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section id="proceso" data-page="proceso" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Proceso de envío</span>
+      <h2>De tu garaje a Cuba, en cinco pasos</h2>
+      <p>Un proceso directo y sin intermediarios, dividido entre dos empresas del grupo: Macias Logistics lo ejecuta desde Miami, y Henex Worldwide Group lo recibe y acompaña en Cuba.</p>
+    </div>
+
+    <div class="phase-head reveal">
+      <span class="phase-tag">Fase 1 · En Miami</span>
+      <span class="phase-owner">A cargo de Macias Logistics</span>
+    </div>
+    <div class="timeline">
+      <div class="step reveal"><span class="step-num">01</span><div><h3>Recepción del vehículo</h3><p>Recibimos tu auto, camión o equipo comercial en nuestras instalaciones de Florida.</p></div></div>
+      <div class="step reveal"><span class="step-num">02</span><div><h3>Inspección y documentación</h3><p>Verificamos elegibilidad (año 2016 en adelante) y preparamos la documentación de exportación.</p></div></div>
+      <div class="step reveal"><span class="step-num">03</span><div><h3>Transporte al puerto</h3><p>Traslado seguro en camiones propios especializados hasta Puerto Everglades.</p></div></div>
+    </div>
+
+    <div class="phase-head reveal">
+      <span class="phase-tag">Fase 2 · Travesía marítima</span>
+      <span class="phase-owner">Puerto Everglades → Puerto de Mariel</span>
+    </div>
+    <div class="timeline">
+      <div class="step reveal"><span class="step-num">04</span><div><h3>Embarque y cruce</h3><p>Supervisión experta de carga y descarga en el buque rumbo a Puerto de Mariel.</p></div></div>
+    </div>
+
+    <div class="phase-head reveal">
+      <span class="phase-tag">Fase 3 · En Cuba</span>
+      <span class="phase-owner">A cargo de Henex Worldwide Group</span>
+    </div>
+    <div class="timeline">
+      <div class="step reveal"><span class="step-num">05</span><div><h3>Entrega al destinatario</h3><p>Henex Worldwide Group gestiona la documentación cubana y coordina una entrega sin contratiempos.</p></div></div>
+    </div>
+
+    <div class="requirements reveal">
+      <h3>Qué necesitas para empezar</h3>
+      <ul>
+        <li>Título de propiedad del vehículo, a nombre del remitente.</li>
+        <li>Identificación del remitente en Estados Unidos.</li>
+        <li>Nombre, identificación y datos de contacto del destinatario en Cuba.</li>
+        <li>Marca, modelo y año del vehículo (2016 en adelante).</li>
+      </ul>
+      <a class="btn btn-ghost" href="https://wa.me/17862390289" target="_blank" rel="noopener">Confirmar mis documentos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VEHICULOS AUTORIZADOS ============ -->
+<section id="vehiculos" data-page="vehiculos">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Macias Logistics · Catálogo CEMA</span>
+      <h2>Vehículos autorizados para Cuba</h2>
+      <p>Todas las marcas y modelos aprobados por CEMA para la importación de vehículos comerciales y utilitarios a Cuba. Macias Logistics es proveedor autorizado directo: el proceso arranca y termina con nosotros, sin intermediarios.</p>
+    </div>
+
+    <div class="catalog-controls reveal">
+      <input type="search" id="cat-search" class="cat-search" placeholder="Buscar marca o modelo… (ej. Tucson, Freightliner, EV)" aria-label="Buscar vehículo">
+      <select id="cat-tipo" class="cat-select" aria-label="Filtrar por tipo"><option value="">Todos los tipos</option></select>
+    </div>
+    <div class="brand-pills reveal" id="cat-brands" role="group" aria-label="Filtrar por marca">
+      <button class="brand-pill active" data-marca="">Todas</button>
+    </div>
+    <p class="catalog-summary reveal"><span id="cat-count">0</span> modelos · <span id="cat-brandcount">0</span> marcas</p>
+
+    <div class="catalog-table-wrap reveal">
+      <table class="catalog-table">
+        <thead><tr><th>Marca</th><th>Modelo</th><th>Tipo</th></tr></thead>
+        <tbody id="cat-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REMOLQUES ============ -->
+<section id="remolques" data-page="remolques" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Macias Logistics · Equipo nuevo</span>
+      <h2>Remolques y plataformas nuevas</h2>
+      <p>Macias Logistics es la única compañía con autorización oficial para la importación de vehículos comerciales en el territorio cubano. Fabricados en alianza con Howo Sinotruck (China).</p>
+    </div>
+    <div class="trailer-grid">
+      <div class="trailer-card reveal">
+        <img src="img/trailer-lowbed.jpg" alt="Low Bed Trailer">
+        <div class="body"><h3>Low Bed Trailer</h3><p>Plataforma baja diseñada para el transporte de maquinaria pesada y cargas especiales.</p></div>
+      </div>
+      <div class="trailer-card reveal">
+        <img src="img/trailer-flatbed.jpg" alt="Flatbed Trailer">
+        <div class="body"><h3>Flatbed Trailer</h3><p>Semirremolque de plataforma plana, versátil y adaptable a múltiples tipos de carga.</p></div>
+      </div>
+      <div class="trailer-card reveal">
+        <img src="img/trailer-tanker.jpg" alt="Fuel Tanker Trailer">
+        <div class="body"><h3>Fuel Tanker Trailer</h3><p>Cisternas para el transporte seguro de combustibles.</p></div>
+      </div>
+      <div class="trailer-card reveal">
+        <img src="img/trailer-cargo.jpg" alt="Cargo Trailer">
+        <div class="body"><h3>Cargo Trailer</h3><p>Remolques cerrados para transporte seguro de mercancías.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust" data-page="grupo">
+  <div class="wrap">
+    <div class="trust-item reveal">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div><h3>Licencias BIS vigentes</h3><p>Macias Logistics opera con todas las licencias y autorizaciones del Departamento de Comercio de EE. UU. (BIS) para exportar a Cuba.</p></div>
+    </div>
+    <div class="trust-item reveal">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div><h3>Apoyo a las MIPYMES</h3><p>El grupo impulsa el desarrollo del sector privado cubano con importaciones y envíos confiables.</p></div>
+    </div>
+    <div class="trust-item reveal">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div><h3>Una red, cinco empresas</h3><p>Exportación, comercio internacional y operaciones en Cuba bajo un mismo grupo, sin intermediarios externos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section id="galeria" data-page="galeria">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Entregas reales</span>
+      <h2>Vehículos ya entregados en Cuba</h2>
+      <p>Fotos reales de nuestro equipo y de familias recibiendo su vehículo.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="gallery-scroll reveal" role="list">
+      <img role="listitem" src="img/gallery-1.jpg" alt="Entrega de vehículo en Cuba">
+      <img role="listitem" src="img/gallery-2.jpg" alt="Camión y furgón en operación">
+      <img role="listitem" src="img/gallery-3.jpg" alt="Vehículo entregado en Cuba">
+      <img role="listitem" src="img/gallery-4.jpg" alt="Familia junto a vehículo entregado">
+      <img role="listitem" src="img/gallery-5.jpg" alt="Equipo de ConnectingCuba">
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" data-page="contacto" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Hablemos</span>
+      <h2>Solicita tu cotización</h2>
+      <p>Cuéntanos qué vehículo quieres enviar y a qué empresa del grupo corresponde tu consulta.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="reveal" onsubmit="event.preventDefault(); this.querySelector('.sent').hidden=false;">
+        <div class="field"><label for="f-name">Nombre</label><input id="f-name" type="text" placeholder="Tu nombre completo"></div>
+        <div class="field"><label for="f-email">Correo electrónico*</label><input id="f-email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
+        <div class="field">
+          <label for="f-div">¿A qué empresa te diriges?</label>
+          <select id="f-div">
+            <option>Macias Logistics — envío de vehículos</option>
+            <option>Macias Logistics — remolques y plataformas</option>
+            <option>Ola International Trading — comercio internacional</option>
+            <option>Henex Worldwide Group — operaciones en Cuba</option>
+            <option>Metele / Prime Truck USA — información general</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" placeholder="Marca, modelo y año del vehículo, y ciudad de destino en Cuba"></textarea></div>
+        <button class="btn btn-primary" type="submit" style="width:100%">Enviar solicitud</button>
+        <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos por WhatsApp o correo en breve.</p>
+      </form>
+      <div class="contact-card reveal">
+        <div class="contact-row">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div><b>Teléfono / WhatsApp</b><span class="mono">+1 786 239 0289</span></div>
+        </div>
+        <div class="contact-row">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V8l8-6 8 6v11M9 19v-7h6v7" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div><b>Cobertura</b><span>Puerto Everglades, FL → Puerto de Mariel, Cuba</span></div>
+        </div>
+        <div class="contact-row">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6"/></svg>
+          <div><b>Horario</b><span>Lunes a sábado · respuesta el mismo día</span></div>
+        </div>
+        <a class="btn btn-primary" href="https://wa.me/17862390289" target="_blank" rel="noopener" style="margin-top:6px">Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Grupo</h4>
+        <p style="color:#9DBBC2; font-size:.85rem; max-width:34ch">ConnectingCuba conecta a Estados Unidos, Europa y Cuba a través de Macias Logistics, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA.</p>
+      </div>
+      <div>
+        <h4>Empresas</h4>
+        <a href="#grupo">Macias Logistics</a>
+        <a href="#grupo">Ola International Trading</a>
+        <a href="#grupo">Henex Worldwide Group</a>
+        <a href="#grupo">Metele</a>
+        <a href="#grupo">Prime Truck USA</a>
+      </div>
+      <div>
+        <h4>Macias Logistics</h4>
+        <a href="#vehiculos">Envío de autos</a>
+        <a href="#vehiculos">Vehículos autorizados</a>
+        <a href="#remolques">Remolques y plataformas</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="tel:+17862390289" class="mono">+1 786 239 0289</a>
+        <a href="https://wa.me/17862390289" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="#contacto">Formulario</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ConnectingCuba — Macias Logistics · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA. Todos los derechos reservados.</span>
+      <div class="social-row">
+        <button type="button" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5h1.6V3.7c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.2H7.6V13h2.7v8h3.2Z"/></svg></button>
+        <button type="button" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></button>
+        <button type="button" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 1.8 1.8 3.2 3.6 3.5v2.9c-1.3 0-2.6-.4-3.6-1.1v6.3a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v3a2.7 2.7 0 1 0 1.9 2.6V3h2.9Z"/></svg></button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/17862390289" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<script>
+  // mobile nav
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('nav.primary a').forEach(a => a.addEventListener('click', () => {
+    document.body.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // ===== Router de páginas =====
+  const PAGES = ['inicio','grupo','proceso','vehiculos','remolques','galeria','contacto'];
+  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', remolques:'Remolques y plataformas', galeria:'Galería', contacto:'Contacto'};
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showPage(page){
+    if (!PAGES.includes(page)) page = 'inicio';
+    document.querySelectorAll('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; });
+    document.querySelectorAll('nav.primary a').forEach(a => {
+      const isActive = a.getAttribute('href') === '#' + page;
+      a.classList.toggle('active', isActive);
+      if (isActive) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    document.title = page === 'inicio' ? PAGE_TITLES.inicio : PAGE_TITLES[page] + ' · ConnectingCuba';
+    window.scrollTo(0, 0);
+    const revealEls = document.querySelectorAll(`[data-page="${page}"] .reveal, [data-page="${page}"] .step`);
+    if (reduceMotion) {
+      revealEls.forEach(el => el.classList.add('in'));
+    } else {
+      revealEls.forEach(el => el.classList.remove('in'));
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        revealEls.forEach((el, i) => setTimeout(() => el.classList.add('in'), Math.min(i * 35, 300)));
+      }));
+    }
+  }
+
+  function routeFromHash(){ showPage((location.hash || '#inicio').slice(1)); }
+  window.addEventListener('hashchange', routeFromHash);
+  routeFromHash();
+
+  // ===== Catálogo de vehículos autorizados (CEMA) =====
+  // [marca, tipo, modelo]
+  const CATALOG = [
+    // AUDI
+    ['AUDI','Auto','A4 / S4'],['AUDI','Auto','A4 Allroad'],['AUDI','Auto','A5 / S5 / RS 5'],
+    ['AUDI','Auto','A6 / S6'],['AUDI','Auto','A6 Allroad'],['AUDI','Auto','RS 6 Avant'],
+    ['AUDI','Auto','A7 / S7 / RS 7'],['AUDI','Auto','A8 / A8 L / S8'],['AUDI','Auto','TT / TTS / TT RS'],
+    ['AUDI','Auto','R8'],['AUDI','Auto','Q3'],['AUDI','Auto','Q5'],['AUDI','Auto','Q5 Sportback'],
+    ['AUDI','Auto','SQ5'],['AUDI','Auto','Q7'],['AUDI','Auto','SQ7'],['AUDI','Auto','Q8'],
+    ['AUDI','Auto','SQ8'],['AUDI','Auto','RS Q8'],['AUDI','Auto','e-tron'],['AUDI','Auto','e-tron Sportback'],
+    ['AUDI','Auto','e-tron S'],['AUDI','Auto','Q4 e-tron'],['AUDI','Auto','Q4 Sportback e-tron'],
+    ['AUDI','Auto','Q6 e-tron'],['AUDI','Auto','SQ6 e-tron'],['AUDI','Auto','Q6 Sportback e-tron'],
+    ['AUDI','Auto','SQ6 Sportback e-tron'],['AUDI','Auto','Q8 e-tron'],['AUDI','Auto','Q8 Sportback e-tron'],
+    ['AUDI','Auto','SQ8 e-tron'],['AUDI','Auto','A6 Sportback e-tron'],['AUDI','Auto','S6 Sportback e-tron'],
+    ['AUDI','Auto','e-tron GT'],['AUDI','Auto','S e-tron GT'],['AUDI','Auto','RS e-tron GT'],
+    // BMW
+    ['BMW','Auto','Serie 1'],['BMW','Auto','Serie 2 Coupé'],['BMW','Auto','Serie 2 Gran Coupé'],
+    ['BMW','Auto','Serie 2 Active Tourer'],['BMW','Auto','Serie 3 Sedán'],['BMW','Auto','Serie 3 Touring'],
+    ['BMW','Auto','Serie 4 Coupé'],['BMW','Auto','Serie 4 Cabrio'],['BMW','Auto','Serie 4 Gran Coupé'],
+    ['BMW','Auto','Serie 5 Sedán'],['BMW','Auto','Serie 5 Touring'],['BMW','Auto','Serie 6 Gran Turismo'],
+    ['BMW','Auto','Serie 7'],['BMW','Auto','Serie 8 Coupé'],['BMW','Auto','Serie 8 Cabrio'],
+    ['BMW','Auto','Serie 8 Gran Coupé'],['BMW','Auto','Z4 Roadster'],['BMW','Auto','X1'],['BMW','Auto','X2'],
+    ['BMW','Auto','X3'],['BMW','Auto','X4'],['BMW','Auto','X5'],['BMW','Auto','X6'],['BMW','Auto','X7'],
+    ['BMW','Auto','XM'],['BMW','Auto','i4'],['BMW','Auto','i5'],['BMW','Auto','i7'],['BMW','Auto','iX1'],
+    ['BMW','Auto','iX2'],['BMW','Auto','iX'],['BMW','Auto','i8'],['BMW','Auto','iX3'],
+    // INFINITI
+    ['INFINITI','Auto','Q50'],['INFINITI','Auto','Q60'],['INFINITI','Auto','Q70'],['INFINITI','Auto','Q70L'],
+    ['INFINITI','Auto','QX30'],['INFINITI','Auto','QX50'],['INFINITI','Auto','QX55'],['INFINITI','Auto','QX60'],
+    ['INFINITI','Auto','QX70'],['INFINITI','Auto','QX80'],
+    // LAND ROVER
+    ['LAND ROVER','Auto','Range Rover'],['LAND ROVER','Auto','Range Rover Sport'],
+    ['LAND ROVER','Auto','Range Rover Velar'],['LAND ROVER','Auto','Range Rover Evoque'],
+    // LEXUS
+    ['LEXUS','Auto','CT 200h'],['LEXUS','Auto','IS'],['LEXUS','Auto','ES'],['LEXUS','Auto','GS'],
+    ['LEXUS','Auto','LS'],['LEXUS','Auto','RC'],['LEXUS','Auto','LC'],['LEXUS','Auto','UX'],
+    ['LEXUS','Auto','NX'],['LEXUS','Auto','RX'],['LEXUS','Auto','TX'],['LEXUS','Auto','GX'],
+    ['LEXUS','Auto','LX'],['LEXUS','Auto','RZ'],
+    // NISSAN
+    ['NISSAN','Auto','Maxima'],['NISSAN','Auto','370Z'],['NISSAN','Auto','Z'],['NISSAN','Auto','GT-R'],
+    ['NISSAN','Auto','Juke'],['NISSAN','Auto','Kicks'],['NISSAN','Auto','Rogue Sport'],
+    ['NISSAN','Auto','Murano'],['NISSAN','Auto','Pathfinder'],['NISSAN','Auto','Armada'],
+    ['NISSAN','Auto','Quest'],['NISSAN','Auto','Ariya (eléctrico)'],['NISSAN','Auto','Leaf (eléctrico)'],
+    ['NISSAN','Auto','Altima'],['NISSAN','Auto','Sentra'],['NISSAN','Auto','Versa'],
+    ['NISSAN','Auto','X-Trail (híbrido)'],['NISSAN','Auto','X-Trail (motor gasolina)'],
+    ['NISSAN','Rural','Frontier'],
+    ['NISSAN','Camioneta','Titan'],['NISSAN','Camioneta','Titan XD'],
+    ['NISSAN','Panel','NV1500 Cargo'],['NISSAN','Panel','NV2500 HD Cargo'],['NISSAN','Panel','NV3500 HD Cargo'],
+    ['NISSAN','Panel','NV3500 HD Passenger'],['NISSAN','Panel','NV200 Compact Cargo'],['NISSAN','Panel','NV200 Taxi'],
+    // PORSCHE
+    ['PORSCHE','Auto','718'],['PORSCHE','Auto','911'],['PORSCHE','Auto','Panamera'],['PORSCHE','Auto','Macan'],
+    ['PORSCHE','Auto','Cayenne'],['PORSCHE','Auto','Taycan'],['PORSCHE','Auto','918 Spyder'],
+    // TOYOTA
+    ['TOYOTA','Auto','Avalon'],['TOYOTA','Auto','Camry'],['TOYOTA','Auto','Corolla'],
+    ['TOYOTA','Auto','Corolla Hatchback'],['TOYOTA','Auto','Corolla iM'],['TOYOTA','Auto','Crown'],
+    ['TOYOTA','Auto','Prius'],['TOYOTA','Auto','Prius c'],['TOYOTA','Auto','Prius v'],
+    ['TOYOTA','Auto','Prius Prime'],['TOYOTA','Auto','Yaris Hatchback'],['TOYOTA','Auto','Yaris iA / Yaris Sedán'],
+    ['TOYOTA','Auto','4Runner'],['TOYOTA','Auto','C-HR'],['TOYOTA','Auto','Corolla Cross'],
+    ['TOYOTA','Auto','Crown Signia'],['TOYOTA','Auto','Highlander'],['TOYOTA','Auto','Grand Highlander'],
+    ['TOYOTA','Auto','Land Cruiser'],['TOYOTA','Auto','RAV4'],['TOYOTA','Auto','RAV5'],
+    ['TOYOTA','Auto','RAV4 Prime / Plug-in Hybrid'],['TOYOTA','Auto','Sequoia'],['TOYOTA','Auto','Venza'],
+    ['TOYOTA','Auto','bZ4X / bZ'],['TOYOTA','Auto','bZ Woodland'],['TOYOTA','Auto','86'],
+    ['TOYOTA','Auto','GR86'],['TOYOTA','Auto','GR Corolla'],['TOYOTA','Auto','GR Supra'],
+    ['TOYOTA','Panel','Sienna'],['TOYOTA','Camioneta','Tacoma'],['TOYOTA','Camioneta','Tundra'],
+    // HONDA
+    ['HONDA','Auto','Accord'],['HONDA','Auto','City'],['HONDA','Auto','Civic'],
+    ['HONDA','Auto','CR-V (motor gasolina)'],['HONDA','Auto','CR-V (híbrido)'],['HONDA','Auto','HR-V'],
+    ['HONDA','Auto','Prologue (motor eléctrico)'],['HONDA','Auto','Pilot'],['HONDA','Auto','Odyssey (motor gasolina)'],
+    ['HONDA','Auto','Passport (motor gasolina — EX-L, TrailSport, Black Edition)'],
+    ['HONDA','Camioneta','Ridgeline (motor gasolina)'],
+    // HYUNDAI
+    ['HYUNDAI','Auto','Accent (Gamma GDi)'],['HYUNDAI','Auto','Accent (Gamma II MPi)'],
+    ['HYUNDAI','Auto','Accent (MPi)'],['HYUNDAI','Auto','Accent (T-GDi)'],['HYUNDAI','Auto','Accent (CRDi diésel)'],
+    ['HYUNDAI','Auto','Elantra (MPi Gamma)'],['HYUNDAI','Auto','Elantra (T-GDi Gamma Turbo)'],
+    ['HYUNDAI','Auto','Elantra (T-GDi Theta II)'],['HYUNDAI','Auto','Elantra (GDi Hybrid)'],
+    ['HYUNDAI','Auto','Elantra (CRDi diésel)'],['HYUNDAI','Auto','Grandeur (Theta II GDi)'],
+    ['HYUNDAI','Auto','Grandeur (Smartstream GDi)'],['HYUNDAI','Auto','Grandeur (Lambda II MPi/GDi)'],
+    ['HYUNDAI','Auto','Grandeur (Lambda II GDi)'],['HYUNDAI','Auto','Grandeur (Theta II MPi Hybrid)'],
+    ['HYUNDAI','Auto','Grandeur (R II CRDi diésel)'],['HYUNDAI','Auto','Grandeur (Smartstream GDi V6)'],
+    ['HYUNDAI','Auto','Grandeur (T-GDi Hybrid)'],['HYUNDAI','Auto','Ioniq 5 (RWD)'],
+    ['HYUNDAI','Auto','Ioniq 5 (AWD)'],['HYUNDAI','Auto','Ioniq 5 N'],['HYUNDAI','Auto','Ioniq 6 (RWD)'],
+    ['HYUNDAI','Auto','Ioniq 6 (AWD)'],
+    ['HYUNDAI','SUV','Kona (T-GDi)'],['HYUNDAI','SUV','Kona (MPi)'],['HYUNDAI','SUV','Kona (GDi Hybrid)'],
+    ['HYUNDAI','SUV','Kona (eléctrico)'],['HYUNDAI','SUV','Palisade (MPi V6)'],['HYUNDAI','SUV','Palisade (GDi V6)'],
+    ['HYUNDAI','SUV','Palisade (GDi V6 Smartstream)'],['HYUNDAI','SUV','Palisade (GDi Hybrid)'],
+    ['HYUNDAI','SUV','Palisade (CRDi I5 diésel)'],['HYUNDAI','SUV','Santa Fe (Smartstream G2.5T turbo)'],
+    ['HYUNDAI','SUV','Santa Fe (T-GDi Hybrid)'],['HYUNDAI','SUV','Santa Fe (T-GDi Plug-in Hybrid)'],
+    ['HYUNDAI','SUV','Santa Fe (CRDi diésel)'],['HYUNDAI','SUV','Tucson (MPi atmosférico)'],
+    ['HYUNDAI','SUV','Tucson (GDi Smartstream)'],['HYUNDAI','SUV','Tucson (T-GDi turbo)'],
+    ['HYUNDAI','SUV','Tucson (T-GDi Hybrid)'],['HYUNDAI','SUV','Tucson (T-GDi Plug-in Hybrid)'],
+    ['HYUNDAI','SUV','Tucson (CRDi diésel)'],['HYUNDAI','SUV','Venue (Gamma MPi Smartstream)'],
+    ['HYUNDAI','SUV','Venue (Kappa II T-GDi turbo)'],['HYUNDAI','SUV','Venue (Kappa II MPi atmosférico)'],
+    ['HYUNDAI','SUV','Venue (U II CRDi diésel)'],
+    ['HYUNDAI','Pick up','Santa Cruz (I4 atmosférico)'],['HYUNDAI','Pick up','Santa Cruz (I4 turbo)'],
+    ['HYUNDAI','Trailer','Original (seco)'],['HYUNDAI','Trailer','Composite (seco)'],
+    ['HYUNDAI','Trailer','Composite XT (seco)'],['HYUNDAI','Trailer','H Y-Cube (seco)'],
+    ['HYUNDAI','Trailer','Termotech (refrigerado)'],['HYUNDAI','Trailer','Latitude (flatbed)'],
+    ['HYUNDAI','Chasis','40-45 Extendable'],['HYUNDAI','Chasis','40-45 Extendable HDG'],
+    ['HYUNDAI','Chasis','Tandem 6 (extensible)'],['HYUNDAI','Chasis','Tandem Spread 12 (extensible)'],
+    ['HYUNDAI','Chasis','Tri-Axle 12 (extensible)'],['HYUNDAI','Chasis','20 Slider Tandem (fijo)'],
+    ['HYUNDAI','Chasis','40 Lightweight Gooseneck (fijo)'],['HYUNDAI','Chasis','40 Gooseneck (fijo)'],
+    ['HYUNDAI','Chasis','53 Gooseneck (fijo)'],['HYUNDAI','Chasis','Tri-Axle (fijo)'],
+    ['HYUNDAI','Chasis','Extendable 40 (reacondicionado)'],
+    // BYD
+    ['BYD','Auto','Dolphin Mini'],['BYD','Auto','Atto 2 EV'],['BYD','Auto','Atto 3 EV'],
+    ['BYD','Auto','Atto 3 EVO'],['BYD','Auto','Dolphin EV'],['BYD','Auto','Dolphin Surf EV'],
+    ['BYD','Auto','Han EV'],['BYD','Auto','Seal EV'],['BYD','Auto','Seal U EV'],['BYD','Auto','Sealion 7 EV'],
+    ['BYD','Auto','Tang EV'],['BYD','Auto','Yangwang U8'],['BYD','Auto','Yangwang U9 Xtreme'],
+    ['BYD','Auto','Yuan Plus EV'],['BYD','Auto','Yuan Pro EV'],
+    ['BYD','Ómnibus','Ride Achiever'],['BYD','Ómnibus','Ride Creator'],['BYD','Ómnibus','Ride Dreamer'],
+    ['BYD','Ómnibus','Ride K7M'],['BYD','Ómnibus','Ride K7MER'],['BYD','Ómnibus','Ride K8M'],
+    ['BYD','Ómnibus','Ride K9MD'],['BYD','Ómnibus','Ride K11M'],
+    ['BYD','Camión','Ride 6F'],['BYD','Cuña','Ride 8TT'],['BYD','Cuña','Ride 8Y'],
+    // VW
+    ['VW','Auto','Virtus'],['VW','Auto','Jetta / GLI'],['VW','Auto','Golf'],['VW','Auto','Passat'],
+    ['VW','Auto','Arteon'],['VW','Auto','CC'],['VW','Auto','Beetle'],['VW','Auto','Touran'],
+    ['VW','Auto','Sharan'],['VW','Auto','Santana'],['VW','Auto','Lavida'],['VW','Auto','Lamando'],
+    ['VW','Auto','Phideon'],['VW','Auto','Tera'],['VW','Auto','Taigun'],['VW','Auto','Nivus / Taigo'],
+    ['VW','Auto','T-Cross'],['VW','Auto','Taos / Tharu'],['VW','Auto','T-Roc'],['VW','Auto','Tiguan'],
+    ['VW','Auto','Tayron'],['VW','Auto','Teramont / Atlas'],['VW','Auto','Touareg'],['VW','Auto','Talagon'],
+    ['VW','Auto','Tavendor'],['VW','Auto','e-up!'],['VW','Auto','e-Golf'],['VW','Auto','ID.3'],
+    ['VW','Auto','ID.4'],['VW','Auto','ID.5'],['VW','Auto','ID.6'],['VW','Auto','ID.7'],
+    ['VW','Auto','ID. Buzz'],['VW','Auto','ID. Unyx'],['VW','Auto','Caddy'],
+    ['VW','Auto','California (caravana)'],['VW','Auto','Grand California (caravana)'],
+    ['VW','Camioneta','Saveiro'],['VW','Camioneta','Amarok'],
+    ['VW','Microbús','Caravelle'],['VW','Microbús','Multivan'],
+    ['VW','Panel','Transporter'],['VW','Panel','e-Transporter'],['VW','Panel','Crafter'],
+    ['VW','Camión','e-Delivery'],['VW','Camión','Delivery'],['VW','Camión','Constellation'],
+    ['VW','Cuña','Meteor'],
+    ['VW','Ómnibus','Volksbus Escolar y Rural'],['VW','Ómnibus','Volksbus Urbano'],
+    ['VW','Ómnibus','Volksbus de Fletamento y Carretera'],['VW','Ómnibus','e-Volksbus'],
+    // FREIGHTLINER
+    ['FREIGHTLINER','Camión','108SD'],['FREIGHTLINER','Camión','108SD Plus'],['FREIGHTLINER','Camión','114SD'],
+    ['FREIGHTLINER','Camión','114SD Plus'],['FREIGHTLINER','Camión','122SD'],['FREIGHTLINER','Camión','MT45'],
+    ['FREIGHTLINER','Camión','MT55'],['FREIGHTLINER','Camión','MT50e'],['FREIGHTLINER','Camión','Cascadia'],
+    ['FREIGHTLINER','Camión','M2 (106)'],['FREIGHTLINER','Camión','M2 (112)'],
+    ['FREIGHTLINER','Cuña','Coronado SD'],['FREIGHTLINER','Cuña','EconicSD'],['FREIGHTLINER','Cuña','S2'],
+    ['FREIGHTLINER','Cuña','S2C'],['FREIGHTLINER','Cuña','S2RV'],['FREIGHTLINER','Cuña','C2'],
+    ['FREIGHTLINER','Panel','Sprinter 2500'],['FREIGHTLINER','Panel','Sprinter 3500'],['FREIGHTLINER','Panel','Sprinter 4500'],
+    // KENWORTH
+    ['KENWORTH','Camión','T680 (motor diésel)'],
+    ['KENWORTH','Cuña','T660'],['KENWORTH','Cuña','T700'],['KENWORTH','Cuña','W900'],['KENWORTH','Cuña','W900B'],
+    ['KENWORTH','Cuña','W900L'],['KENWORTH','Cuña','W900 Legacy Edition'],['KENWORTH','Cuña','W900S'],
+    ['KENWORTH','Cuña','W990'],['KENWORTH','Cuña','T800'],['KENWORTH','Cuña','T800W'],['KENWORTH','Cuña','T880'],
+    ['KENWORTH','Cuña','T880S'],['KENWORTH','Cuña','T440'],['KENWORTH','Cuña','T470'],['KENWORTH','Cuña','T480'],
+    ['KENWORTH','Cuña','C500'],['KENWORTH','Cuña','C580'],['KENWORTH','Cuña','963'],['KENWORTH','Cuña','T180'],
+    ['KENWORTH','Cuña','T280'],['KENWORTH','Cuña','T380'],['KENWORTH','Cuña','T170'],['KENWORTH','Cuña','T270'],
+    ['KENWORTH','Cuña','T370'],['KENWORTH','Cuña','K270'],['KENWORTH','Cuña','K370'],['KENWORTH','Cuña','T880E'],
+    ['KENWORTH','Cuña','T280E'],['KENWORTH','Cuña','T380E'],['KENWORTH','Cuña','T480E'],
+    ['KENWORTH','Cuña','K270E'],['KENWORTH','Cuña','K370E'],
+    // WESTERN STAR
+    ['WESTERN STAR','Cuña','47X'],['WESTERN STAR','Cuña','49X'],['WESTERN STAR','Cuña','49X Power Hood'],
+    ['WESTERN STAR','Cuña','57X'],['WESTERN STAR','Cuña','5700XE'],['WESTERN STAR','Cuña','4700'],
+    ['WESTERN STAR','Cuña','4800'],['WESTERN STAR','Cuña','4900'],['WESTERN STAR','Cuña','4900FA'],
+    ['WESTERN STAR','Cuña','4900SA'],['WESTERN STAR','Cuña','4900EX'],['WESTERN STAR','Cuña','4900TS'],
+    ['WESTERN STAR','Cuña','4900XD'],['WESTERN STAR','Cuña','6900XD'],['WESTERN STAR','Cuña','6900TS'],
+    // PETERBILT
+    ['PETERBILT','Cuña','579'],['PETERBILT','Cuña','New Model 579'],['PETERBILT','Cuña','589'],
+    ['PETERBILT','Cuña','389'],['PETERBILT','Cuña','388'],['PETERBILT','Cuña','587'],['PETERBILT','Cuña','386'],
+    ['PETERBILT','Cuña','567'],['PETERBILT','Cuña','367'],['PETERBILT','Cuña','365'],['PETERBILT','Cuña','520'],
+    ['PETERBILT','Cuña','389 Heavy Haul'],['PETERBILT','Cuña','220'],['PETERBILT','Cuña','210'],
+    ['PETERBILT','Cuña','535'],['PETERBILT','Cuña','536'],['PETERBILT','Cuña','537'],['PETERBILT','Cuña','548'],
+    ['PETERBILT','Cuña','325'],['PETERBILT','Cuña','330'],['PETERBILT','Cuña','337'],['PETERBILT','Cuña','348'],
+    ['PETERBILT','Cuña','579EV'],['PETERBILT','Cuña','567EV'],['PETERBILT','Cuña','520EV'],
+    ['PETERBILT','Cuña','548EV'],['PETERBILT','Cuña','537EV'],['PETERBILT','Cuña','536EV'],['PETERBILT','Cuña','220EV'],
+    // INTERNATIONAL
+    ['INTERNATIONAL','Cuña','LT Series'],['INTERNATIONAL','Cuña','LT625'],['INTERNATIONAL','Cuña','RH Series'],
+    ['INTERNATIONAL','Cuña','RH613'],['INTERNATIONAL','Cuña','LoneStar'],['INTERNATIONAL','Cuña','ProStar'],
+    ['INTERNATIONAL','Cuña','TranStar'],['INTERNATIONAL','Cuña','HX Series'],['INTERNATIONAL','Cuña','HX520'],
+    ['INTERNATIONAL','Cuña','HX615'],['INTERNATIONAL','Cuña','HX620'],['INTERNATIONAL','Cuña','HV Series'],
+    ['INTERNATIONAL','Cuña','HV507'],['INTERNATIONAL','Cuña','HV513'],['INTERNATIONAL','Cuña','HV607'],
+    ['INTERNATIONAL','Cuña','HV613'],['INTERNATIONAL','Cuña','WorkStar'],['INTERNATIONAL','Cuña','PayStar'],
+    ['INTERNATIONAL','Cuña','MV Series'],['INTERNATIONAL','Cuña','MV607'],['INTERNATIONAL','Cuña','MV60H'],
+    ['INTERNATIONAL','Cuña','CV Series'],['INTERNATIONAL','Cuña','CV515'],['INTERNATIONAL','Cuña','DuraStar'],
+    ['INTERNATIONAL','Cuña','4300'],['INTERNATIONAL','Cuña','4400'],['INTERNATIONAL','Cuña','TerraStar'],
+    ['INTERNATIONAL','Cuña','eMV Series'],['INTERNATIONAL','Cuña','eMV'],
+    // ISUZU
+    ['ISUZU','Cuña','NPR'],['ISUZU','Cuña','NPR-HD'],['ISUZU','Cuña','NPR-XD'],['ISUZU','Cuña','NQR'],
+    ['ISUZU','Cuña','NRR'],['ISUZU','Cuña','NRR EV'],['ISUZU','Cuña','FTR'],['ISUZU','Cuña','FVR Derate'],
+    ['ISUZU','Cuña','FVR'],['ISUZU','Cuña','Reach'],
+    // VOLVO / HINO
+    ['VOLVO','Camión','VNL (motor diésel)'],
+    ['HINO','Camión','268 J08E-WU (motor diésel)'],['HINO','Camión','155 J05E-TP (motor diésel)'],
+    // TRAILERS / CHASIS independientes
+    ['UTILITY','Trailer','3000R (refrigerado)'],['UTILITY','Trailer','4000D-X (seco)'],
+    ['UTILITY','Trailer','4000AE (semirremolque)'],['UTILITY','Trailer','4000S (semirremolque)'],
+    ['UTILITY','Trailer','4000A (semirremolque)'],
+    ['CHEETAH','Trailer','Flatbed 48"'],['CHEETAH','Trailer','Flatbed 48" Extensible'],
+    ['SHENGDA','Trailer','Flatbed 20"'],['SHENGDA','Trailer','Flatbed 40"'],
+    ['SHOUTERM','Trailer','SOC-1-40GN (semirremolque)'],
+    ['OHIO','Chasis','Chasis (nuevo)'],
+  ];
+
+  const catSearch = document.getElementById('cat-search');
+  const catTipo = document.getElementById('cat-tipo');
+  const catBrands = document.getElementById('cat-brands');
+  const catTbody = document.getElementById('cat-tbody');
+  const catCount = document.getElementById('cat-count');
+  const catBrandCount = document.getElementById('cat-brandcount');
+  let activeBrand = '';
+
+  const tipos = [...new Set(CATALOG.map(r => r[1]))].sort();
+  tipos.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; catTipo.appendChild(o); });
+
+  const marcas = [...new Set(CATALOG.map(r => r[0]))];
+  marcas.forEach(m => {
+    const b = document.createElement('button');
+    b.className = 'brand-pill'; b.dataset.marca = m; b.textContent = m;
+    catBrands.appendChild(b);
+  });
+
+  function normalize(s){ return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+  function renderCatalog(){
+    const q = normalize(catSearch.value.trim());
+    const tipoSel = catTipo.value;
+    const rows = CATALOG.filter(([marca, tipo, modelo]) => {
+      if (activeBrand && marca !== activeBrand) return false;
+      if (tipoSel && tipo !== tipoSel) return false;
+      if (q && !normalize(marca + ' ' + modelo).includes(q)) return false;
+      return true;
+    });
+    catTbody.innerHTML = rows.length ? rows.map(([marca, tipo, modelo]) =>
+      `<tr><td class="t-marca">${marca}</td><td>${modelo}</td><td class="t-tipo">${tipo}</td></tr>`
+    ).join('') : `<tr><td colspan="3" class="catalog-empty">Sin resultados — prueba con otra marca o escribe menos texto.</td></tr>`;
+    catCount.textContent = rows.length;
+    catBrandCount.textContent = new Set(rows.map(r => r[0])).size;
+  }
+
+  catSearch.addEventListener('input', renderCatalog);
+  catTipo.addEventListener('change', renderCatalog);
+  catBrands.addEventListener('click', (e) => {
+    const btn = e.target.closest('.brand-pill');
+    if (!btn) return;
+    activeBrand = btn.dataset.marca;
+    catBrands.querySelectorAll('.brand-pill').forEach(b => b.classList.toggle('active', b === btn));
+    renderCatalog();
+  });
+  renderCatalog();
+</script>
