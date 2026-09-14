@@ -79,13 +79,14 @@
     display:inline-flex; align-items:center; gap:10px; justify-content:center;
     font-family:'IBM Plex Sans'; font-weight:600; font-size:.92rem;
     padding:14px 24px; border-radius:3px; border:1.5px solid transparent; cursor:pointer;
-    text-decoration:none; white-space:nowrap; transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    text-decoration:none; white-space:nowrap; transition:transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
   }
   .btn:active{transform:translateY(1px)}
   .btn-primary{background:var(--amber); color:#1A0F00}
-  .btn-primary:hover{background:var(--amber-strong)}
+  .btn-primary:hover{background:var(--amber-strong); transform:translateY(-1px); box-shadow:0 6px 16px rgba(184,113,26,.32)}
+  .btn-primary:active{transform:translateY(0)}
   .btn-ghost{background:transparent; border-color:currentColor; color:var(--ink)}
-  .btn-ghost:hover{background:var(--surface-2)}
+  .btn-ghost:hover{background:var(--surface-2); transform:translateY(-1px)}
   .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
 
   section{padding:88px 0}
@@ -99,18 +100,20 @@
   .route-strip .wrap{display:flex; align-items:center; gap:16px; padding:9px 24px; overflow-x:auto; white-space:nowrap; scrollbar-width:none}
   .route-strip .wrap::-webkit-scrollbar{display:none}
   .route-strip .port{font-weight:600; color:#fff; flex:none}
-  .route-strip .track{flex:none; width:60px; height:2px; background-image:var(--route-line); background-size:20px 2px; position:relative}
+  .route-strip .track{flex:none; width:60px; height:2px; background-image:var(--route-line); background-size:20px 2px; position:relative; animation:route-flow 1.4s linear infinite}
   @media (min-width:960px){ .route-strip .track{flex:1; width:auto; min-width:40px} }
   .route-strip .track::after{content:'▸'; position:absolute; right:-2px; top:50%; transform:translateY(-50%); color:var(--amber)}
+  @keyframes route-flow{ from{background-position:0 0} to{background-position:-20px 0} }
   .route-strip .tag{flex:none; color:#7FA3AF; display:none}
   @media (min-width:760px){ .route-strip .tag{display:inline} }
 
   /* ============ HEADER ============ */
   header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
-  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:20px}
-  @media (max-width:480px){ header.site .wrap{padding:12px 16px; gap:10px} }
-  .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
-  .brand-logo{height:38px; width:auto; flex:none; display:block}
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:11px 24px; gap:20px}
+  @media (max-width:480px){ header.site .wrap{padding:10px 16px; gap:10px} }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; transition:opacity .15s ease}
+  .brand:hover{opacity:.85}
+  .brand-logo{height:48px; width:auto; flex:none; display:block}
   .brand-logo-dark{display:none}
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]) .brand-logo-light{display:none}
@@ -118,18 +121,22 @@
   }
   :root[data-theme="dark"] .brand-logo-light{display:none}
   :root[data-theme="dark"] .brand-logo-dark{display:block}
-  .brand-tag{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.08em; color:var(--ink-mute); text-transform:uppercase; white-space:nowrap}
-  @media (max-width:640px){ .brand-tag{display:none} }
-  @media (max-width:480px){ .brand-logo{height:30px} }
+  @media (max-width:480px){ .brand-logo{height:38px} }
   nav.primary{display:flex; align-items:center; gap:28px}
   nav.primary a{font-size:.88rem; font-weight:500; text-decoration:none; color:var(--ink-mute); white-space:nowrap}
-  nav.primary a:hover{color:var(--teal-strong)}
   @media (min-width:960px){
-    nav.primary a{padding-bottom:5px; border-bottom:2px solid transparent}
-    nav.primary a.active{color:var(--ink); font-weight:700; border-bottom-color:var(--amber)}
+    nav.primary a{position:relative; padding-bottom:7px}
+    nav.primary a::after{content:''; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--teal); transition:width .22s ease}
+    nav.primary a:hover{color:var(--teal-strong)}
+    nav.primary a:hover::after{width:100%}
+    nav.primary a.active{color:var(--ink); font-weight:700}
+    nav.primary a.active::after{width:100%; background:var(--amber)}
+    nav.primary a.active:hover::after{background:var(--amber)}
   }
   @media (max-width:959px){
-    nav.primary a.active{color:var(--teal-strong); border-left:3px solid var(--amber); padding-left:12px; margin-left:-15px}
+    nav.primary a{transition:background .15s ease, border-left-color .15s ease, padding-left .15s ease; border-left:3px solid transparent}
+    nav.primary a:hover{color:var(--teal-strong); background:var(--surface-2)}
+    nav.primary a.active{color:var(--teal-strong); border-left-color:var(--amber); padding-left:12px; margin-left:-15px}
   }
   .header-actions{display:flex; align-items:center; gap:14px}
   @media (max-width:560px){ .header-actions > .btn-primary{display:none} }
@@ -183,7 +190,8 @@
   .division-flagship .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
   .division-flagship .tag-row span{font-family:'IBM Plex Mono'; font-size:.68rem; color:#D3E2E5; border:1px solid rgba(255,255,255,.25); border-radius:2px; padding:4px 9px}
   .divisions-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow)}
+  .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+  .division:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(12,34,51,.1); border-color:var(--teal)}
   .division .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute); letter-spacing:.08em}
   .division h3{font-size:1.35rem; color:var(--ink)}
   .division .role{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-strong); background:var(--teal-soft); padding:4px 9px; border-radius:2px; align-self:flex-start}
@@ -282,8 +290,10 @@
 
   /* ============ TRAILERS ============ */
   .trailer-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .trailer-card{background:var(--surface); border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:var(--shadow)}
-  .trailer-card img{height:170px; object-fit:cover; width:100%}
+  .trailer-card{background:var(--surface); border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease}
+  .trailer-card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(12,34,51,.1)}
+  .trailer-card img{height:170px; object-fit:cover; width:100%; transition:transform .3s ease}
+  .trailer-card:hover img{transform:scale(1.04)}
   .trailer-card .body{padding:18px}
   .trailer-card h3{font-size:1.1rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
   .trailer-card p{font-size:.85rem; margin-top:6px}
@@ -340,8 +350,13 @@
   .social-row button:hover{background:rgba(255,255,255,.1)}
 
   /* ============ WHATSAPP FAB ============ */
-  .fab{position:fixed; right:20px; bottom:20px; z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28); text-decoration:none}
-  .fab:hover{filter:brightness(1.06)}
+  .fab{position:fixed; right:20px; bottom:20px; z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.5); text-decoration:none; transition:transform .15s ease, filter .15s ease; animation:fab-pulse 2.8s ease-out infinite}
+  .fab:hover{filter:brightness(1.06); transform:scale(1.06); animation-play-state:paused}
+  @keyframes fab-pulse{
+    0%{box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.45)}
+    70%{box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 12px rgba(37,211,102,0)}
+    100%{box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,0)}
+  }
 
   ::selection{background:var(--amber); color:#1A0F00}
 </style>
@@ -363,7 +378,6 @@
     <a class="brand" href="#inicio">
       <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
       <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
-      <span class="brand-tag">connectingcuba.com</span>
     </a>
     <nav class="primary" id="primaryNav">
       <a href="#inicio">Inicio</a>
@@ -389,17 +403,17 @@
     <img src="img/hero.jpg" alt="Autos y camiones listos para embarcar en Puerto Everglades">
   </div>
   <div class="wrap hero-inner">
-    <span class="eyebrow">Grupo ConnectingCuba · Desde 2017</span>
-    <h1>Conectamos<br>Estados Unidos<br>con <em>Cuba</em></h1>
-    <p class="lead">ConnectingCuba es la plataforma que reúne a las empresas del grupo: <strong style="color:#fff">Macias Logistics</strong> exporta vehículos comerciales y utilitarios con todas las licencias BIS, <strong style="color:#fff">Ola International Trading</strong> gestiona comercio internacional entre Europa, Cuba y Estados Unidos, y <strong style="color:#fff">Henex Worldwide Group</strong> opera la estructura logística en Cuba.</p>
-    <div class="hero-ctas">
+    <span class="eyebrow reveal">Grupo ConnectingCuba · Desde 2017</span>
+    <h1 class="reveal">Conectamos<br>Estados Unidos<br>con <em>Cuba</em></h1>
+    <p class="lead reveal">ConnectingCuba es la plataforma que reúne a las empresas del grupo: <strong style="color:#fff">Macias Logistics</strong> exporta vehículos comerciales y utilitarios con todas las licencias BIS, <strong style="color:#fff">Ola International Trading</strong> gestiona comercio internacional entre Europa, Cuba y Estados Unidos, y <strong style="color:#fff">Henex Worldwide Group</strong> opera la estructura logística en Cuba.</p>
+    <div class="hero-ctas reveal">
       <a class="btn btn-primary" href="https://wa.me/17865200009" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
         WhatsApp directo
       </a>
       <a class="btn btn-ghost" href="#grupo" style="color:#fff; border-color:rgba(255,255,255,.5)">Conocer el grupo ↓</a>
     </div>
-    <div class="hero-stats">
+    <div class="hero-stats reveal">
       <div class="hero-stat"><b>2017</b><span>Grupo operando en EE.UU.</span></div>
       <div class="hero-stat"><b>5</b><span>Empresas del grupo</span></div>
       <div class="hero-stat"><b>BIS</b><span>Licencias vigentes</span></div>
