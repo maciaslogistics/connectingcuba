@@ -632,6 +632,12 @@
               <span>Freightliner, Kenworth, Peterbilt, Western Star, Volvo, Hino, International, Isuzu…</span>
               <span class="tier-card-price">$10,500 <em>flete regular</em></span>
             </button>
+            <button type="button" class="tier-card" data-tier="remolque">
+              <span class="tier-card-icon" aria-hidden="true">🚚</span>
+              <b>Remolques y chasis</b>
+              <span>Trailers, semirremolques y chasis nuevos</span>
+              <span class="tier-card-price">Cotización <em>personalizada</em></span>
+            </button>
           </div>
         </div>
 
@@ -660,14 +666,14 @@
       <aside class="configurator-summary" id="cfg-summary" hidden>
         <span class="eyebrow" style="color:var(--amber-strong)">Tu cotización</span>
         <div class="summary-vehicle" id="summary-vehicle">—</div>
-        <div class="summary-rows">
+        <div class="summary-rows" id="summary-rows">
           <div class="summary-row"><span>Flete regular</span><span class="strike" id="summary-base">$0</span></div>
           <div class="summary-row highlight"><span>Flete con promoción</span><span id="summary-online">$0</span></div>
           <div class="summary-row save"><span>Descuento promoción web</span><span id="summary-save">$0</span></div>
           <div class="summary-row"><span>Impuestos estimados en Cuba</span><span id="summary-tax">Por confirmar</span></div>
         </div>
-        <div class="summary-total"><span>Total estimado</span><span id="summary-total">$0</span></div>
-        <p class="summary-disclaimer">El descuento se aplica al flete. Los impuestos en Cuba se pagan por separado mediante tarjeta Clásica.</p>
+        <div class="summary-total"><span id="summary-total-label">Total estimado</span><span id="summary-total">$0</span></div>
+        <p class="summary-disclaimer" id="summary-disclaimer">El descuento se aplica al flete. Los impuestos en Cuba se pagan por separado mediante tarjeta Clásica.</p>
         <div class="summary-ctas">
           <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17865200009" target="_blank" rel="noopener">Consultar mi envío por WhatsApp</a>
           <a class="btn btn-ghost" href="#cfg-contact-anchor">Prefiero que me escriban</a>
@@ -1304,12 +1310,14 @@
 
   // ===== Calculadora de envío =====
   const TIER_PRICING = {
-    regular: { base: 4500, online: 4000, discount: 500, label: 'Vehículo regular / turismo' },
-    camion:  { base: 10500, online: 10000, discount: 500, label: 'Camión / tracto-camión' }
+    regular:  { base: 4500, online: 4000, discount: 500, label: 'Vehículo regular / turismo' },
+    camion:   { base: 10500, online: 10000, discount: 500, label: 'Camión / tracto-camión' },
+    remolque: { custom: true, label: 'Remolque / chasis' }
   };
   const TIER_TIPOS = {
     regular: ['Auto','SUV','Pick up','Camioneta','Panel','Microbús','Ómnibus','Rural'],
-    camion: ['Camión']
+    camion: ['Camión'],
+    remolque: ['Trailer','Chasis']
   };
   // Impuestos aproximados en Cuba por vehículo ('MARCA|MODELO' -> monto en USD).
   // Vacío hasta recibir la tabla oficial del cliente — la interfaz muestra
@@ -1370,26 +1378,42 @@
     const tax = CUBA_TAXES[marca + '|' + modelo];
 
     document.getElementById('summary-vehicle').textContent = marca + ' ' + modelo;
-    document.getElementById('summary-base').textContent = fmtUSD(pricing.base);
-    document.getElementById('summary-online').textContent = fmtUSD(pricing.online);
-    document.getElementById('summary-save').textContent = '−' + fmtUSD(pricing.discount);
-    const taxEl = document.getElementById('summary-tax');
+    const summaryRows = document.getElementById('summary-rows');
+    const totalLabel = document.getElementById('summary-total-label');
     const totalEl = document.getElementById('summary-total');
-    let waTaxPart;
-    if (tax != null) {
-      taxEl.textContent = fmtUSD(tax) + ' aprox.';
-      totalEl.textContent = fmtUSD(pricing.online + tax) + ' aprox.';
-      waTaxPart = `, más impuestos aproximados de ${fmtUSD(tax)} en Cuba`;
+    const disclaimerEl = document.getElementById('summary-disclaimer');
+    let waText;
+
+    if (pricing.custom) {
+      summaryRows.hidden = true;
+      totalLabel.textContent = 'Flete';
+      totalEl.textContent = 'Cotización personalizada';
+      disclaimerEl.textContent = 'Este equipo no tiene una tarifa fija en línea — te confirmamos el flete directamente según las condiciones de tu operación.';
+      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Necesito una cotización personalizada.`);
     } else {
-      taxEl.textContent = 'Por confirmar';
-      totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos por confirmar';
-      waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
+      summaryRows.hidden = false;
+      totalLabel.textContent = 'Total estimado';
+      document.getElementById('summary-base').textContent = fmtUSD(pricing.base);
+      document.getElementById('summary-online').textContent = fmtUSD(pricing.online);
+      document.getElementById('summary-save').textContent = '−' + fmtUSD(pricing.discount);
+      const taxEl = document.getElementById('summary-tax');
+      let waTaxPart;
+      if (tax != null) {
+        taxEl.textContent = fmtUSD(tax) + ' aprox.';
+        totalEl.textContent = fmtUSD(pricing.online + tax) + ' aprox.';
+        waTaxPart = `, más impuestos aproximados de ${fmtUSD(tax)} en Cuba`;
+      } else {
+        taxEl.textContent = 'Por confirmar';
+        totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos por confirmar';
+        waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
+      }
+      disclaimerEl.textContent = 'El descuento se aplica al flete. Los impuestos en Cuba se pagan por separado mediante tarjeta Clásica.';
+      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
     }
 
-    const waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
     document.getElementById('summary-whatsapp').href = `https://wa.me/17865200009?text=${waText}`;
 
-    blockIncluded.hidden = false;
+    blockIncluded.hidden = !!pricing.custom;
     cfgSummary.hidden = false;
   }
 
