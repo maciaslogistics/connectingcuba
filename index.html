@@ -728,14 +728,14 @@
 <section id="galeria" data-page="galeria">
   <div class="wrap">
     <div class="head reveal">
-      <span class="eyebrow">Entregas reales</span>
-      <h2>Clientes recibiendo su vehículo en Cuba</h2>
-      <p>Fotos reales, publicadas con autorización de nuestros clientes — así se ve el final del proceso.</p>
+      <span class="eyebrow">Galería</span>
+      <h2>El proceso, de punta a punta</h2>
+      <p>Desde el puerto hasta la entrega final: fotos y videos reales, publicados con autorización de nuestros clientes.</p>
     </div>
 
     <div class="gal-tabs reveal" role="tablist" aria-label="Categoría de galería">
-      <button type="button" class="gal-tab active" data-gal="entregas" role="tab" aria-selected="true">Entregas reales</button>
-      <button type="button" class="gal-tab" data-gal="puerto" role="tab" aria-selected="false">Puerto y recogida</button>
+      <button type="button" class="gal-tab active" data-gal="puerto" role="tab" aria-selected="true">Vehículos en los puertos de Cuba y EE.UU.</button>
+      <button type="button" class="gal-tab" data-gal="entregas" role="tab" aria-selected="false">Entregas reales a nuestros clientes</button>
       <button type="button" class="gal-tab" data-gal="video" role="tab" aria-selected="false">Video del proceso</button>
     </div>
 
@@ -921,7 +921,7 @@
     ];
     const SETS = { entregas: ENTREGAS, puerto: PUERTO, video: VIDEOS };
 
-    let activeSet = 'entregas';
+    let activeSet = 'puerto';
     let shown = PAGE_SIZE;
 
     function renderGrid(){
