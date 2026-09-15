@@ -317,6 +317,9 @@
   .gal-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease}
   .gal-item:hover img{transform:scale(1.05)}
   .gal-more{display:block; margin:28px auto 0}
+  .video-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .video-card{position:relative; aspect-ratio:9/16; border-radius:6px; overflow:hidden; background:#000; box-shadow:var(--shadow)}
+  .video-card video{width:100%; height:100%; object-fit:cover; display:block}
 
   .lightbox{position:fixed; inset:0; z-index:100; background:rgba(7,22,32,.94); display:flex; align-items:center; justify-content:center}
   .lightbox img{max-width:90vw; max-height:86vh; object-fit:contain; border-radius:4px}
@@ -733,6 +736,7 @@
     <div class="gal-tabs reveal" role="tablist" aria-label="Categoría de galería">
       <button type="button" class="gal-tab active" data-gal="entregas" role="tab" aria-selected="true">Entregas reales</button>
       <button type="button" class="gal-tab" data-gal="puerto" role="tab" aria-selected="false">Puerto y recogida</button>
+      <button type="button" class="gal-tab" data-gal="video" role="tab" aria-selected="false">Video del proceso</button>
     </div>
 
     <div class="gal-grid reveal" id="gal-grid"></div>
@@ -910,12 +914,28 @@
       { src: 'img/gallery-4.jpg', alt: 'Equipo de ConnectingCuba en el puerto' },
       { src: 'img/gallery-5.jpg', alt: 'Vehículo en patio portuario antes de embarcar' },
     ];
-    const SETS = { entregas: ENTREGAS, puerto: PUERTO };
+    const VIDEOS = [
+      { src: 'video/proceso-1.mp4', poster: 'img/video-posters/proceso-1.jpg' },
+      { src: 'video/proceso-2.mp4', poster: 'img/video-posters/proceso-2.jpg' },
+      { src: 'video/proceso-3.mp4', poster: 'img/video-posters/proceso-3.jpg' },
+    ];
+    const SETS = { entregas: ENTREGAS, puerto: PUERTO, video: VIDEOS };
 
     let activeSet = 'entregas';
     let shown = PAGE_SIZE;
 
     function renderGrid(){
+      grid.classList.toggle('video-grid', activeSet === 'video');
+      grid.classList.toggle('gal-grid', activeSet !== 'video');
+
+      if (activeSet === 'video') {
+        grid.innerHTML = VIDEOS.map(v =>
+          `<div class="video-card"><video controls preload="none" poster="${v.poster}"><source src="${v.src}" type="video/mp4"></video></div>`
+        ).join('');
+        moreBtn.hidden = true;
+        return;
+      }
+
       const data = SETS[activeSet];
       const slice = data.slice(0, shown);
       grid.innerHTML = slice.map((item, i) =>
