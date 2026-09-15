@@ -57,6 +57,7 @@
 
   *{box-sizing:border-box}
   [hidden]{display:none !important}
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important} }
 
@@ -95,17 +96,18 @@
   .reveal{transform:translateY(14px); transition:transform .55s ease}
   .reveal.in{transform:none}
 
-  /* ============ ROUTE STRIP ============ */
-  .route-strip{background:var(--navy); color:#CBDDE3; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em}
-  .route-strip .wrap{display:flex; align-items:center; gap:16px; padding:9px 24px; overflow-x:auto; white-space:nowrap; scrollbar-width:none}
-  .route-strip .wrap::-webkit-scrollbar{display:none}
-  .route-strip .port{font-weight:600; color:#fff; flex:none}
-  .route-strip .track{flex:none; width:60px; height:2px; background-image:var(--route-line); background-size:20px 2px; position:relative; animation:route-flow 1.4s linear infinite}
-  @media (min-width:960px){ .route-strip .track{flex:1; width:auto; min-width:40px} }
-  .route-strip .track::after{content:'▸'; position:absolute; right:-2px; top:50%; transform:translateY(-50%); color:var(--amber)}
-  @keyframes route-flow{ from{background-position:0 0} to{background-position:-20px 0} }
-  .route-strip .tag{flex:none; color:#7FA3AF; display:none}
-  @media (min-width:760px){ .route-strip .tag{display:inline} }
+  /* ============ ROUTE STRIP / BRAND TICKER ============ */
+  .route-strip{background:var(--navy); color:#CBDDE3; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; overflow:hidden}
+  .ticker{overflow:hidden; width:100%; -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%)}
+  .ticker-track{display:flex; align-items:center; gap:22px; width:max-content; padding:10px 0; animation:ticker-scroll 48s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-item{flex:none; white-space:nowrap}
+  .ticker-item.is-lead{color:#fff; font-weight:700}
+  .ticker-item.is-lead em{font-style:normal; color:var(--amber-strong); padding:0 2px}
+  .ticker-item.is-tag{color:#9FC1C9}
+  .ticker-sep{flex:none; color:var(--amber); opacity:.75}
+  @keyframes ticker-scroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none} }
 
   /* ============ HEADER ============ */
   header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
@@ -361,14 +363,11 @@
   ::selection{background:var(--amber); color:#1A0F00}
 </style>
 
-<!-- ============ ROUTE STRIP ============ -->
+<!-- ============ ROUTE STRIP / BRAND TICKER ============ -->
 <div class="route-strip">
-  <div class="wrap">
-    <span class="port">PUERTO EVERGLADES, FL</span>
-    <span class="track" aria-hidden="true"></span>
-    <span class="tag">EXPORTACIÓN LEGAL DE VEHÍCULOS · DESDE 2023</span>
-    <span class="track" aria-hidden="true"></span>
-    <span class="port">PUERTO DE MARIEL, CUBA</span>
+  <p class="sr-only">ConnectingCuba: proveedores directos de vehículos en Cuba, sin intermediarios. Marcas comerciales: Freightliner, Kenworth, Peterbilt, Western Star, International, Isuzu, Volvo, Hino. Marcas de autos: Audi, BMW, Porsche, Land Rover, Lexus, Infiniti, Toyota, Honda, Hyundai, Nissan, Volkswagen, BYD. Envíos todas las semanas. Supervisión de todo el proceso. Entregas garantizadas en Cuba.</p>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker-track"></div>
   </div>
 </div>
 
@@ -847,6 +846,32 @@
 </a>
 
 <script>
+  // ===== Cinta superior: propuesta de valor + marcas =====
+  (function buildTicker(){
+    const track = document.getElementById('ticker-track');
+    if (!track) return;
+    const items = [
+      { text: 'PROVEEDORES DIRECTOS EN CUBA · SIN INTERMEDIARIOS', cls: 'is-lead' },
+      { text: 'FREIGHTLINER' }, { text: 'KENWORTH' }, { text: 'PETERBILT' },
+      { text: 'WESTERN STAR' }, { text: 'INTERNATIONAL' }, { text: 'ISUZU' },
+      { text: 'VOLVO' }, { text: 'HINO' },
+      { text: 'AUDI' }, { text: 'BMW' }, { text: 'PORSCHE' },
+      { text: 'LAND ROVER' }, { text: 'LEXUS' }, { text: 'INFINITI' },
+      { text: 'TOYOTA' }, { text: 'HONDA' }, { text: 'HYUNDAI' },
+      { text: 'NISSAN' }, { text: 'VOLKSWAGEN' }, { text: 'BYD' },
+      { text: 'ENVÍOS TODAS LAS SEMANAS', cls: 'is-tag' },
+      { text: 'SUPERVISIÓN DE TODO EL PROCESO', cls: 'is-tag' },
+      { text: 'ENTREGAS GARANTIZADAS EN CUBA', cls: 'is-tag' },
+    ];
+    function renderSequence(){
+      return items.map(it =>
+        `<span class="ticker-item${it.cls ? ' ' + it.cls : ''}">${it.text}</span><span class="ticker-sep">·</span>`
+      ).join('');
+    }
+    // se duplica la secuencia para que el loop sea continuo (translateX -50%)
+    track.innerHTML = renderSequence() + renderSequence();
+  })();
+
   // mobile nav
   const navToggle = document.getElementById('navToggle');
   navToggle.addEventListener('click', () => {
