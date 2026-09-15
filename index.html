@@ -608,9 +608,10 @@
 <section id="calculadora" data-page="calculadora" style="background:var(--surface-2)">
   <div class="wrap">
     <div class="head reveal">
-      <span class="eyebrow">Macias Logistics · Cotización instantánea</span>
+      <span class="eyebrow">MACIAS LOGISTICS · PROMOCIÓN WEB</span>
       <h2>Configura tu envío</h2>
-      <p>Elige tu vehículo y obtén el costo de tu flete al instante. Configurando tu envío aquí, en la web, obtienes hasta $500 de descuento sobre el precio regular.</p>
+      <p>Tu próximo envío comienza con un beneficio: hasta $500 de descuento en el flete. Completa el formulario online o solicita tu cotización a nuestro equipo desde esta web para acceder a la promoción. Selecciona tu vehículo, consulta el precio y da el siguiente paso con nosotros.</p>
+      <p style="margin-top:10px; font-size:.88rem">Recibimos solicitudes para vehículos de turismo del año 2017 en adelante y camiones del año 2012 en adelante. Cada operación está sujeta a la revisión del vehículo y su documentación.</p>
     </div>
 
     <div class="configurator">
@@ -623,7 +624,7 @@
               <span class="tier-card-icon" aria-hidden="true">🚗</span>
               <b>Vehículo regular / turismo</b>
               <span>Autos, SUV, pick up, paneles, microbuses, ómnibus…</span>
-              <span class="tier-card-price">$4,250 <em>flete regular</em></span>
+              <span class="tier-card-price">$4,500 <em>flete regular</em></span>
             </button>
             <button type="button" class="tier-card" data-tier="camion">
               <span class="tier-card-icon" aria-hidden="true">🚛</span>
@@ -660,28 +661,28 @@
         <span class="eyebrow" style="color:var(--amber-strong)">Tu cotización</span>
         <div class="summary-vehicle" id="summary-vehicle">—</div>
         <div class="summary-rows">
-          <div class="summary-row"><span>Flete — precio regular</span><span class="strike" id="summary-base">$0</span></div>
-          <div class="summary-row highlight"><span>Flete configurando online</span><span id="summary-online">$0</span></div>
-          <div class="summary-row save"><span>Ahorras configurando aquí</span><span id="summary-save">$0</span></div>
-          <div class="summary-row"><span>Impuestos estimados en Cuba*</span><span id="summary-tax">Por confirmar</span></div>
+          <div class="summary-row"><span>Flete regular</span><span class="strike" id="summary-base">$0</span></div>
+          <div class="summary-row highlight"><span>Flete con promoción</span><span id="summary-online">$0</span></div>
+          <div class="summary-row save"><span>Descuento promoción web</span><span id="summary-save">$0</span></div>
+          <div class="summary-row"><span>Impuestos estimados en Cuba</span><span id="summary-tax">Por confirmar</span></div>
         </div>
         <div class="summary-total"><span>Total estimado</span><span id="summary-total">$0</span></div>
-        <p class="summary-disclaimer">*Impuestos aproximados de Cuba — se pagan en Cuba mediante tarjeta clásica y pueden variar hasta $500 por encima o por debajo según el contrato final.</p>
+        <p class="summary-disclaimer">El descuento se aplica al flete. Los impuestos en Cuba se pagan por separado mediante tarjeta Clásica.</p>
         <div class="summary-ctas">
-          <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17865200009" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+          <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17865200009" target="_blank" rel="noopener">Consultar mi envío por WhatsApp</a>
           <a class="btn btn-ghost" href="#cfg-contact-anchor">Prefiero que me escriban</a>
         </div>
       </aside>
     </div>
 
     <div class="cfg-contact reveal" id="cfg-contact-anchor">
-      <h3>Envíanos un email y nuestro equipo se pondrá en contacto contigo</h3>
-      <p style="margin-top:6px">O si prefieres, escríbenos directo por WhatsApp con tu cotización ya lista.</p>
+      <h3>Solicita tu cotización con descuento</h3>
+      <p style="margin-top:6px">Completa tus datos y envíanos tu solicitud para acceder a la promoción web. Nuestro equipo se pondrá en contacto contigo para revisar los detalles de tu envío. También puedes continuar por WhatsApp con la cotización que acabas de configurar.</p>
       <form class="cfg-contact-form" id="cfg-contact-form" onsubmit="event.preventDefault(); this.querySelector('.sent').hidden=false;">
         <div class="field"><label for="cfg-name">Nombre</label><input id="cfg-name" type="text" placeholder="Tu nombre completo"></div>
         <div class="field"><label for="cfg-email">Correo electrónico*</label><input id="cfg-email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
         <div class="field"><label for="cfg-phone">Teléfono / WhatsApp</label><input id="cfg-phone" type="tel" placeholder="+1 786 000 0000"></div>
-        <button class="btn btn-primary" type="submit">Enviar mi cotización</button>
+        <button class="btn btn-primary" type="submit">Solicitar mi cotización con descuento</button>
         <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos en breve con los siguientes pasos.</p>
       </form>
     </div>
@@ -690,8 +691,8 @@
       <h3>Preguntas frecuentes</h3>
       <details><summary>¿Cómo se paga el flete?</summary><p>El flete se contrata y se paga en Estados Unidos, antes del embarque del vehículo.</p></details>
       <details><summary>¿Cómo se pagan los impuestos en Cuba?</summary><p>Los impuestos de importación se pagan directamente en Cuba, mediante tarjeta clásica, al momento de la entrega. Son estimados y pueden variar hasta $500 por encima o por debajo según el contrato final.</p></details>
-      <details><summary>¿Por qué el flete configurando online es más barato?</summary><p>Al configurar y confirmar tu pedido directamente en la web nos ahorras trabajo administrativo, y trasladamos ese ahorro a ti: $250 en vehículos regulares y $500 en camiones.</p></details>
-      <details><summary>¿No encuentro mi modelo exacto?</summary><p>Escríbenos por WhatsApp — la mayoría de las marcas y modelos del año 2016 en adelante son elegibles, y seguimos ampliando el catálogo.</p></details>
+      <details><summary>¿Por qué obtengo un descuento al cotizar desde la web?</summary><p>Es una promoción que ofrecemos a nuestros clientes a través de esta web. Al completar el formulario online o solicitar tu cotización desde aquí por nuestros canales oficiales, puedes acceder a un descuento de hasta $500 sobre el flete regular. Para las tarifas mostradas, el flete de vehículos regulares pasa de $4,500 a $4,000 USD y el de camiones, de $10,500 a $10,000 USD. Los impuestos en Cuba se pagan por separado.</p></details>
+      <details><summary>¿Qué hago si no encuentro mi modelo?</summary><p>Comunícate con nosotros a través de nuestros canales oficiales: <a href="https://wa.me/17865200009" target="_blank" rel="noopener">WhatsApp</a>, <a href="tel:+13056156007,0">teléfono</a> o el <a href="#cfg-contact-anchor">formulario de esta web</a>. Indícanos la marca, el modelo y el año del vehículo para que nuestro equipo revise tu caso y te oriente sobre las opciones disponibles. Si es un vehículo de turismo, debe ser del año 2017 en adelante; si es un camión, del año 2012 en adelante. Cumplir el año requerido es parte de la revisión y no sustituye la aprobación del vehículo y su documentación.</p></details>
     </div>
   </div>
 </section>
@@ -1303,7 +1304,7 @@
 
   // ===== Calculadora de envío =====
   const TIER_PRICING = {
-    regular: { base: 4250, online: 4000, discount: 250, label: 'Vehículo regular / turismo' },
+    regular: { base: 4500, online: 4000, discount: 500, label: 'Vehículo regular / turismo' },
     camion:  { base: 10500, online: 10000, discount: 500, label: 'Camión / tracto-camión' }
   };
   const TIER_TIPOS = {
@@ -1371,7 +1372,7 @@
     document.getElementById('summary-vehicle').textContent = marca + ' ' + modelo;
     document.getElementById('summary-base').textContent = fmtUSD(pricing.base);
     document.getElementById('summary-online').textContent = fmtUSD(pricing.online);
-    document.getElementById('summary-save').textContent = fmtUSD(pricing.discount);
+    document.getElementById('summary-save').textContent = '−' + fmtUSD(pricing.discount);
     const taxEl = document.getElementById('summary-tax');
     const totalEl = document.getElementById('summary-total');
     let waTaxPart;
@@ -1381,11 +1382,11 @@
       waTaxPart = `, más impuestos aproximados de ${fmtUSD(tax)} en Cuba`;
     } else {
       taxEl.textContent = 'Por confirmar';
-      totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos';
+      totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos por confirmar';
       waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
     }
 
-    const waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Precio configurando online: ${fmtUSD(pricing.online)}${waTaxPart}.`);
+    const waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
     document.getElementById('summary-whatsapp').href = `https://wa.me/17865200009?text=${waText}`;
 
     blockIncluded.hidden = false;
