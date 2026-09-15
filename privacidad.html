@@ -1,0 +1,235 @@
+<!doctype html>
+<title>Política de Privacidad · ConnectingCuba</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F4F3; --surface:#FFFFFF; --surface-2:#E7EEEC; --line:#D5DFDC;
+    --ink:#0F2530; --ink-mute:#4E6670; --navy:#0C2233; --navy-2:#12354A;
+    --teal:#1C94C7; --teal-strong:#146E96; --teal-soft:#E4F3F9;
+    --amber:#B8711A; --amber-strong:#9C5E14;
+    --shadow: 0 1px 2px rgba(12,34,51,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0A1B26; --surface:#102A38; --surface-2:#0D2330; --line:#1E3D4C;
+      --ink:#E9F1EF; --ink-mute:#93AEB6; --navy:#071620; --navy-2:#0C2233;
+      --teal:#4DC3EA; --teal-strong:#7ADCF5; --teal-soft:#113247;
+      --amber:#F2A93B; --amber-strong:#F7C169;
+      --shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0A1B26; --surface:#102A38; --surface-2:#0D2330; --line:#1E3D4C;
+    --ink:#E9F1EF; --ink-mute:#93AEB6; --navy:#071620; --navy-2:#0C2233;
+    --teal:#4DC3EA; --teal-strong:#7ADCF5; --teal-soft:#113247;
+    --amber:#F2A93B; --amber-strong:#F7C169;
+    --shadow: 0 1px 2px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none !important}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing:antialiased}
+  img{max-width:100%; display:block}
+  a{color:inherit}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+  h1,h2{font-family:'Big Shoulders Display','Arial Narrow',sans-serif; text-transform:uppercase; letter-spacing:.01em; margin:0; line-height:1.02; color:var(--ink)}
+  .eyebrow{font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-strong); font-weight:600}
+  p{line-height:1.65; color:var(--ink-mute); max-width:68ch}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Sans'; font-weight:600; font-size:.88rem; padding:11px 18px; border-radius:3px; border:1.5px solid currentColor; cursor:pointer; text-decoration:none; background:transparent; color:var(--ink)}
+  .btn:hover{background:var(--surface-2)}
+  .btn:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:11px 24px; gap:20px; max-width:1180px}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+  .brand-logo{height:44px; width:auto; display:block}
+  .brand-logo-dark{display:none}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .brand-logo-light{display:none}
+    :root:not([data-theme="light"]) .brand-logo-dark{display:block}
+  }
+  :root[data-theme="dark"] .brand-logo-light{display:none}
+  :root[data-theme="dark"] .brand-logo-dark{display:block}
+
+  main{padding:56px 0 80px}
+  .legal-head{margin-bottom:32px}
+  .legal-head h1{font-size:clamp(2rem,5vw,2.8rem); margin-top:10px}
+  .legal-head p{margin-top:14px}
+
+  .lang-tabs{display:flex; gap:8px; margin-bottom:36px; border-bottom:1px solid var(--line); padding-bottom:0}
+  .lang-tab{font-family:'IBM Plex Mono'; font-size:.82rem; font-weight:600; letter-spacing:.03em; padding:10px 4px; margin-bottom:-1px; border:none; border-bottom:2px solid transparent; background:transparent; color:var(--ink-mute); cursor:pointer}
+  .lang-tab + .lang-tab{margin-left:8px}
+  .lang-tab.active{color:var(--ink); border-bottom-color:var(--amber)}
+  .lang-tab:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  .legal-body h2{font-size:1.05rem; text-transform:none; letter-spacing:0; font-weight:700; color:var(--ink); margin-top:36px; padding-top:20px; border-top:1px solid var(--line)}
+  .legal-body h2:first-child{margin-top:0; padding-top:0; border-top:none}
+  .legal-body p{margin-top:10px; font-size:.94rem}
+  .legal-body p + p{margin-top:12px}
+  .legal-updated{margin-top:44px; font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-mute)}
+
+  footer{background:var(--navy-2); color:#B9CDD3; padding:48px 0 26px; margin-top:40px}
+  .footer-grid{display:grid; gap:28px; grid-template-columns:1.4fr 1fr 1fr 1fr}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr} }
+  .footer-grid h3{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
+  .footer-grid a{display:block; font-size:.86rem; color:#D3E2E5; text-decoration:none; margin-bottom:9px}
+  .footer-grid a:hover{color:#fff}
+  .footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; border-top:1px solid rgba(255,255,255,.1); margin-top:36px; padding-top:22px; font-size:.78rem; color:#7FA3AF}
+</style>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html#inicio">
+      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
+    </a>
+    <a class="btn" href="index.html#inicio">← Volver al sitio</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="legal-head">
+    <span class="eyebrow">ConnectingCuba</span>
+    <h1 data-es="Política de Privacidad" data-en="Privacy Policy"></h1>
+  </div>
+
+  <div class="lang-tabs" role="tablist" aria-label="Idioma / Language">
+    <button type="button" class="lang-tab" data-lang="es" role="tab">Español</button>
+    <button type="button" class="lang-tab" data-lang="en" role="tab">English</button>
+  </div>
+
+  <div class="legal-body" id="content-es" lang="es">
+    <p>ConnectingCuba es la plataforma del grupo formado por Macias Logistics LLC, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA (en conjunto, «el Grupo»). Esta Política de Privacidad explica cómo tratamos la información personal de quienes usan este sitio web y solicitan nuestros servicios. La empresa del Grupo responsable de cada operación se identifica en la cotización o el contrato correspondiente; ninguna empresa del Grupo asume responsabilidad por operaciones que no le correspondan directamente.</p>
+
+    <h2>1. Qué información recopilamos</h2>
+    <p>Para responder tu solicitud y elaborar tu cotización recopilamos los datos que nos proporcionas por el formulario de esta web, WhatsApp o teléfono: nombre, teléfono, correo electrónico, y los datos del vehículo o mercancía que quieres enviar (marca, modelo, año). Para avanzar una operación de exportación podemos solicitar documentación adicional, como el título de propiedad, la factura de compraventa, el número de motor y los datos de contacto necesarios en Cuba, según lo indicado en cada operación.</p>
+
+    <h2>2. Cómo usamos tu información</h2>
+    <p>Usamos tu información para responder tu solicitud y preparar tu cotización, gestionar la contratación y el seguimiento de tu envío, comunicarnos contigo sobre el estado de tu operación, y cumplir con los requisitos legales y documentales aplicables a la exportación.</p>
+
+    <h2>3. Con quién compartimos tu información</h2>
+    <p>Según la empresa del Grupo que gestione tu operación, tu información puede compartirse con las demás empresas del Grupo y con terceros que intervienen directamente en el proceso — por ejemplo, navieras, agentes aduanales y autoridades de Estados Unidos y Cuba — únicamente en la medida necesaria para completar tu envío. No vendemos tu información a terceros.</p>
+
+    <h2>4. Tratamiento internacional de datos</h2>
+    <p>Nuestras operaciones conectan Estados Unidos, Cuba y, en algunos casos, Europa. Por eso, tu información puede ser tratada o consultada por personal del Grupo ubicado en más de un país, únicamente para los fines descritos en esta política.</p>
+
+    <h2>5. Conservación de la información</h2>
+    <p>Conservamos tu información mientras sea necesaria para gestionar tu operación y cumplir con nuestras obligaciones legales y documentales.</p>
+
+    <h2>6. Seguridad</h2>
+    <p>Adoptamos medidas razonables dentro de nuestros procesos internos para proteger tu información frente a accesos, usos o divulgaciones no autorizados.</p>
+
+    <h2>7. Tus derechos</h2>
+    <p>Puedes escribirnos para consultar, corregir o solicitar la actualización de la información que nos has proporcionado. Atenderemos tu solicitud conforme a la legislación aplicable a tu caso.</p>
+
+    <h2>8. Cookies y herramientas de este sitio</h2>
+    <p>Este sitio no utiliza cookies de rastreo ni herramientas de análisis de terceros. Utilizamos el almacenamiento local de tu propio navegador (localStorage) únicamente para recordar, en tu dispositivo, la selección que hiciste en la calculadora de envío (tipo de vehículo, marca y modelo), de modo que no tengas que repetirla si vuelves a visitar la página. Esa información no se envía a nuestros servidores ni se comparte con terceros. Este sitio también carga tipografías desde Google Fonts, lo que implica que tu navegador se conecta a los servidores de Google para mostrarlas.</p>
+
+    <h2>9. Contacto</h2>
+    <p>Para cualquier consulta sobre esta Política de Privacidad, puedes escribirnos a <a href="mailto:e.lopez@maciaslogistics.com">e.lopez@maciaslogistics.com</a>.</p>
+
+    <h2>10. Actualizaciones de esta política</h2>
+    <p>Podemos actualizar esta Política de Privacidad. La fecha de la versión vigente se indicará al momento de su publicación.</p>
+
+    <p class="legal-updated">Última actualización: se indicará al publicar esta página.</p>
+  </div>
+
+  <div class="legal-body" id="content-en" lang="en" hidden>
+    <p>ConnectingCuba is the platform for the group formed by Macias Logistics LLC, Ola International Trading, Henex Worldwide Group, Metele and Prime Truck USA (together, "the Group"). This Privacy Policy explains how we handle the personal information of people who use this website and request our services. The Group company responsible for each transaction is identified in the corresponding quote or contract; no Group company presents itself as responsible for transactions handled by another Group company.</p>
+
+    <h2>1. Information we collect</h2>
+    <p>To respond to your request and prepare your quote, we collect the information you provide through this website's form, WhatsApp or phone: name, phone number, email address, and details of the vehicle or goods you want to ship (make, model, year). To move forward with an export transaction we may request additional documentation, such as the title of ownership, the bill of sale, the engine number, and the contact details needed in Cuba, as indicated for each transaction.</p>
+
+    <h2>2. How we use your information</h2>
+    <p>We use your information to respond to your request and prepare your quote, manage the contracting and follow-up of your shipment, communicate with you about the status of your transaction, and comply with the legal and documentary requirements applicable to the export.</p>
+
+    <h2>3. Who we share your information with</h2>
+    <p>Depending on which Group company handles your transaction, your information may be shared with the other Group companies and with third parties directly involved in the process — for example, shipping lines, customs agents, and authorities in the United States and Cuba — only to the extent necessary to complete your shipment. We do not sell your information to third parties.</p>
+
+    <h2>4. International data handling</h2>
+    <p>Our operations connect the United States, Cuba and, in some cases, Europe. Because of this, your information may be handled or accessed by Group staff located in more than one country, solely for the purposes described in this policy.</p>
+
+    <h2>5. Data retention</h2>
+    <p>We keep your information for as long as necessary to manage your transaction and comply with our legal and documentary obligations.</p>
+
+    <h2>6. Security</h2>
+    <p>We take reasonable measures within our internal processes to protect your information against unauthorized access, use or disclosure.</p>
+
+    <h2>7. Your rights</h2>
+    <p>You may write to us to review, correct or request an update to the information you have provided us. We will handle your request in accordance with the law applicable to your case.</p>
+
+    <h2>8. Cookies and tools used on this site</h2>
+    <p>This site does not use tracking cookies or third-party analytics tools. We use your own browser's local storage (localStorage) solely to remember, on your device, the selection you made in the shipping calculator (vehicle type, make and model), so you don't have to repeat it if you visit the page again. That information is not sent to our servers or shared with third parties. This site also loads fonts from Google Fonts, which means your browser connects to Google's servers to display them.</p>
+
+    <h2>9. Contact</h2>
+    <p>For any questions about this Privacy Policy, you can write to us at <a href="mailto:e.lopez@maciaslogistics.com">e.lopez@maciaslogistics.com</a>.</p>
+
+    <h2>10. Updates to this policy</h2>
+    <p>We may update this Privacy Policy. The date of the current version will be indicated when it is published.</p>
+
+    <p class="legal-updated">Last updated: to be indicated upon publication.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Grupo</h3>
+        <p style="color:#9DBBC2; font-size:.85rem; max-width:34ch">ConnectingCuba conecta a Estados Unidos, Europa y Cuba a través de Macias Logistics, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA.</p>
+      </div>
+      <div>
+        <h3>Empresas</h3>
+        <a href="index.html#grupo">Macias Logistics</a>
+        <a href="index.html#grupo">Ola International Trading</a>
+        <a href="index.html#grupo">Henex Worldwide Group</a>
+        <a href="index.html#grupo">Metele</a>
+        <a href="index.html#grupo">Prime Truck USA</a>
+      </div>
+      <div>
+        <h3>Sitio</h3>
+        <a href="index.html#calculadora">Configura tu envío</a>
+        <a href="index.html#vehiculos">Vehículos autorizados</a>
+        <a href="index.html#contacto">Contacto</a>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="terminos.html">Términos y condiciones</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ConnectingCuba — Macias Logistics · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const KEY = 'cc_lang';
+    const tabs = document.querySelectorAll('.lang-tab');
+    const blocks = { es: document.getElementById('content-es'), en: document.getElementById('content-en') };
+    const titleEl = document.querySelector('.legal-head h1');
+
+    function apply(lang){
+      if (lang !== 'es' && lang !== 'en') lang = 'es';
+      blocks.es.hidden = lang !== 'es';
+      blocks.en.hidden = lang !== 'en';
+      tabs.forEach(t => {
+        const active = t.dataset.lang === lang;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active);
+      });
+      titleEl.textContent = titleEl.dataset[lang];
+      document.documentElement.lang = lang;
+      try { localStorage.setItem(KEY, lang); } catch(e) {}
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.lang)));
+
+    let saved = 'es';
+    try { saved = localStorage.getItem(KEY) || 'es'; } catch(e) {}
+    apply(saved);
+  })();
+</script>

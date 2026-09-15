@@ -1,0 +1,257 @@
+<!doctype html>
+<title>Términos y Condiciones · ConnectingCuba</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F1F4F3; --surface:#FFFFFF; --surface-2:#E7EEEC; --line:#D5DFDC;
+    --ink:#0F2530; --ink-mute:#4E6670; --navy:#0C2233; --navy-2:#12354A;
+    --teal:#1C94C7; --teal-strong:#146E96; --teal-soft:#E4F3F9;
+    --amber:#B8711A; --amber-strong:#9C5E14;
+    --shadow: 0 1px 2px rgba(12,34,51,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0A1B26; --surface:#102A38; --surface-2:#0D2330; --line:#1E3D4C;
+      --ink:#E9F1EF; --ink-mute:#93AEB6; --navy:#071620; --navy-2:#0C2233;
+      --teal:#4DC3EA; --teal-strong:#7ADCF5; --teal-soft:#113247;
+      --amber:#F2A93B; --amber-strong:#F7C169;
+      --shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0A1B26; --surface:#102A38; --surface-2:#0D2330; --line:#1E3D4C;
+    --ink:#E9F1EF; --ink-mute:#93AEB6; --navy:#071620; --navy-2:#0C2233;
+    --teal:#4DC3EA; --teal-strong:#7ADCF5; --teal-soft:#113247;
+    --amber:#F2A93B; --amber-strong:#F7C169;
+    --shadow: 0 1px 2px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none !important}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing:antialiased}
+  img{max-width:100%; display:block}
+  a{color:inherit}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+  h1,h2{font-family:'Big Shoulders Display','Arial Narrow',sans-serif; text-transform:uppercase; letter-spacing:.01em; margin:0; line-height:1.02; color:var(--ink)}
+  .eyebrow{font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-strong); font-weight:600}
+  p{line-height:1.65; color:var(--ink-mute); max-width:68ch}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Sans'; font-weight:600; font-size:.88rem; padding:11px 18px; border-radius:3px; border:1.5px solid currentColor; cursor:pointer; text-decoration:none; background:transparent; color:var(--ink)}
+  .btn:hover{background:var(--surface-2)}
+  .btn:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:11px 24px; gap:20px; max-width:1180px}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+  .brand-logo{height:44px; width:auto; display:block}
+  .brand-logo-dark{display:none}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .brand-logo-light{display:none}
+    :root:not([data-theme="light"]) .brand-logo-dark{display:block}
+  }
+  :root[data-theme="dark"] .brand-logo-light{display:none}
+  :root[data-theme="dark"] .brand-logo-dark{display:block}
+
+  main{padding:56px 0 80px}
+  .legal-head{margin-bottom:32px}
+  .legal-head h1{font-size:clamp(2rem,5vw,2.8rem); margin-top:10px}
+  .legal-head p{margin-top:14px}
+
+  .lang-tabs{display:flex; gap:8px; margin-bottom:36px; border-bottom:1px solid var(--line); padding-bottom:0}
+  .lang-tab{font-family:'IBM Plex Mono'; font-size:.82rem; font-weight:600; letter-spacing:.03em; padding:10px 4px; margin-bottom:-1px; border:none; border-bottom:2px solid transparent; background:transparent; color:var(--ink-mute); cursor:pointer}
+  .lang-tab + .lang-tab{margin-left:8px}
+  .lang-tab.active{color:var(--ink); border-bottom-color:var(--amber)}
+  .lang-tab:focus-visible{outline:2px solid var(--teal); outline-offset:2px}
+
+  .legal-body h2{font-size:1.05rem; text-transform:none; letter-spacing:0; font-weight:700; color:var(--ink); margin-top:36px; padding-top:20px; border-top:1px solid var(--line)}
+  .legal-body h2:first-child{margin-top:0; padding-top:0; border-top:none}
+  .legal-body p{margin-top:10px; font-size:.94rem}
+  .legal-body p + p{margin-top:12px}
+  .legal-updated{margin-top:44px; font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-mute)}
+
+  footer{background:var(--navy-2); color:#B9CDD3; padding:48px 0 26px; margin-top:40px}
+  .footer-grid{display:grid; gap:28px; grid-template-columns:1.4fr 1fr 1fr 1fr}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr} }
+  .footer-grid h3{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
+  .footer-grid a{display:block; font-size:.86rem; color:#D3E2E5; text-decoration:none; margin-bottom:9px}
+  .footer-grid a:hover{color:#fff}
+  .footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; border-top:1px solid rgba(255,255,255,.1); margin-top:36px; padding-top:22px; font-size:.78rem; color:#7FA3AF}
+</style>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html#inicio">
+      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
+    </a>
+    <a class="btn" href="index.html#inicio">← Volver al sitio</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="legal-head">
+    <span class="eyebrow">ConnectingCuba</span>
+    <h1 data-es="Términos y Condiciones" data-en="Terms and Conditions"></h1>
+  </div>
+
+  <div class="lang-tabs" role="tablist" aria-label="Idioma / Language">
+    <button type="button" class="lang-tab" data-lang="es" role="tab">Español</button>
+    <button type="button" class="lang-tab" data-lang="en" role="tab">English</button>
+  </div>
+
+  <div class="legal-body" id="content-es" lang="es">
+    <p>Estos Términos y Condiciones regulan el uso de este sitio web y las operaciones de envío y cotización solicitadas a través de él, ofrecidas por las empresas del grupo ConnectingCuba: Macias Logistics LLC, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA. La empresa del Grupo responsable de cada servicio se identifica en la cotización o el contrato de la operación correspondiente. Ninguna empresa del Grupo se presenta como responsable de operaciones gestionadas por otra empresa del Grupo.</p>
+
+    <h2>1. Sobre el Grupo</h2>
+    <p>ConnectingCuba es la plataforma que reúne a las empresas del grupo. Cada una cumple un rol distinto en la cadena de exportación, comercio internacional y operaciones en Cuba, tal como se describe en la sección Grupo de este sitio.</p>
+
+    <h2>2. Aceptación de estos Términos</h2>
+    <p>Al usar este sitio para solicitar una cotización o iniciar una operación, aceptas estos Términos y Condiciones.</p>
+
+    <h2>3. Cotizaciones y contratación</h2>
+    <p>Las cotizaciones mostradas en la calculadora de este sitio son estimadas y pueden variar según las condiciones finales de tu operación. La contratación se confirma con la empresa del Grupo correspondiente, conforme a la cotización o el contrato aplicable a tu caso.</p>
+
+    <h2>4. Seguro</h2>
+    <p>El precio del flete no incluye seguro de transporte. Si deseas asegurar tu vehículo o mercancía, el seguro debe contratarse por separado y confirmarse por escrito antes del inicio de la cobertura. Su costo, valor asegurado, tramos cubiertos, deducibles, exclusiones y procedimiento de reclamación serán los establecidos en la póliza correspondiente. Solicitar información o una cotización de seguro no significa que la cobertura esté contratada o vigente.</p>
+    <p>La contratación o no contratación de un seguro no elimina las responsabilidades que correspondan a cada parte conforme al contrato de transporte y la legislación aplicable.</p>
+
+    <h2>5. Inspección, daños y reclamaciones</h2>
+    <p>Se recomienda inspeccionar el vehículo o la mercancía al momento de la entrega. Cualquier daño o inconformidad debe documentarse y notificarse por escrito a la empresa del Grupo responsable de la operación, siguiendo el procedimiento indicado en tu cotización o contrato.</p>
+
+    <h2>6. Cancelaciones y reembolsos</h2>
+    <p>Las solicitudes de cancelación deben presentarse por escrito. Su tramitación y cualquier reembolso dependerán de la fase de la operación, los servicios realizados y los compromisos asumidos. Antes de contratar se informarán las condiciones aplicables. Cualquier deducción deberá estar justificada y ajustarse a lo acordado y a la legislación vigente.</p>
+    <p>Una vez embarcado el vehículo o la mercancía, la interrupción o devolución del envío estará sujeta a viabilidad operativa y a las condiciones del transporte, sin perjuicio de los derechos legales del cliente.</p>
+
+    <h2>7. Almacenaje y gastos adicionales</h2>
+    <p>La operación puede generar gastos adicionales por almacenaje, demoras, inspecciones u otros servicios no incluidos en la cotización. Cuando correspondan, informaremos al cliente de su concepto, causa e importe o método de cálculo. Su aplicación se ajustará a las condiciones contratadas y a la legislación vigente.</p>
+
+    <h2>8. Documentación y elegibilidad</h2>
+    <p>Cada vehículo o mercancía debe cumplir los requisitos de aprobación y documentación vigentes para su envío a Cuba. Los criterios de elegibilidad actualmente aplicables se indican en las secciones Vehículos y Configura tu envío de este sitio.</p>
+
+    <h2>9. Metele (plataforma en desarrollo)</h2>
+    <p>Metele es una plataforma de comercio electrónico del Grupo que se encuentra actualmente en desarrollo. Sus condiciones de uso y de venta se publicarán cuando la plataforma esté disponible.</p>
+
+    <h2>10. Propiedad intelectual</h2>
+    <p>Los contenidos de este sitio, incluyendo textos, imágenes y logotipos, pertenecen a las empresas del Grupo o se usan con su autorización. No está permitida su reproducción o uso comercial sin autorización previa por escrito.</p>
+
+    <h2>11. Ley aplicable</h2>
+    <p>Estos Términos y Condiciones se interpretan conforme a la legislación aplicable en Estados Unidos y, cuando corresponda a la operación, en Cuba.</p>
+
+    <h2>12. Modificaciones</h2>
+    <p>Podemos actualizar estos Términos y Condiciones. La fecha de la versión vigente se indicará al momento de su publicación.</p>
+
+    <h2>13. Contacto</h2>
+    <p>Para consultas sobre estos Términos y Condiciones, escríbenos a <a href="mailto:e.lopez@maciaslogistics.com">e.lopez@maciaslogistics.com</a>.</p>
+
+    <p class="legal-updated">Última actualización: se indicará al publicar esta página.</p>
+  </div>
+
+  <div class="legal-body" id="content-en" lang="en" hidden>
+    <p>These Terms and Conditions govern the use of this website and the shipping and quote transactions requested through it, offered by the companies of the ConnectingCuba group: Macias Logistics LLC, Ola International Trading, Henex Worldwide Group, Metele and Prime Truck USA. The Group company responsible for each service is identified in the quote or contract for the corresponding transaction. No Group company presents itself as responsible for transactions handled by another Group company.</p>
+
+    <h2>1. About the Group</h2>
+    <p>ConnectingCuba is the platform that brings together the Group's companies. Each one plays a distinct role in export, international trade and Cuba-based operations, as described in the Group section of this site.</p>
+
+    <h2>2. Acceptance of these Terms</h2>
+    <p>By using this site to request a quote or start a transaction, you accept these Terms and Conditions.</p>
+
+    <h2>3. Quotes and contracting</h2>
+    <p>The quotes shown in this site's calculator are estimates and may vary according to the final conditions of your transaction. Contracting is confirmed with the corresponding Group company, in accordance with the quote or contract applicable to your case.</p>
+
+    <h2>4. Insurance</h2>
+    <p>The freight price does not include transport insurance. If you wish to insure your vehicle or goods, insurance must be arranged separately and confirmed in writing before coverage begins. Its cost, insured value, covered transport stages, deductibles, exclusions and claims procedure will be governed by the applicable policy. Requesting insurance information or a quote does not mean that coverage has been purchased or is in effect.</p>
+    <p>Whether or not insurance is purchased does not remove any party's responsibilities under the transportation contract and applicable law.</p>
+
+    <h2>5. Inspection, damage and claims</h2>
+    <p>We recommend inspecting the vehicle or goods at the time of delivery. Any damage or nonconformity must be documented and reported in writing to the Group company responsible for the transaction, following the procedure indicated in your quote or contract.</p>
+
+    <h2>6. Cancellations and refunds</h2>
+    <p>Cancellation requests must be submitted in writing. Processing and any refund will depend on the stage of the transaction, services performed and commitments made. Applicable conditions will be disclosed before contracting. Any deduction must be justified and consistent with the agreement and applicable law.</p>
+    <p>Once the vehicle or goods have been loaded for shipment, stopping or returning the shipment will depend on operational feasibility and transportation conditions, without prejudice to the customer's legal rights.</p>
+
+    <h2>7. Storage and additional charges</h2>
+    <p>The transaction may generate additional charges for storage, delays, inspections or other services not included in the quote. Where applicable, we will inform the customer of the nature, reason and amount or calculation method of those charges. They will apply in accordance with the agreed terms and applicable law.</p>
+
+    <h2>8. Documentation and eligibility</h2>
+    <p>Each vehicle or shipment must meet the approval and documentation requirements currently in force for shipping to Cuba. The eligibility criteria currently applicable are indicated in the Vehicles and Configure Your Shipment sections of this site.</p>
+
+    <h2>9. Metele (platform under development)</h2>
+    <p>Metele is a Group e-commerce platform currently under development. Its terms of use and sale will be published once the platform is available.</p>
+
+    <h2>10. Intellectual property</h2>
+    <p>The content on this site, including text, images and logos, belongs to the Group's companies or is used with their authorization. Reproduction or commercial use without prior written authorization is not permitted.</p>
+
+    <h2>11. Governing law</h2>
+    <p>These Terms and Conditions are interpreted in accordance with the law applicable in the United States and, where applicable to the transaction, in Cuba.</p>
+
+    <h2>12. Changes to these Terms</h2>
+    <p>We may update these Terms and Conditions. The date of the current version will be indicated when it is published.</p>
+
+    <h2>13. Contact</h2>
+    <p>For questions about these Terms and Conditions, write to us at <a href="mailto:e.lopez@maciaslogistics.com">e.lopez@maciaslogistics.com</a>.</p>
+
+    <p class="legal-updated">Last updated: to be indicated upon publication.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Grupo</h3>
+        <p style="color:#9DBBC2; font-size:.85rem; max-width:34ch">ConnectingCuba conecta a Estados Unidos, Europa y Cuba a través de Macias Logistics, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA.</p>
+      </div>
+      <div>
+        <h3>Empresas</h3>
+        <a href="index.html#grupo">Macias Logistics</a>
+        <a href="index.html#grupo">Ola International Trading</a>
+        <a href="index.html#grupo">Henex Worldwide Group</a>
+        <a href="index.html#grupo">Metele</a>
+        <a href="index.html#grupo">Prime Truck USA</a>
+      </div>
+      <div>
+        <h3>Sitio</h3>
+        <a href="index.html#calculadora">Configura tu envío</a>
+        <a href="index.html#vehiculos">Vehículos autorizados</a>
+        <a href="index.html#contacto">Contacto</a>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="terminos.html">Términos y condiciones</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ConnectingCuba — Macias Logistics · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const KEY = 'cc_lang';
+    const tabs = document.querySelectorAll('.lang-tab');
+    const blocks = { es: document.getElementById('content-es'), en: document.getElementById('content-en') };
+    const titleEl = document.querySelector('.legal-head h1');
+
+    function apply(lang){
+      if (lang !== 'es' && lang !== 'en') lang = 'es';
+      blocks.es.hidden = lang !== 'es';
+      blocks.en.hidden = lang !== 'en';
+      tabs.forEach(t => {
+        const active = t.dataset.lang === lang;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active);
+      });
+      titleEl.textContent = titleEl.dataset[lang];
+      document.documentElement.lang = lang;
+      try { localStorage.setItem(KEY, lang); } catch(e) {}
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.lang)));
+
+    let saved = 'es';
+    try { saved = localStorage.getItem(KEY) || 'es'; } catch(e) {}
+    apply(saved);
+  })();
+</script>
