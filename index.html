@@ -1,5 +1,7 @@
 <!doctype html>
 <title>ConnectingCuba</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   /* ============ TOKENS ============ */
@@ -12,9 +14,9 @@
     --ink-mute:#4E6670;
     --navy:#0C2233;
     --navy-2:#12354A;
-    --teal:#0E7C82;
-    --teal-strong:#0A5F64;
-    --teal-soft:#E1F1F0;
+    --teal:#1C94C7;
+    --teal-strong:#146E96;
+    --teal-soft:#E4F3F9;
     --amber:#B8711A;
     --amber-strong:#9C5E14;
     --shadow: 0 1px 2px rgba(12,34,51,.06);
@@ -30,9 +32,9 @@
       --ink-mute:#93AEB6;
       --navy:#071620;
       --navy-2:#0C2233;
-      --teal:#3BC8C0;
-      --teal-strong:#5AD9D1;
-      --teal-soft:#123C3D;
+      --teal:#4DC3EA;
+      --teal-strong:#7ADCF5;
+      --teal-soft:#113247;
       --amber:#F2A93B;
       --amber-strong:#F7C169;
       --shadow: 0 1px 2px rgba(0,0,0,.35);
@@ -47,9 +49,9 @@
     --ink-mute:#93AEB6;
     --navy:#071620;
     --navy-2:#0C2233;
-    --teal:#3BC8C0;
-    --teal-strong:#5AD9D1;
-    --teal-soft:#123C3D;
+    --teal:#4DC3EA;
+    --teal-strong:#7ADCF5;
+    --teal-soft:#113247;
     --amber:#F2A93B;
     --amber-strong:#F7C169;
     --shadow: 0 1px 2px rgba(0,0,0,.35);
@@ -356,6 +358,7 @@
 
   /* ============ FOOTER ============ */
   footer{background:var(--navy-2); color:#B9CDD3; padding:56px 0 26px}
+  .footer-badge{height:56px; width:auto; display:block; margin-bottom:16px}
   .footer-grid{display:grid; gap:32px; grid-template-columns:1.4fr 1fr 1fr 1fr}
   @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr} }
   .footer-grid h4{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
@@ -369,6 +372,7 @@
   /* ============ WHATSAPP FAB ============ */
   .fab{position:fixed; right:20px; bottom:20px; z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.5); text-decoration:none; transition:transform .15s ease, filter .15s ease; animation:fab-pulse 2.8s ease-out infinite}
   .fab:hover{filter:brightness(1.06); transform:scale(1.06); animation-play-state:paused}
+  .fab-badge{position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:50%; border:2px solid var(--paper); background:var(--navy); box-shadow:0 1px 3px rgba(0,0,0,.3)}
   @keyframes fab-pulse{
     0%{box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.45)}
     70%{box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 12px rgba(37,211,102,0)}
@@ -829,6 +833,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
+        <img src="img/logo-macias-circle.png" alt="Macias Logistics" class="footer-badge">
         <h4>Grupo</h4>
         <p style="color:#9DBBC2; font-size:.85rem; max-width:34ch">ConnectingCuba conecta a Estados Unidos, Europa y Cuba a través de Macias Logistics, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA.</p>
       </div>
@@ -866,6 +871,7 @@
 
 <a class="fab" href="https://wa.me/17865200009" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+  <img src="img/logo-macias-circle.png" alt="" aria-hidden="true" class="fab-badge">
 </a>
 
 <script>
