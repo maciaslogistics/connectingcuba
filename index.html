@@ -579,23 +579,25 @@
 <section id="vehiculos" data-page="vehiculos">
   <div class="wrap">
     <div class="head reveal">
-      <span class="eyebrow">Macias Logistics · Catálogo CEMA</span>
+      <span class="eyebrow">MACIAS LOGISTICS · CATÁLOGO CEMA</span>
       <h2>Vehículos autorizados para Cuba</h2>
-      <p>Todas las marcas y modelos aprobados por CEMA para la importación de vehículos comerciales y utilitarios a Cuba. Macias Logistics es proveedor autorizado directo: el proceso arranca y termina con nosotros, sin intermediarios.</p>
+      <p>Elegir tu vehículo es el primer paso. Confirmar que puede importarse a Cuba es igual de importante: para las operaciones que gestionamos, la marca y el modelo deben contar con la aprobación del Comité Evaluador de Medios Automotores (CEMA), el órgano encargado de evaluar y aprobar los proveedores, marcas y modelos para su comercialización en el país. Además, cada vehículo debe cumplir los requisitos técnicos y documentales aplicables.</p>
+      <p style="margin-top:10px">En Macias Logistics contamos con todas las licencias del Departamento de Comercio de Estados Unidos requeridas para nuestras operaciones de exportación a Cuba. Trabajamos conforme a la legislación vigente en ambos países y somos proveedores oficiales directos en Cuba. Tu operación se gestiona a través de nuestros canales, sin intermediarios comerciales y con la coordinación de nuestros equipos de principio a fin.</p>
+      <p style="margin-top:10px">Consulta el catálogo por marca, modelo o categoría. Cuando encuentres el vehículo que buscas, nuestro equipo te ayudará a confirmar los requisitos para tu operación.</p>
     </div>
 
     <div class="catalog-controls reveal">
-      <input type="search" id="cat-search" class="cat-search" placeholder="Buscar marca o modelo… (ej. Tucson, Freightliner, EV)" aria-label="Buscar vehículo">
-      <select id="cat-tipo" class="cat-select" aria-label="Filtrar por tipo"><option value="">Todos los tipos</option></select>
+      <input type="search" id="cat-search" class="cat-search" placeholder="Busca por marca o modelo…" aria-label="Buscar vehículo por marca o modelo">
+      <select id="cat-tipo" class="cat-select" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select>
     </div>
     <div class="brand-pills reveal" id="cat-brands" role="group" aria-label="Filtrar por marca">
       <button class="brand-pill active" data-marca="">Todas</button>
     </div>
-    <p class="catalog-summary reveal"><span id="cat-count">0</span> modelos · <span id="cat-brandcount">0</span> marcas</p>
+    <p class="catalog-summary reveal"><span id="cat-count">0 modelos</span> · <span id="cat-brandcount">0 marcas</span></p>
 
     <div class="catalog-table-wrap reveal">
       <table class="catalog-table">
-        <thead><tr><th>Marca</th><th>Modelo</th><th>Tipo</th></tr></thead>
+        <thead><tr><th>Marca</th><th>Modelo</th><th>Categoría</th></tr></thead>
         <tbody id="cat-tbody"></tbody>
       </table>
     </div>
@@ -1058,13 +1060,13 @@
     ['AUDI','Auto','A4 / S4'],['AUDI','Auto','A4 Allroad'],['AUDI','Auto','A5 / S5 / RS 5'],
     ['AUDI','Auto','A6 / S6'],['AUDI','Auto','A6 Allroad'],['AUDI','Auto','RS 6 Avant'],
     ['AUDI','Auto','A7 / S7 / RS 7'],['AUDI','Auto','A8 / A8 L / S8'],['AUDI','Auto','TT / TTS / TT RS'],
-    ['AUDI','Auto','R8'],['AUDI','Auto','Q3'],['AUDI','Auto','Q5'],['AUDI','Auto','Q5 Sportback'],
-    ['AUDI','Auto','SQ5'],['AUDI','Auto','Q7'],['AUDI','Auto','SQ7'],['AUDI','Auto','Q8'],
-    ['AUDI','Auto','SQ8'],['AUDI','Auto','RS Q8'],['AUDI','Auto','e-tron'],['AUDI','Auto','e-tron Sportback'],
-    ['AUDI','Auto','e-tron S'],['AUDI','Auto','Q4 e-tron'],['AUDI','Auto','Q4 Sportback e-tron'],
-    ['AUDI','Auto','Q6 e-tron'],['AUDI','Auto','SQ6 e-tron'],['AUDI','Auto','Q6 Sportback e-tron'],
-    ['AUDI','Auto','SQ6 Sportback e-tron'],['AUDI','Auto','Q8 e-tron'],['AUDI','Auto','Q8 Sportback e-tron'],
-    ['AUDI','Auto','SQ8 e-tron'],['AUDI','Auto','A6 Sportback e-tron'],['AUDI','Auto','S6 Sportback e-tron'],
+    ['AUDI','Auto','R8'],['AUDI','SUV','Q3'],['AUDI','SUV','Q5'],['AUDI','SUV','Q5 Sportback'],
+    ['AUDI','SUV','SQ5'],['AUDI','SUV','Q7'],['AUDI','SUV','SQ7'],['AUDI','SUV','Q8'],
+    ['AUDI','SUV','SQ8'],['AUDI','SUV','RS Q8'],['AUDI','SUV','e-tron'],['AUDI','SUV','e-tron Sportback'],
+    ['AUDI','SUV','e-tron S'],['AUDI','SUV','Q4 e-tron'],['AUDI','SUV','Q4 Sportback e-tron'],
+    ['AUDI','SUV','Q6 e-tron'],['AUDI','SUV','SQ6 e-tron'],['AUDI','SUV','Q6 Sportback e-tron'],
+    ['AUDI','SUV','SQ6 Sportback e-tron'],['AUDI','SUV','Q8 e-tron'],['AUDI','SUV','Q8 Sportback e-tron'],
+    ['AUDI','SUV','SQ8 e-tron'],['AUDI','Auto','A6 Sportback e-tron'],['AUDI','Auto','S6 Sportback e-tron'],
     ['AUDI','Auto','e-tron GT'],['AUDI','Auto','S e-tron GT'],['AUDI','Auto','RS e-tron GT'],
     // BMW
     ['BMW','Auto','Serie 1'],['BMW','Auto','Serie 2 Coupé'],['BMW','Auto','Serie 2 Gran Coupé'],
@@ -1072,53 +1074,53 @@
     ['BMW','Auto','Serie 4 Coupé'],['BMW','Auto','Serie 4 Cabrio'],['BMW','Auto','Serie 4 Gran Coupé'],
     ['BMW','Auto','Serie 5 Sedán'],['BMW','Auto','Serie 5 Touring'],['BMW','Auto','Serie 6 Gran Turismo'],
     ['BMW','Auto','Serie 7'],['BMW','Auto','Serie 8 Coupé'],['BMW','Auto','Serie 8 Cabrio'],
-    ['BMW','Auto','Serie 8 Gran Coupé'],['BMW','Auto','Z4 Roadster'],['BMW','Auto','X1'],['BMW','Auto','X2'],
-    ['BMW','Auto','X3'],['BMW','Auto','X4'],['BMW','Auto','X5'],['BMW','Auto','X6'],['BMW','Auto','X7'],
-    ['BMW','Auto','XM'],['BMW','Auto','i4'],['BMW','Auto','i5'],['BMW','Auto','i7'],['BMW','Auto','iX1'],
-    ['BMW','Auto','iX2'],['BMW','Auto','iX'],['BMW','Auto','i8'],['BMW','Auto','iX3'],
+    ['BMW','Auto','Serie 8 Gran Coupé'],['BMW','Auto','Z4 Roadster'],['BMW','SUV','X1'],['BMW','SUV','X2'],
+    ['BMW','SUV','X3'],['BMW','SUV','X4'],['BMW','SUV','X5'],['BMW','SUV','X6'],['BMW','SUV','X7'],
+    ['BMW','SUV','XM'],['BMW','Auto','i4'],['BMW','Auto','i5'],['BMW','Auto','i7'],['BMW','SUV','iX1'],
+    ['BMW','SUV','iX2'],['BMW','SUV','iX'],['BMW','Auto','i8'],['BMW','SUV','iX3'],
     // INFINITI
     ['INFINITI','Auto','Q50'],['INFINITI','Auto','Q60'],['INFINITI','Auto','Q70'],['INFINITI','Auto','Q70L'],
-    ['INFINITI','Auto','QX30'],['INFINITI','Auto','QX50'],['INFINITI','Auto','QX55'],['INFINITI','Auto','QX60'],
-    ['INFINITI','Auto','QX70'],['INFINITI','Auto','QX80'],
+    ['INFINITI','SUV','QX30'],['INFINITI','SUV','QX50'],['INFINITI','SUV','QX55'],['INFINITI','SUV','QX60'],
+    ['INFINITI','SUV','QX70'],['INFINITI','SUV','QX80'],
     // LAND ROVER
-    ['LAND ROVER','Auto','Range Rover'],['LAND ROVER','Auto','Range Rover Sport'],
-    ['LAND ROVER','Auto','Range Rover Velar'],['LAND ROVER','Auto','Range Rover Evoque'],
+    ['LAND ROVER','SUV','Range Rover'],['LAND ROVER','SUV','Range Rover Sport'],
+    ['LAND ROVER','SUV','Range Rover Velar'],['LAND ROVER','SUV','Range Rover Evoque'],
     // LEXUS
     ['LEXUS','Auto','CT 200h'],['LEXUS','Auto','IS'],['LEXUS','Auto','ES'],['LEXUS','Auto','GS'],
-    ['LEXUS','Auto','LS'],['LEXUS','Auto','RC'],['LEXUS','Auto','LC'],['LEXUS','Auto','UX'],
-    ['LEXUS','Auto','NX'],['LEXUS','Auto','RX'],['LEXUS','Auto','TX'],['LEXUS','Auto','GX'],
-    ['LEXUS','Auto','LX'],['LEXUS','Auto','RZ'],
+    ['LEXUS','Auto','LS'],['LEXUS','Auto','RC'],['LEXUS','Auto','LC'],['LEXUS','SUV','UX'],
+    ['LEXUS','SUV','NX'],['LEXUS','SUV','RX'],['LEXUS','SUV','TX'],['LEXUS','SUV','GX'],
+    ['LEXUS','SUV','LX'],['LEXUS','SUV','RZ'],
     // NISSAN
     ['NISSAN','Auto','Maxima'],['NISSAN','Auto','370Z'],['NISSAN','Auto','Z'],['NISSAN','Auto','GT-R'],
-    ['NISSAN','Auto','Juke'],['NISSAN','Auto','Kicks'],['NISSAN','Auto','Rogue Sport'],
-    ['NISSAN','Auto','Murano'],['NISSAN','Auto','Pathfinder'],['NISSAN','Auto','Armada'],
-    ['NISSAN','Auto','Quest'],['NISSAN','Auto','Ariya (eléctrico)'],['NISSAN','Auto','Leaf (eléctrico)'],
+    ['NISSAN','SUV','Juke'],['NISSAN','SUV','Kicks'],['NISSAN','SUV','Rogue Sport'],
+    ['NISSAN','SUV','Murano'],['NISSAN','SUV','Pathfinder'],['NISSAN','SUV','Armada'],
+    ['NISSAN','Microbús','Quest'],['NISSAN','SUV','Ariya (eléctrico)'],['NISSAN','Auto','Leaf (eléctrico)'],
     ['NISSAN','Auto','Altima'],['NISSAN','Auto','Sentra'],['NISSAN','Auto','Versa'],
-    ['NISSAN','Auto','X-Trail (híbrido)'],['NISSAN','Auto','X-Trail (motor gasolina)'],
-    ['NISSAN','Rural','Frontier'],
+    ['NISSAN','SUV','X-Trail (híbrido)'],['NISSAN','SUV','X-Trail (motor gasolina)'],
+    ['NISSAN','Camioneta','Frontier'],
     ['NISSAN','Camioneta','Titan'],['NISSAN','Camioneta','Titan XD'],
     ['NISSAN','Panel','NV1500 Cargo'],['NISSAN','Panel','NV2500 HD Cargo'],['NISSAN','Panel','NV3500 HD Cargo'],
     ['NISSAN','Panel','NV3500 HD Passenger'],['NISSAN','Panel','NV200 Compact Cargo'],['NISSAN','Panel','NV200 Taxi'],
     // PORSCHE
-    ['PORSCHE','Auto','718'],['PORSCHE','Auto','911'],['PORSCHE','Auto','Panamera'],['PORSCHE','Auto','Macan'],
-    ['PORSCHE','Auto','Cayenne'],['PORSCHE','Auto','Taycan'],['PORSCHE','Auto','918 Spyder'],
+    ['PORSCHE','Auto','718'],['PORSCHE','Auto','911'],['PORSCHE','Auto','Panamera'],['PORSCHE','SUV','Macan'],
+    ['PORSCHE','SUV','Cayenne'],['PORSCHE','Auto','Taycan'],['PORSCHE','Auto','918 Spyder'],
     // TOYOTA
     ['TOYOTA','Auto','Avalon'],['TOYOTA','Auto','Camry'],['TOYOTA','Auto','Corolla'],
     ['TOYOTA','Auto','Corolla Hatchback'],['TOYOTA','Auto','Corolla iM'],['TOYOTA','Auto','Crown'],
     ['TOYOTA','Auto','Prius'],['TOYOTA','Auto','Prius c'],['TOYOTA','Auto','Prius v'],
     ['TOYOTA','Auto','Prius Prime'],['TOYOTA','Auto','Yaris Hatchback'],['TOYOTA','Auto','Yaris iA / Yaris Sedán'],
-    ['TOYOTA','Auto','4Runner'],['TOYOTA','Auto','C-HR'],['TOYOTA','Auto','Corolla Cross'],
-    ['TOYOTA','Auto','Crown Signia'],['TOYOTA','Auto','Highlander'],['TOYOTA','Auto','Grand Highlander'],
-    ['TOYOTA','Auto','Land Cruiser'],['TOYOTA','Auto','RAV4'],['TOYOTA','Auto','RAV5'],
-    ['TOYOTA','Auto','RAV4 Prime / Plug-in Hybrid'],['TOYOTA','Auto','Sequoia'],['TOYOTA','Auto','Venza'],
-    ['TOYOTA','Auto','bZ4X / bZ'],['TOYOTA','Auto','bZ Woodland'],['TOYOTA','Auto','86'],
+    ['TOYOTA','SUV','4Runner'],['TOYOTA','SUV','C-HR'],['TOYOTA','SUV','Corolla Cross'],
+    ['TOYOTA','SUV','Crown Signia'],['TOYOTA','SUV','Highlander'],['TOYOTA','SUV','Grand Highlander'],
+    ['TOYOTA','SUV','Land Cruiser'],['TOYOTA','SUV','RAV4'],['TOYOTA','SUV','RAV5'],
+    ['TOYOTA','SUV','RAV4 Prime / Plug-in Hybrid'],['TOYOTA','SUV','Sequoia'],['TOYOTA','SUV','Venza'],
+    ['TOYOTA','SUV','bZ4X / bZ'],['TOYOTA','SUV','bZ Woodland'],['TOYOTA','Auto','86'],
     ['TOYOTA','Auto','GR86'],['TOYOTA','Auto','GR Corolla'],['TOYOTA','Auto','GR Supra'],
-    ['TOYOTA','Panel','Sienna'],['TOYOTA','Camioneta','Tacoma'],['TOYOTA','Camioneta','Tundra'],
+    ['TOYOTA','Microbús','Sienna'],['TOYOTA','Camioneta','Tacoma'],['TOYOTA','Camioneta','Tundra'],
     // HONDA
     ['HONDA','Auto','Accord'],['HONDA','Auto','City'],['HONDA','Auto','Civic'],
-    ['HONDA','Auto','CR-V (motor gasolina)'],['HONDA','Auto','CR-V (híbrido)'],['HONDA','Auto','HR-V'],
-    ['HONDA','Auto','Prologue (motor eléctrico)'],['HONDA','Auto','Pilot'],['HONDA','Auto','Odyssey (motor gasolina)'],
-    ['HONDA','Auto','Passport (motor gasolina — EX-L, TrailSport, Black Edition)'],
+    ['HONDA','SUV','CR-V (motor gasolina)'],['HONDA','SUV','CR-V (híbrido)'],['HONDA','SUV','HR-V'],
+    ['HONDA','SUV','Prologue (motor eléctrico)'],['HONDA','SUV','Pilot'],['HONDA','Microbús','Odyssey (motor gasolina)'],
+    ['HONDA','SUV','Passport (motor gasolina — EX-L, TrailSport, Black Edition)'],
     ['HONDA','Camioneta','Ridgeline (motor gasolina)'],
     // HYUNDAI
     ['HYUNDAI','Auto','Accent (Gamma GDi)'],['HYUNDAI','Auto','Accent (Gamma II MPi)'],
@@ -1143,7 +1145,7 @@
     ['HYUNDAI','SUV','Tucson (CRDi diésel)'],['HYUNDAI','SUV','Venue (Gamma MPi Smartstream)'],
     ['HYUNDAI','SUV','Venue (Kappa II T-GDi turbo)'],['HYUNDAI','SUV','Venue (Kappa II MPi atmosférico)'],
     ['HYUNDAI','SUV','Venue (U II CRDi diésel)'],
-    ['HYUNDAI','Pick up','Santa Cruz (I4 atmosférico)'],['HYUNDAI','Pick up','Santa Cruz (I4 turbo)'],
+    ['HYUNDAI','Camioneta','Santa Cruz (I4 atmosférico)'],['HYUNDAI','Camioneta','Santa Cruz (I4 turbo)'],
     ['HYUNDAI','Trailer','Original (seco)'],['HYUNDAI','Trailer','Composite (seco)'],
     ['HYUNDAI','Trailer','Composite XT (seco)'],['HYUNDAI','Trailer','H Y-Cube (seco)'],
     ['HYUNDAI','Trailer','Termotech (refrigerado)'],['HYUNDAI','Trailer','Latitude (flatbed)'],
@@ -1154,25 +1156,25 @@
     ['HYUNDAI','Chasis','53 Gooseneck (fijo)'],['HYUNDAI','Chasis','Tri-Axle (fijo)'],
     ['HYUNDAI','Chasis','Extendable 40 (reacondicionado)'],
     // BYD
-    ['BYD','Auto','Dolphin Mini'],['BYD','Auto','Atto 2 EV'],['BYD','Auto','Atto 3 EV'],
-    ['BYD','Auto','Atto 3 EVO'],['BYD','Auto','Dolphin EV'],['BYD','Auto','Dolphin Surf EV'],
-    ['BYD','Auto','Han EV'],['BYD','Auto','Seal EV'],['BYD','Auto','Seal U EV'],['BYD','Auto','Sealion 7 EV'],
-    ['BYD','Auto','Tang EV'],['BYD','Auto','Yangwang U8'],['BYD','Auto','Yangwang U9 Xtreme'],
-    ['BYD','Auto','Yuan Plus EV'],['BYD','Auto','Yuan Pro EV'],
+    ['BYD','Auto','Dolphin Mini'],['BYD','SUV','Atto 2 EV'],['BYD','SUV','Atto 3 EV'],
+    ['BYD','SUV','Atto 3 EVO'],['BYD','Auto','Dolphin EV'],['BYD','Auto','Dolphin Surf EV'],
+    ['BYD','Auto','Han EV'],['BYD','Auto','Seal EV'],['BYD','SUV','Seal U EV'],['BYD','SUV','Sealion 7 EV'],
+    ['BYD','SUV','Tang EV'],['BYD','SUV','Yangwang U8'],['BYD','Auto','Yangwang U9 Xtreme'],
+    ['BYD','SUV','Yuan Plus EV'],['BYD','SUV','Yuan Pro EV'],
     ['BYD','Ómnibus','Ride Achiever'],['BYD','Ómnibus','Ride Creator'],['BYD','Ómnibus','Ride Dreamer'],
     ['BYD','Ómnibus','Ride K7M'],['BYD','Ómnibus','Ride K7MER'],['BYD','Ómnibus','Ride K8M'],
     ['BYD','Ómnibus','Ride K9MD'],['BYD','Ómnibus','Ride K11M'],
     ['BYD','Camión','Ride 6F'],['BYD','Cuña','Ride 8TT'],['BYD','Cuña','Ride 8Y'],
     // VW
     ['VW','Auto','Virtus'],['VW','Auto','Jetta / GLI'],['VW','Auto','Golf'],['VW','Auto','Passat'],
-    ['VW','Auto','Arteon'],['VW','Auto','CC'],['VW','Auto','Beetle'],['VW','Auto','Touran'],
-    ['VW','Auto','Sharan'],['VW','Auto','Santana'],['VW','Auto','Lavida'],['VW','Auto','Lamando'],
-    ['VW','Auto','Phideon'],['VW','Auto','Tera'],['VW','Auto','Taigun'],['VW','Auto','Nivus / Taigo'],
-    ['VW','Auto','T-Cross'],['VW','Auto','Taos / Tharu'],['VW','Auto','T-Roc'],['VW','Auto','Tiguan'],
-    ['VW','Auto','Tayron'],['VW','Auto','Teramont / Atlas'],['VW','Auto','Touareg'],['VW','Auto','Talagon'],
-    ['VW','Auto','Tavendor'],['VW','Auto','e-up!'],['VW','Auto','e-Golf'],['VW','Auto','ID.3'],
-    ['VW','Auto','ID.4'],['VW','Auto','ID.5'],['VW','Auto','ID.6'],['VW','Auto','ID.7'],
-    ['VW','Auto','ID. Buzz'],['VW','Auto','ID. Unyx'],['VW','Auto','Caddy'],
+    ['VW','Auto','Arteon'],['VW','Auto','CC'],['VW','Auto','Beetle'],['VW','Microbús','Touran'],
+    ['VW','Microbús','Sharan'],['VW','Auto','Santana'],['VW','Auto','Lavida'],['VW','Auto','Lamando'],
+    ['VW','Auto','Phideon'],['VW','SUV','Tera'],['VW','SUV','Taigun'],['VW','SUV','Nivus / Taigo'],
+    ['VW','SUV','T-Cross'],['VW','SUV','Taos / Tharu'],['VW','SUV','T-Roc'],['VW','SUV','Tiguan'],
+    ['VW','SUV','Tayron'],['VW','SUV','Teramont / Atlas'],['VW','SUV','Touareg'],['VW','SUV','Talagon'],
+    ['VW','SUV','Tavendor'],['VW','Auto','e-up!'],['VW','Auto','e-Golf'],['VW','Auto','ID.3'],
+    ['VW','SUV','ID.4'],['VW','SUV','ID.5'],['VW','SUV','ID.6'],['VW','Auto','ID.7'],
+    ['VW','Microbús','ID. Buzz'],['VW','SUV','ID. Unyx'],['VW','Panel','Caddy'],
     ['VW','Auto','California (caravana)'],['VW','Auto','Grand California (caravana)'],
     ['VW','Camioneta','Saveiro'],['VW','Camioneta','Amarok'],
     ['VW','Microbús','Caravelle'],['VW','Microbús','Multivan'],
@@ -1239,9 +1241,16 @@
     ['UTILITY','Trailer','4000A (semirremolque)'],
     ['CHEETAH','Trailer','Flatbed 48"'],['CHEETAH','Trailer','Flatbed 48" Extensible'],
     ['SHENGDA','Trailer','Flatbed 20"'],['SHENGDA','Trailer','Flatbed 40"'],
-    ['SHOUTERM','Trailer','SOC-1-40GN (semirremolque)'],
-    ['OHIO','Chasis','Chasis (nuevo)'],
   ];
+
+  // Orden: marca (A-Z) -> modelo (alfanumérico natural) -> categoría (tiebreak)
+  CATALOG.sort((a, b) => {
+    const brandCmp = a[0].localeCompare(b[0], 'es', { sensitivity: 'base' });
+    if (brandCmp !== 0) return brandCmp;
+    const modelCmp = a[2].localeCompare(b[2], 'es', { numeric: true, sensitivity: 'base' });
+    if (modelCmp !== 0) return modelCmp;
+    return a[1].localeCompare(b[1], 'es', { sensitivity: 'base' });
+  });
 
   const catSearch = document.getElementById('cat-search');
   const catTipo = document.getElementById('cat-tipo');
@@ -1251,10 +1260,10 @@
   const catBrandCount = document.getElementById('cat-brandcount');
   let activeBrand = '';
 
-  const tipos = [...new Set(CATALOG.map(r => r[1]))].sort();
+  const tipos = [...new Set(CATALOG.map(r => r[1]))].sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
   tipos.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; catTipo.appendChild(o); });
 
-  const marcas = [...new Set(CATALOG.map(r => r[0]))];
+  const marcas = [...new Set(CATALOG.map(r => r[0]))].sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
   marcas.forEach(m => {
     const b = document.createElement('button');
     b.className = 'brand-pill'; b.dataset.marca = m; b.textContent = m;
@@ -1274,9 +1283,11 @@
     });
     catTbody.innerHTML = rows.length ? rows.map(([marca, tipo, modelo]) =>
       `<tr><td class="t-marca">${marca}</td><td>${modelo}</td><td class="t-tipo">${tipo}</td></tr>`
-    ).join('') : `<tr><td colspan="3" class="catalog-empty">Sin resultados — prueba con otra marca o escribe menos texto.</td></tr>`;
-    catCount.textContent = rows.length;
-    catBrandCount.textContent = new Set(rows.map(r => r[0])).size;
+    ).join('') : `<tr><td colspan="3" class="catalog-empty">No encontramos coincidencias. Prueba con otra marca, modelo o categoría.</td></tr>`;
+    const modelCount = rows.length;
+    const brandCount = new Set(rows.map(r => r[0])).size;
+    catCount.textContent = `${modelCount} ${modelCount === 1 ? 'modelo' : 'modelos'}`;
+    catBrandCount.textContent = `${brandCount} ${brandCount === 1 ? 'marca' : 'marcas'}`;
   }
 
   catSearch.addEventListener('input', renderCatalog);
