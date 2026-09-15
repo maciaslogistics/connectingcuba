@@ -309,10 +309,22 @@
   .trust-item p{color:#AEC7CD; font-size:.85rem; margin-top:4px}
 
   /* ============ GALLERY ============ */
-  .gallery-scroll{display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
-  .gallery-scroll img{flex:none; width:260px; height:320px; object-fit:cover; border-radius:4px; scroll-snap-align:start}
-  .gallery-scroll::-webkit-scrollbar{height:6px}
-  .gallery-scroll::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px}
+  .gal-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px}
+  .gal-tab{font-family:'IBM Plex Mono'; font-size:.78rem; font-weight:600; letter-spacing:.04em; padding:10px 18px; border:1px solid var(--line); background:var(--surface); border-radius:20px; cursor:pointer; color:var(--ink-mute)}
+  .gal-tab.active{background:var(--navy); border-color:var(--navy); color:#fff}
+  .gal-grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .gal-item{position:relative; aspect-ratio:3/4; border-radius:4px; overflow:hidden; cursor:pointer; background:var(--surface-2); border:none; padding:0; display:block; width:100%}
+  .gal-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease}
+  .gal-item:hover img{transform:scale(1.05)}
+  .gal-more{display:block; margin:28px auto 0}
+
+  .lightbox{position:fixed; inset:0; z-index:100; background:rgba(7,22,32,.94); display:flex; align-items:center; justify-content:center}
+  .lightbox img{max-width:90vw; max-height:86vh; object-fit:contain; border-radius:4px}
+  .lightbox-close{position:absolute; top:20px; right:20px; width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff; font-size:1.1rem; cursor:pointer}
+  .lightbox-nav{position:absolute; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff; font-size:1.8rem; cursor:pointer; line-height:1}
+  .lightbox-prev{left:16px}
+  .lightbox-next{right:16px}
+  @media (max-width:600px){ .lightbox-nav{width:42px; height:42px; font-size:1.4rem} }
 
   /* ============ CONTACT ============ */
   .contact-grid{display:grid; gap:40px; grid-template-columns:1.1fr 1fr}
@@ -714,20 +726,27 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Entregas reales</span>
-      <h2>Vehículos ya entregados en Cuba</h2>
-      <p>Fotos reales de nuestro equipo y de familias recibiendo su vehículo.</p>
+      <h2>Clientes recibiendo su vehículo en Cuba</h2>
+      <p>Fotos reales, publicadas con autorización de nuestros clientes — así se ve el final del proceso.</p>
     </div>
-  </div>
-  <div class="wrap">
-    <div class="gallery-scroll reveal" role="list">
-      <img role="listitem" src="img/gallery-1.jpg" alt="Entrega de vehículo en Cuba">
-      <img role="listitem" src="img/gallery-2.jpg" alt="Camión y furgón en operación">
-      <img role="listitem" src="img/gallery-3.jpg" alt="Vehículo entregado en Cuba">
-      <img role="listitem" src="img/gallery-4.jpg" alt="Familia junto a vehículo entregado">
-      <img role="listitem" src="img/gallery-5.jpg" alt="Equipo de ConnectingCuba">
+
+    <div class="gal-tabs reveal" role="tablist" aria-label="Categoría de galería">
+      <button type="button" class="gal-tab active" data-gal="entregas" role="tab" aria-selected="true">Entregas reales</button>
+      <button type="button" class="gal-tab" data-gal="puerto" role="tab" aria-selected="false">Puerto y recogida</button>
     </div>
+
+    <div class="gal-grid reveal" id="gal-grid"></div>
+    <button type="button" class="btn btn-ghost gal-more" id="gal-more" hidden>Ver más entregas</button>
   </div>
 </section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">✕</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto anterior">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto siguiente">›</button>
+</div>
 
 <!-- ============ CONTACTO ============ -->
 <section id="contacto" data-page="contacto" style="background:var(--surface-2)">
@@ -870,6 +889,86 @@
     }
     // se duplica la secuencia para que el loop sea continuo (translateX -50%)
     track.innerHTML = renderSequence() + renderSequence();
+  })();
+
+  // ===== Galería: pestañas + paginación + lightbox =====
+  (function galeria(){
+    const grid = document.getElementById('gal-grid');
+    if (!grid) return;
+    const tabs = document.querySelectorAll('.gal-tab');
+    const moreBtn = document.getElementById('gal-more');
+    const PAGE_SIZE = 12;
+
+    const ENTREGAS = Array.from({ length: 50 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0');
+      return { src: `img/entregas/entrega-${n}.jpg`, alt: `Cliente recibiendo su vehículo en Cuba — entrega ${i + 1}` };
+    });
+    const PUERTO = [
+      { src: 'img/gallery-1.jpg', alt: 'Camiones listos para embarcar en puerto' },
+      { src: 'img/gallery-2.jpg', alt: 'Vehículo entregado en La Habana' },
+      { src: 'img/gallery-3.jpg', alt: 'Familia recibiendo su camioneta en Cuba' },
+      { src: 'img/gallery-4.jpg', alt: 'Equipo de ConnectingCuba en el puerto' },
+      { src: 'img/gallery-5.jpg', alt: 'Vehículo en patio portuario antes de embarcar' },
+    ];
+    const SETS = { entregas: ENTREGAS, puerto: PUERTO };
+
+    let activeSet = 'entregas';
+    let shown = PAGE_SIZE;
+
+    function renderGrid(){
+      const data = SETS[activeSet];
+      const slice = data.slice(0, shown);
+      grid.innerHTML = slice.map((item, i) =>
+        `<button type="button" class="gal-item" data-index="${i}"><img src="${item.src}" alt="${item.alt}" loading="lazy"></button>`
+      ).join('');
+      moreBtn.hidden = shown >= data.length;
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.toggle('active', t === tab); t.setAttribute('aria-selected', t === tab); });
+      activeSet = tab.dataset.gal;
+      shown = PAGE_SIZE;
+      renderGrid();
+    }));
+
+    moreBtn.addEventListener('click', () => { shown += PAGE_SIZE; renderGrid(); });
+
+    grid.addEventListener('click', (e) => {
+      const item = e.target.closest('.gal-item');
+      if (!item) return;
+      openLightbox(parseInt(item.dataset.index, 10));
+    });
+
+    renderGrid();
+
+    // ----- Lightbox -----
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let lbIndex = 0;
+
+    function updateLightbox(){
+      const item = SETS[activeSet][lbIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt;
+    }
+    function openLightbox(i){ lbIndex = i; updateLightbox(); lightbox.hidden = false; }
+    function closeLightbox(){ lightbox.hidden = true; }
+    function stepLightbox(delta){
+      const len = SETS[activeSet].length;
+      lbIndex = (lbIndex + delta + len) % len;
+      updateLightbox();
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', () => stepLightbox(-1));
+    document.getElementById('lightbox-next').addEventListener('click', () => stepLightbox(1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+      if (e.key === 'ArrowRight') stepLightbox(1);
+    });
   })();
 
   // mobile nav
