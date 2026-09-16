@@ -365,20 +365,26 @@
   .contact-row svg{flex:none; color:var(--teal-strong); margin-top:2px}
   .contact-row b{display:block; font-size:.92rem}
   .contact-row span{font-size:.85rem; color:var(--ink-mute)}
-  .cuba-support{background:var(--navy); color:#fff; border-radius:6px; padding:28px; margin-top:32px; display:flex; gap:20px; align-items:flex-start}
+  .cuba-support{position:relative; overflow:hidden; background:var(--navy); color:#fff; border-radius:6px; padding:28px; margin-top:32px; display:flex; gap:20px; align-items:flex-start}
   @media (max-width:600px){ .cuba-support{flex-direction:column} }
-  .cuba-support-icon{flex:none; color:var(--amber-strong); margin-top:2px}
+  .cuba-support::before{content:''; position:absolute; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, #7ADCF5, #F7C169); transition:width .9s cubic-bezier(.2,.8,.2,1) .15s}
+  .cuba-support.in::before{width:100%}
+  .cuba-support-icon-wrap{position:relative; flex:none; display:inline-flex; margin-top:2px}
+  .cuba-support-icon-wrap::before{content:''; position:absolute; inset:-9px; border-radius:50%; border:1.5px solid #F7C169; animation:cubaPing 2.6s ease-out infinite}
+  .cuba-support-icon{position:relative; flex:none; color:#F7C169; display:block}
+  @media (prefers-reduced-motion: reduce){ .cuba-support-icon-wrap::before{animation:none} }
+  @keyframes cubaPing{0%{transform:scale(.55); opacity:.8} 70%{transform:scale(1.7); opacity:0} 100%{transform:scale(1.7); opacity:0}}
   .cuba-support h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.15rem; font-weight:700; color:#fff}
   .cuba-support p{color:#C9DBE0; font-size:.9rem; margin-top:8px; max-width:60ch}
   .cuba-support-rows{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
-  .cuba-support-item{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:9px 16px; font-size:.84rem; font-weight:600; color:#fff; text-decoration:none; transition:background .15s ease}
-  .cuba-support-item:hover{background:rgba(255,255,255,.16)}
+  .cuba-support-item{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:9px 16px; font-size:.84rem; font-weight:600; color:#fff; text-decoration:none; transition:background .2s ease, transform .2s ease, border-color .2s ease}
+  .cuba-support-item:hover{background:rgba(255,255,255,.16); border-color:rgba(247,193,105,.55); transform:translateY(-2px)}
   .cuba-support-item svg{flex:none}
   .cuba-support-hours{font-family:'IBM Plex Mono'; font-size:.74rem; color:#9FC1C9; margin-top:14px}
 
   /* ============ FOOTER ============ */
   footer{background:var(--navy-2); color:#B9CDD3; padding:56px 0 26px}
-  .footer-badge{height:56px; width:auto; display:block; margin-bottom:18px}
+  .footer-badge{height:78px; width:auto; display:block; margin-bottom:18px}
   .footer-grid{display:grid; gap:40px; grid-template-columns:1.6fr 1fr 1fr}
   @media (max-width:760px){ .footer-grid{grid-template-columns:1fr; gap:36px} }
   .footer-brand-name{font-family:'Big Shoulders Display'; font-weight:800; font-size:1.6rem; letter-spacing:.01em; color:#fff; margin-bottom:14px}
@@ -856,7 +862,9 @@
     </div>
 
     <div class="cuba-support reveal">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div class="cuba-support-icon-wrap">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
       <div>
         <h3>¿Ya enviaste tu vehículo? Soporte en Cuba</h3>
         <p>Si ya estás en Cuba y necesitas una actualización real sobre la entrega de tu vehículo, comunícate directamente con nuestro equipo en la isla — por teléfono, WhatsApp o correo electrónico.</p>
