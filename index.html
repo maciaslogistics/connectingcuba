@@ -327,6 +327,7 @@
   .video-card{position:relative; aspect-ratio:9/16; border-radius:4px; overflow:hidden; background:#000; box-shadow:var(--shadow)}
   .video-card video{width:100%; height:100%; object-fit:cover; display:block}
   @media (max-width:700px){ .video-grid{grid-template-columns:1fr; max-width:360px} }
+  .gal-grid-videos{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
 
   .lightbox{position:fixed; inset:0; z-index:100; background:rgba(7,22,32,.94); display:flex; align-items:center; justify-content:center}
   .lightbox img{max-width:90vw; max-height:86vh; object-fit:contain; border-radius:4px}
@@ -767,6 +768,7 @@
     <div class="gal-tabs reveal" role="tablist" aria-label="Categoría de galería">
       <button type="button" class="gal-tab active" data-gal="puerto" role="tab" aria-selected="true">Vehículos en los puertos de Cuba y EE.UU.</button>
       <button type="button" class="gal-tab" data-gal="entregas" role="tab" aria-selected="false">Entregas reales a nuestros clientes</button>
+      <button type="button" class="gal-tab" data-gal="proceso" role="tab" aria-selected="false">Video del proceso</button>
     </div>
 
     <div class="video-grid reveal" id="gal-videos" hidden></div>
@@ -1015,7 +1017,11 @@
       { src: 'video/proceso-2.mp4', poster: 'img/video-posters/proceso-2.jpg' },
       { src: 'video/proceso-3.mp4', poster: 'img/video-posters/proceso-3.jpg' },
     ];
-    const SETS = { entregas: ENTREGAS, puerto: PUERTO };
+    const PROCESO = Array.from({ length: 29 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0');
+      return { src: `video/operaciones-${n}.mp4`, poster: `img/video-posters/operaciones-${n}.jpg` };
+    });
+    const SETS = { entregas: ENTREGAS, puerto: PUERTO, proceso: PROCESO };
 
     let activeSet = 'puerto';
     let shown = PAGE_SIZE;
@@ -1029,9 +1035,15 @@
 
       const data = SETS[activeSet];
       const slice = data.slice(0, shown);
-      grid.innerHTML = slice.map((item, i) =>
-        `<button type="button" class="gal-item" data-index="${i}"><img src="${item.src}" alt="${item.alt}" loading="lazy"></button>`
-      ).join('');
+      grid.classList.toggle('gal-grid-videos', activeSet === 'proceso');
+      grid.classList.toggle('gal-grid', activeSet !== 'proceso');
+      grid.innerHTML = activeSet === 'proceso'
+        ? slice.map(v =>
+            `<div class="video-card"><video controls preload="none" poster="${v.poster}"><source src="${v.src}" type="video/mp4"></video></div>`
+          ).join('')
+        : slice.map((item, i) =>
+            `<button type="button" class="gal-item" data-index="${i}"><img src="${item.src}" alt="${item.alt}" loading="lazy"></button>`
+          ).join('');
       moreBtn.hidden = shown >= data.length;
     }
 
