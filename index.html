@@ -268,6 +268,20 @@
   .cfg-faq summary{cursor:pointer; font-weight:600; color:var(--ink)}
   .cfg-faq details p{margin-top:10px; font-size:.88rem}
 
+  /* ============ PREGUNTAS FRECUENTES ============ */
+  .faq-block{margin-top:40px; padding-top:28px; border-top:1px solid var(--line)}
+  .faq-block:first-of-type{margin-top:36px; padding-top:0; border-top:none}
+  .faq-block-title{font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-strong); font-weight:600; margin-bottom:14px}
+  .faq-block details{border-top:1px solid var(--line); padding:16px 0}
+  .faq-block details:last-child{border-bottom:1px solid var(--line)}
+  .faq-block summary{cursor:pointer; font-weight:600; color:var(--ink)}
+  .faq-block details p{margin-top:10px; font-size:.88rem; line-height:1.6}
+  .faq-block details p + p{margin-top:10px}
+  .faq-closing{background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:36px; margin-top:56px; text-align:center}
+  .faq-closing h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.4rem; font-weight:700; color:var(--ink)}
+  .faq-closing p{color:var(--ink-mute); max-width:56ch; margin:10px auto 22px}
+  .faq-closing-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
+
   /* ============ PROCESS TIMELINE ============ */
   .phase-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px; margin:38px 0 2px}
   .phase-head:first-child{margin-top:0}
@@ -438,6 +452,7 @@
       <a href="#vehiculos">Vehículos</a>
       <a href="#calculadora">Cotizar</a>
       <a href="#galeria">Galería</a>
+      <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <a class="phone-link mono" href="tel:+13056156007,0">+1 305 615 6007 ext. 0</a>
@@ -732,7 +747,7 @@
     <div class="cfg-faq reveal">
       <h3>Preguntas frecuentes</h3>
       <details><summary>¿Cómo se paga el flete?</summary><p>El flete se contrata y se paga en Estados Unidos, antes del embarque del vehículo.</p></details>
-      <details><summary>¿Cómo se pagan los impuestos en Cuba?</summary><p>Los impuestos de importación se pagan directamente en Cuba, mediante tarjeta clásica, al momento de la entrega. Son estimados y pueden variar hasta $500 por encima o por debajo según el contrato final.</p></details>
+      <details><summary>¿Cómo se pagan los impuestos en Cuba?</summary><p>Los impuestos se pagan directamente en Cuba, en la importadora, mediante tarjeta Clásica. La estimación mostrada es orientativa: el importe final puede presentar variaciones al alza o a la baja según la liquidación correspondiente a la operación.</p></details>
       <details><summary>¿Por qué obtengo un descuento al cotizar desde la web?</summary><p>Es una promoción que ofrecemos a nuestros clientes a través de esta web. Al completar el formulario online o solicitar tu cotización desde aquí por nuestros canales oficiales, puedes acceder a un descuento de hasta $500 sobre el flete regular. Para las tarifas mostradas, el flete de vehículos regulares pasa de $4,500 a $4,000 USD y el de camiones, de $10,500 a $10,000 USD. Los impuestos en Cuba se pagan por separado.</p></details>
       <details><summary>¿Qué hago si no encuentro mi modelo?</summary><p>Comunícate con nosotros a través de nuestros canales oficiales: <a href="https://wa.me/17865200009" target="_blank" rel="noopener">WhatsApp</a>, <a href="tel:+13056156007,0">teléfono</a> o el <a href="#cfg-contact-anchor">formulario de esta web</a>. Indícanos la marca, el modelo y el año del vehículo para que nuestro equipo revise tu caso y te oriente sobre las opciones disponibles. Si es un vehículo de turismo, debe ser del año 2017 en adelante; si es un camión, del año 2012 en adelante. Cumplir el año requerido es parte de la revisión y no sustituye la aprobación del vehículo y su documentación.</p></details>
     </div>
@@ -814,6 +829,158 @@
   <img id="lightbox-img" src="" alt="">
   <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto siguiente">›</button>
 </div>
+
+<!-- ============ PREGUNTAS FRECUENTES ============ -->
+<section id="preguntas-frecuentes" data-page="preguntas-frecuentes">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">RESOLVEMOS TUS DUDAS</span>
+      <h2>Preguntas frecuentes</h2>
+      <p>Todo lo que necesitas saber para preparar tu envío, conocer el proceso y coordinar la entrega en Cuba. Si necesitas revisar un caso particular, comunícate con nuestro equipo a través de los canales oficiales.</p>
+    </div>
+
+    <div class="faq-block reveal">
+      <h3 class="faq-block-title">Bloque 1 · Compra y requisitos</h3>
+      <details>
+        <summary>1. ¿Puedo enviar un vehículo que ya tengo o comprarlo a través de ustedes?</summary>
+        <p>Sí. Puedes enviarnos un vehículo de tu propiedad o adquirirlo a través de nuestra red de distribuidores autorizados. En ambos casos, nuestro equipo te acompaña con la contratación, la revisión documental y la coordinación del envío hasta su entrega en Cuba.</p>
+      </details>
+      <details>
+        <summary>2. ¿Qué tipos de vehículos puedo enviar a Cuba?</summary>
+        <p>Gestionamos envíos de autos, SUV, camionetas, camiones, tractocamiones, autobuses, remolques y maquinaria, incluidos equipos agrícolas. Cada operación está sujeta a las autorizaciones y requisitos correspondientes al vehículo o equipo.</p>
+        <p>Consulta nuestro catálogo o comunícate con nosotros para revisar tu opción.</p>
+      </details>
+      <details>
+        <summary>3. ¿Qué requisitos de año y documentación debe cumplir mi vehículo?</summary>
+        <p>Para las operaciones que gestionamos, los vehículos de turismo deben ser del año 2017 en adelante y los camiones del año 2012 en adelante.</p>
+        <p>Para iniciar la contratación, necesitamos el título de propiedad, la factura de compraventa —Bill of Sale—, el número de motor y la información personal requerida. Nuestro equipo revisará la documentación y confirmará los requisitos aplicables antes de coordinar el envío.</p>
+      </details>
+      <details>
+        <summary>4. ¿Qué hago si la marca o el modelo que busco no aparece en el catálogo?</summary>
+        <p>Comunícate con nosotros a través de nuestros canales oficiales e indícanos la marca, el modelo y el año del vehículo. Revisaremos tu caso y evaluaremos las opciones disponibles para ayudarte a concretar la operación.</p>
+        <p>Que un modelo no aparezca en la web no significa que debas descartar tu proyecto: consúltanos antes de tomar una decisión.</p>
+      </details>
+      <details>
+        <summary>5. ¿Quién puede recibir o importar un vehículo en Cuba?</summary>
+        <p>Atendemos a personas naturales y personas jurídicas del sector privado, incluidas las MIPYMES, siempre que cumplan los requisitos aplicables a la operación.</p>
+        <p>Por política de la empresa, no aceptamos como clientes o beneficiarios a entidades gubernamentales, empresas de propiedad o control estatal, funcionarios del Gobierno cubano ni personas que actúen en su representación.</p>
+        <p>Cada operación está sujeta a la verificación de las partes involucradas, sus propietarios y beneficiarios finales y el destino del vehículo, conforme a las restricciones aplicables de la Oficina de Control de Activos Extranjeros del Departamento del Tesoro de Estados Unidos —OFAC—, los controles de exportación y las demás normas vigentes. No realizamos operaciones prohibidas ni gestiones destinadas a eludir estas restricciones.</p>
+      </details>
+      <details>
+        <summary>6. ¿Puedo realizar todo el proceso a distancia?</summary>
+        <p>Sí. Nuestro proceso está preparado para gestionar online la contratación, el envío de documentos y la coordinación de la operación, sin que tengas que desplazarte a nuestras oficinas.</p>
+        <p>Coordinamos la recogida de tu vehículo en todo el territorio continental de Estados Unidos. Nuestro equipo te informará de las condiciones y el coste de ese traslado antes de confirmarlo. La entrega en Cuba se coordina con el destinatario o la persona debidamente autorizada.</p>
+      </details>
+    </div>
+
+    <div class="faq-block reveal">
+      <h3 class="faq-block-title">Bloque 2 · Cotización y pagos</h3>
+      <details>
+        <summary>7. ¿Qué incluye el precio del flete y qué gastos se pagan por separado?</summary>
+        <p>Nuestra tarifa comprende los servicios de gestión y transporte necesarios para coordinar tu envío: acreditación para la operación, preparación y tramitación de contratos, revisión documental, reserva de embarque, coordinación de ingreso al puerto, gestión de las validaciones aduanales y flete marítimo hacia Cuba.</p>
+        <p>Además, nuestros equipos realizan el seguimiento de la operación en Estados Unidos y Cuba, manteniendo la coordinación hasta la entrega.</p>
+        <p>El seguro de transporte, los impuestos en Cuba y la recogida del vehículo dentro de Estados Unidos se pagan por separado. Tu cotización detallará el alcance del servicio y cualquier gasto adicional aplicable.</p>
+      </details>
+      <details>
+        <summary>8. ¿Cómo obtengo el descuento de hasta $500 que ofrece la web?</summary>
+        <p>El descuento es exclusivo para las solicitudes de cotización realizadas a través de nuestra web. Configura tu envío y completa el formulario online para acceder a un ahorro de hasta $500 sobre la tarifa regular del flete.</p>
+        <p>El descuento aplicable aparecerá en tu cotización. No se aplica a los impuestos en Cuba, al seguro ni a otros servicios adicionales.</p>
+      </details>
+      <details>
+        <summary>9. ¿Cuándo debo pagar y qué métodos de pago aceptan?</summary>
+        <p>Los pagos se realizan mediante transferencia bancaria. Una vez aprobados los contratos e iniciada la fase logística, con el vehículo en el puerto, nuestro equipo te facilitará las instrucciones para efectuar el pago correspondiente.</p>
+        <p>El importe contratado debe estar abonado en su totalidad y la transferencia confirmada antes del embarque. La programación del envío queda sujeta a la confirmación del pago y al cumplimiento de los requisitos documentales y aduanales.</p>
+      </details>
+      <details>
+        <summary>10. ¿Cómo se calculan y se pagan los impuestos en Cuba?</summary>
+        <p>Los impuestos se pagan en Cuba, directamente en la importadora, mediante tarjeta Clásica.</p>
+        <p>Durante la contratación, nuestro equipo te proporciona una estimación de los impuestos correspondientes a tu vehículo. Una vez que llega a Cuba, nuestros representantes te comunican el importe definitivo al coordinar la entrega.</p>
+        <p>La estimación es orientativa: el importe final puede presentar pequeñas variaciones al alza o a la baja, según la liquidación correspondiente a la operación.</p>
+      </details>
+    </div>
+
+    <div class="faq-block reveal">
+      <h3 class="faq-block-title">Bloque 3 · Seguro, preparación y envío</h3>
+      <details>
+        <summary>11. ¿Cómo puedo contratar el seguro de transporte y qué cubre?</summary>
+        <p>El seguro de transporte no está incluido en el flete y se contrata por separado con la naviera. Nuestro equipo te facilita las vías y la orientación necesarias para gestionarlo.</p>
+        <p>Consulta con uno de nuestros agentes de ventas antes del embarque para conocer el coste, la cobertura disponible y sus condiciones, incluidos los deducibles y las exclusiones que correspondan. La protección del vehículo será la establecida en la póliza contratada.</p>
+      </details>
+      <details>
+        <summary>12. ¿Dónde debo entregar el vehículo en Estados Unidos? ¿Pueden recogerlo?</summary>
+        <p>Puedes entregar tu vehículo directamente en nuestro lote del puerto designado o solicitar la recogida en cualquier punto del territorio continental de Estados Unidos, con un coste adicional.</p>
+        <p>Al coordinar la entrega, te facilitaremos la reserva de embarque —booking— y las instrucciones de acceso y recepción. Un integrante de nuestro equipo o personal autorizado del puerto se encargará de recibir el vehículo. Coordina siempre con nosotros antes de trasladarlo al lote.</p>
+      </details>
+      <details>
+        <summary>13. ¿Cómo debo preparar el vehículo antes de entregarlo?</summary>
+        <p>Nuestro equipo te enviará las instrucciones de preparación y entrega durante la coordinación del ingreso al puerto. Es indispensable cumplir todos los requisitos establecidos por nuestra compañía y por la Oficina de Aduanas y Protección Fronteriza de Estados Unidos —CBP—.</p>
+        <p>Revisa cuidadosamente las indicaciones y asegúrate de que la documentación solicitada esté completa y coincida con los datos del vehículo. Si tienes alguna duda, consúltanos antes de entregarlo: una preparación correcta ayuda a evitar incidencias en la recepción, la validación aduanal y el embarque.</p>
+      </details>
+      <details>
+        <summary>14. ¿Puedo enviar piezas, equipaje u otros artículos dentro del vehículo?</summary>
+        <p>No. El vehículo no puede utilizarse para transportar mercancías ni objetos ajenos a él. Debe entregarse sin maletas, ropa, alimentos, medicamentos, electrodomésticos, equipos electrónicos, paquetes ni efectos personales, tanto en el habitáculo como en el maletero o la zona de carga.</p>
+        <p>Tampoco se permiten repuestos sueltos, neumáticos adicionales u otros artículos añadidos para aprovechar el envío. Solo deben permanecer los elementos propios del equipamiento del vehículo, conforme a las instrucciones de entrega de nuestra compañía.</p>
+        <p>El incumplimiento puede impedir la recepción o el embarque hasta que se retiren los artículos y se regularice la entrega.</p>
+      </details>
+      <details>
+        <summary>15. ¿Cuánto tarda el proceso completo hasta la entrega en Cuba?</summary>
+        <p>Como referencia, estimamos un plazo de 1 a 35 días desde el inicio del proceso documental hasta la entrega en Cuba. Trabajamos para completar la operación en el menor tiempo posible, aunque este intervalo es orientativo y no garantiza una entrega inmediata ni una fecha fija.</p>
+        <p>El envío de un vehículo requiere contratación, revisión de documentos, validaciones aduanales, disponibilidad de embarque y gestiones de entrega en destino. Dedicamos a cada etapa el tiempo necesario para que la documentación esté en orden y reducir el riesgo de incidencias en Estados Unidos y Cuba.</p>
+        <p>La programación de la naviera, las inspecciones y las interrupciones de los sistemas o del suministro eléctrico en Cuba pueden extender el plazo estimado. Si alguna de estas circunstancias afecta tu operación, nuestro equipo te informará y dará seguimiento hasta su resolución.</p>
+      </details>
+    </div>
+
+    <div class="faq-block reveal">
+      <h3 class="faq-block-title">Bloque 4 · Seguimiento y entrega en Cuba</h3>
+      <details>
+        <summary>16. ¿Cómo recibo actualizaciones sobre el estado de mi envío?</summary>
+        <p>Nuestro centro de atención está disponible a través del <a href="https://wa.me/17865200009" target="_blank" rel="noopener">número oficial de WhatsApp</a>, donde puedes escribirnos o llamarnos dentro de nuestros horarios establecidos.</p>
+        <p>Desde este canal ofrecemos seguimiento actualizado de tu operación: contratación, documentación, embarque y gestiones de entrega en Cuba. Nuestro equipo consulta el estado del proceso para proporcionarte la información disponible y responder tus dudas.</p>
+        <p>Queremos que te sientas acompañado en cada etapa, con atención directa y respuestas claras sobre tu envío.</p>
+      </details>
+      <details>
+        <summary>17. ¿Cómo se coordina la entrega de mi vehículo en Cuba?</summary>
+        <p>Nuestras representantes en La Habana se comunicarán contigo cuando el vehículo esté listo para su entrega. Te indicarán el lugar de recogida, la documentación que debes presentar y los pasos necesarios para completar el proceso.</p>
+        <p>La entrega se coordina directamente con nuestro equipo en Cuba. Espera su confirmación antes de desplazarte al puerto o a la importadora.</p>
+      </details>
+      <details>
+        <summary>18. ¿Puede otra persona recoger el vehículo en mi nombre?</summary>
+        <p>Sí. El propietario debe otorgar un poder legal que autorice expresamente a esa persona a recoger el vehículo en su nombre.</p>
+        <p>Antes de coordinar la recogida, comunícate con nuestras representantes en La Habana para confirmar los requisitos del poder y la documentación que deberá presentar la persona autorizada. Así podremos verificar que todo esté en orden para la entrega.</p>
+      </details>
+      <details>
+        <summary>19. ¿Qué ocurre si el envío se retrasa o no puedo recoger el vehículo a tiempo?</summary>
+        <p>Comunícate con nuestro equipo en La Habana para revisar el estado de tu operación y coordinar las opciones disponibles. Si no puedes acudir a la recogida, avísanos con la mayor antelación posible para que podamos orientarte.</p>
+        <p>Nuestros representantes te explicarán los siguientes pasos y cualquier condición o coste que pudiera aplicar según tu caso. Estamos para ayudarte y acompañarte hasta completar la entrega.</p>
+      </details>
+    </div>
+
+    <div class="faq-block reveal">
+      <h3 class="faq-block-title">Bloque 5 · Cancelaciones e incidencias</h3>
+      <details>
+        <summary>20. ¿Puedo cancelar el envío y solicitar un reembolso?</summary>
+        <p>Sí, aceptamos solicitudes de cancelación. Si los contratos ya han sido elaborados y aprobados, la cancelación conlleva costes adicionales, que se determinarán según la fase de la operación y las gestiones realizadas.</p>
+        <p>Para conocer las condiciones aplicables, los cargos y cualquier importe que corresponda reembolsar, comunícate con nuestra oficina en Estados Unidos al <a href="tel:+13056156007,0" class="mono">+1 305 615 6007, extensión 0</a>. Nuestro equipo revisará tu caso y te explicará el procedimiento antes de formalizar la cancelación.</p>
+      </details>
+      <details>
+        <summary>21. ¿Qué debo hacer si encuentro algún daño al recibir mi vehículo?</summary>
+        <p>Revisa cuidadosamente tu vehículo en el momento de la entrega y antes de retirarlo. Si detectas algún daño o irregularidad, comunícalo de inmediato a nuestros representantes presentes en el puerto o en la importadora. No abandones el lugar sin haber informado y dejado constancia de la incidencia.</p>
+        <p>Nuestro equipo documentará lo ocurrido mediante un reporte, acompañado de fotografías y la información disponible, para remitirlo a las partes involucradas y gestionar el seguimiento correspondiente. Solicita una copia del reporte y asegúrate de que la incidencia quede reflejada en la documentación de entrega.</p>
+        <p>Las incidencias son poco frecuentes en nuestra operación. Mantenemos una supervisión continua y trabajamos con cuidado en cada etapa para reducir los riesgos. Si ocurre una situación, documentarla desde el primer momento es fundamental para su evaluación y atención.</p>
+        <p>Si descubres posteriormente un daño que no era visible al recoger el vehículo, comunícalo cuanto antes y conserva las pruebas disponibles. La evaluación y cualquier cobertura se determinarán conforme al contrato, la póliza cuando exista y la legislación aplicable.</p>
+      </details>
+    </div>
+
+    <div class="faq-closing reveal">
+      <h3>¿Tienes otra pregunta?</h3>
+      <p>Cada operación tiene sus particularidades. Cuéntanos qué necesitas y nuestro equipo te ayudará a definir el siguiente paso.</p>
+      <div class="faq-closing-ctas">
+        <a class="btn btn-primary" href="https://wa.me/17865200009" target="_blank" rel="noopener">Habla con nuestro equipo</a>
+        <a class="btn btn-ghost" href="#calculadora">Cotiza tu envío</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ CONTACTO ============ -->
 <section id="contacto" data-page="contacto" style="background:var(--surface-2)">
@@ -903,6 +1070,7 @@
         <h4>Macias Logistics</h4>
         <a href="#calculadora">Configura tu envío</a>
         <a href="#vehiculos">Vehículos autorizados</a>
+        <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
       </div>
       <div>
         <h4>Contacto</h4>
@@ -1136,8 +1304,8 @@
   }));
 
   // ===== Router de páginas =====
-  const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','contacto'];
-  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', contacto:'Contacto'};
+  const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','preguntas-frecuentes','contacto'];
+  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', 'preguntas-frecuentes':'Preguntas frecuentes', contacto:'Contacto'};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function showPage(page){
