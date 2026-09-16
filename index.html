@@ -700,12 +700,16 @@
     <div class="cfg-contact reveal" id="cfg-contact-anchor">
       <h3>Solicita tu cotización con descuento</h3>
       <p style="margin-top:6px">Completa tus datos y envíanos tu solicitud para acceder a la promoción web. Nuestro equipo se pondrá en contacto contigo para revisar los detalles de tu envío. También puedes continuar por WhatsApp con la cotización que acabas de configurar.</p>
-      <form class="cfg-contact-form" id="cfg-contact-form" onsubmit="event.preventDefault(); this.querySelector('.sent').hidden=false;">
-        <div class="field"><label for="cfg-name">Nombre</label><input id="cfg-name" type="text" placeholder="Tu nombre completo"></div>
-        <div class="field"><label for="cfg-email">Correo electrónico*</label><input id="cfg-email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
-        <div class="field"><label for="cfg-phone">Teléfono / WhatsApp</label><input id="cfg-phone" type="tel" placeholder="+1 786 000 0000"></div>
+      <form class="cfg-contact-form" id="cfg-contact-form">
+        <input type="hidden" name="access_key" value="fb605cfe-6569-4f2f-825c-e3b6fa166d8e">
+        <input type="hidden" name="subject" value="Nueva cotización desde ConnectingCuba (Calculadora)">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="field"><label for="cfg-name">Nombre</label><input id="cfg-name" name="name" type="text" placeholder="Tu nombre completo"></div>
+        <div class="field"><label for="cfg-email">Correo electrónico*</label><input id="cfg-email" name="email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
+        <div class="field"><label for="cfg-phone">Teléfono / WhatsApp</label><input id="cfg-phone" name="telefono" type="tel" placeholder="+1 786 000 0000"></div>
         <button class="btn btn-primary" type="submit">Solicitar mi cotización con descuento</button>
         <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos en breve con los siguientes pasos.</p>
+        <p class="err mono" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
       </form>
     </div>
 
@@ -804,21 +808,25 @@
       <p>Cuéntanos qué vehículo quieres enviar y a qué empresa del grupo corresponde tu consulta.</p>
     </div>
     <div class="contact-grid">
-      <form class="reveal" onsubmit="event.preventDefault(); this.querySelector('.sent').hidden=false;">
-        <div class="field"><label for="f-name">Nombre</label><input id="f-name" type="text" placeholder="Tu nombre completo"></div>
-        <div class="field"><label for="f-email">Correo electrónico*</label><input id="f-email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
+      <form class="reveal" id="contacto-form">
+        <input type="hidden" name="access_key" value="fb605cfe-6569-4f2f-825c-e3b6fa166d8e">
+        <input type="hidden" name="subject" value="Nueva solicitud desde ConnectingCuba (Contacto)">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" type="text" placeholder="Tu nombre completo"></div>
+        <div class="field"><label for="f-email">Correo electrónico*</label><input id="f-email" name="email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
         <div class="field">
           <label for="f-div">¿A qué empresa te diriges?</label>
-          <select id="f-div">
+          <select id="f-div" name="empresa">
             <option>Macias Logistics — envío de vehículos</option>
             <option>Ola International Trading — comercio internacional</option>
             <option>Henex Worldwide Group — operaciones en Cuba</option>
             <option>Metele / Prime Truck USA — información general</option>
           </select>
         </div>
-        <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" placeholder="Marca, modelo y año del vehículo, y ciudad de destino en Cuba"></textarea></div>
+        <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" placeholder="Marca, modelo y año del vehículo, y ciudad de destino en Cuba"></textarea></div>
         <button class="btn btn-primary" type="submit" style="width:100%">Enviar solicitud</button>
         <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos por WhatsApp o correo en breve.</p>
+        <p class="err mono" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
       </form>
       <div class="contact-card reveal">
         <div class="contact-row">
@@ -1527,4 +1535,47 @@
     if (e.target.tagName !== 'VIDEO') return;
     document.querySelectorAll('video').forEach(v => { if (v !== e.target && !v.paused) v.pause(); });
   }, true);
+
+  // Envío de formularios de cotización/contacto vía Web3Forms
+  function wireQuoteForm(form, getExtraFields){
+    if (!form) return;
+    const sentEl = form.querySelector('.sent');
+    const errEl = form.querySelector('.err');
+    const btn = form.querySelector('button[type="submit"]');
+    const btnLabel = btn ? btn.textContent : '';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (sentEl) sentEl.hidden = true;
+      if (errEl) errEl.hidden = true;
+      if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+      const data = new FormData(form);
+      if (getExtraFields) {
+        Object.entries(getExtraFields()).forEach(([k, v]) => { if (v) data.append(k, v); });
+      }
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: data
+        });
+        const json = await res.json();
+        if (json.success) {
+          if (sentEl) sentEl.hidden = false;
+          form.reset();
+        } else {
+          if (errEl) errEl.hidden = false;
+        }
+      } catch (err) {
+        if (errEl) errEl.hidden = false;
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+      }
+    });
+  }
+
+  wireQuoteForm(document.getElementById('cfg-contact-form'), () => ({
+    vehiculo: document.getElementById('summary-vehicle')?.textContent || '',
+    total_estimado: document.getElementById('summary-total')?.textContent || ''
+  }));
+  wireQuoteForm(document.getElementById('contacto-form'));
 </script>
