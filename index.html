@@ -97,8 +97,11 @@
   section{padding:88px 0}
   @media (max-width:720px){ section{padding:56px 0} }
 
-  .reveal{transform:translateY(14px); transition:transform .55s ease}
-  .reveal.in{transform:none}
+  .reveal{transform:translateY(14px); opacity:0; transition:transform .55s ease, opacity .55s ease}
+  .reveal.in{transform:none; opacity:1}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transform:none; opacity:1; transition:none}
+  }
 
   /* ============ ROUTE STRIP / BRAND TICKER ============ */
   .route-strip{background:var(--navy); color:#CBDDE3; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; overflow:hidden}
@@ -779,7 +782,7 @@
 
     <div class="video-grid reveal" id="gal-videos" hidden></div>
     <div class="gal-grid reveal" id="gal-grid"></div>
-    <button type="button" class="btn btn-ghost gal-more" id="gal-more" hidden>Ver más entregas</button>
+    <button type="button" class="btn btn-ghost gal-more" id="gal-more" hidden>Ver más</button>
   </div>
 </section>
 
