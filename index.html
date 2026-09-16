@@ -690,6 +690,13 @@
           </div>
         </div>
 
+        <div class="config-block reveal" id="block-year" hidden>
+          <span class="config-label">Paso 3 · Año del vehículo</span>
+          <div class="config-row">
+            <select id="cfg-ano" class="cat-select" style="flex:1; min-width:180px"><option value="">Selecciona el año…</option></select>
+          </div>
+        </div>
+
         <div class="config-block reveal" id="block-included" hidden>
           <button type="button" class="included-toggle" id="included-toggle">¿Qué incluye el flete? <span>▾</span></button>
           <ul class="included-list" id="included-list" hidden>
@@ -1602,9 +1609,11 @@
     camion: ['Camión'],
     remolque: ['Trailer','Chasis']
   };
-  // Impuestos aproximados en Cuba por vehículo ('MARCA|MODELO' -> monto en USD).
+  // Año mínimo aceptado por tipo de vehículo (elegibilidad de la operación).
+  const TIER_MIN_YEAR = { regular: 2017, camion: 2012 };
+  // Impuestos aproximados en Cuba por vehículo ('MARCA|MODELO|AÑO' -> monto en USD).
   // Vacío hasta recibir la tabla oficial del cliente — la interfaz muestra
-  // "por confirmar" mientras un modelo no tenga entrada aquí.
+  // "por confirmar" mientras un modelo/año no tenga entrada aquí.
   const CUBA_TAXES = {};
 
   function fmtUSD(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
@@ -1612,11 +1621,13 @@
 
   const tierCards = document.querySelectorAll('.tier-card');
   const blockModel = document.getElementById('block-model');
+  const blockYear = document.getElementById('block-year');
   const blockIncluded = document.getElementById('block-included');
   const includedList = document.getElementById('included-list');
   const includedToggle = document.getElementById('included-toggle');
   const cfgMarca = document.getElementById('cfg-marca');
   const cfgModelo = document.getElementById('cfg-modelo');
+  const cfgAno = document.getElementById('cfg-ano');
   const cfgSummary = document.getElementById('cfg-summary');
   let currentTier = null;
 
@@ -1628,7 +1639,9 @@
     cfgMarca.innerHTML = '<option value="">Selecciona la marca…</option>' + marcas.map(m => `<option value="${m}">${m}</option>`).join('');
     cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
     cfgModelo.disabled = true;
+    cfgAno.innerHTML = '<option value="">Selecciona el año…</option>';
     blockModel.hidden = false;
+    blockYear.hidden = true;
     blockIncluded.hidden = true;
     cfgSummary.hidden = true;
     if (persist !== false) safeStorage(() => localStorage.setItem('cc_cfg_tier', tier));
@@ -1639,6 +1652,7 @@
   cfgMarca.addEventListener('change', () => {
     const marca = cfgMarca.value;
     cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
+    blockYear.hidden = true;
     blockIncluded.hidden = true;
     cfgSummary.hidden = true;
     if (!marca) { cfgModelo.disabled = true; return; }
@@ -1650,17 +1664,39 @@
   });
 
   cfgModelo.addEventListener('change', () => {
-    if (!cfgModelo.value) { blockIncluded.hidden = true; cfgSummary.hidden = true; return; }
+    blockIncluded.hidden = true;
+    cfgSummary.hidden = true;
+    if (!cfgModelo.value) { blockYear.hidden = true; return; }
     safeStorage(() => localStorage.setItem('cc_cfg_modelo', cfgModelo.value));
+
+    if (TIER_PRICING[currentTier].custom) {
+      // Remolques y chasis: equipo nuevo, sin año ni impuesto estimado — cotización directa.
+      blockYear.hidden = true;
+      showSummary();
+      return;
+    }
+
+    const minYear = TIER_MIN_YEAR[currentTier];
+    const maxYear = new Date().getFullYear();
+    let opts = '<option value="">Selecciona el año…</option>';
+    for (let y = maxYear; y >= minYear; y--) opts += `<option value="${y}">${y}</option>`;
+    cfgAno.innerHTML = opts;
+    blockYear.hidden = false;
+  });
+
+  cfgAno.addEventListener('change', () => {
+    if (!cfgAno.value) { blockIncluded.hidden = true; cfgSummary.hidden = true; return; }
+    safeStorage(() => localStorage.setItem('cc_cfg_ano', cfgAno.value));
     showSummary();
   });
 
   function showSummary(){
-    const marca = cfgMarca.value, modelo = cfgModelo.value;
+    const marca = cfgMarca.value, modelo = cfgModelo.value, ano = cfgAno.value;
     const pricing = TIER_PRICING[currentTier];
-    const tax = CUBA_TAXES[marca + '|' + modelo];
+    const tax = pricing.custom ? null : CUBA_TAXES[marca + '|' + modelo + '|' + ano];
+    const vehiculoLabel = ano ? `${marca} ${modelo} (${ano})` : `${marca} ${modelo}`;
 
-    document.getElementById('summary-vehicle').textContent = marca + ' ' + modelo;
+    document.getElementById('summary-vehicle').textContent = vehiculoLabel;
     const summaryRows = document.getElementById('summary-rows');
     const totalLabel = document.getElementById('summary-total-label');
     const totalEl = document.getElementById('summary-total');
@@ -1672,7 +1708,7 @@
       totalLabel.textContent = 'Flete';
       totalEl.textContent = 'Cotización personalizada';
       disclaimerEl.textContent = 'Este equipo no tiene una tarifa fija en línea — te confirmamos el flete directamente según las condiciones de tu operación. El flete no incluye seguro; el seguro se contrata por separado.';
-      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Necesito una cotización personalizada.`);
+      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${vehiculoLabel} (${pricing.label}). Necesito una cotización personalizada.`);
     } else {
       summaryRows.hidden = false;
       totalLabel.textContent = 'Total estimado';
@@ -1691,7 +1727,7 @@
         waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
       }
       disclaimerEl.textContent = 'El descuento se aplica al flete. El flete no incluye seguro — el seguro se contrata por separado. Los impuestos en Cuba se pagan aparte, mediante tarjeta Clásica.';
-      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${marca} ${modelo} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
+      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${vehiculoLabel} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
     }
 
     document.getElementById('summary-whatsapp').href = `https://wa.me/17865200009?text=${waText}`;
@@ -1717,7 +1753,13 @@
     const savedModelo = safeStorage(() => localStorage.getItem('cc_cfg_modelo'));
     if (!savedModelo) return;
     cfgModelo.value = savedModelo;
-    if (cfgModelo.value === savedModelo) cfgModelo.dispatchEvent(new Event('change'));
+    if (cfgModelo.value !== savedModelo) return;
+    cfgModelo.dispatchEvent(new Event('change'));
+    if (TIER_PRICING[savedTier].custom) return;
+    const savedAno = safeStorage(() => localStorage.getItem('cc_cfg_ano'));
+    if (!savedAno) return;
+    cfgAno.value = savedAno;
+    if (cfgAno.value === savedAno) cfgAno.dispatchEvent(new Event('change'));
   })();
 
   // Pausa cualquier otro video al reproducir uno nuevo (evita audio superpuesto)
