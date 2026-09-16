@@ -330,10 +330,11 @@
   .gal-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease}
   .gal-item:hover img{transform:scale(1.05)}
   .gal-more{display:block; margin:28px auto 0}
-  .video-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:760px; margin:0 auto 32px}
+  .video-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:900px; margin:0 auto 32px}
   .video-card{position:relative; aspect-ratio:9/16; border-radius:4px; overflow:hidden; background:#000; box-shadow:var(--shadow)}
   .video-card video{width:100%; height:100%; object-fit:cover; display:block}
-  @media (max-width:700px){ .video-grid{grid-template-columns:1fr; max-width:360px} }
+  @media (max-width:860px){ .video-grid{grid-template-columns:repeat(2,1fr); max-width:440px} }
+  @media (max-width:420px){ .video-grid{grid-template-columns:1fr; max-width:300px} }
   .gal-grid-videos{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
 
   .lightbox{position:fixed; inset:0; z-index:100; background:rgba(7,22,32,.94); display:flex; align-items:center; justify-content:center}
@@ -1023,8 +1024,9 @@
       { src: 'video/proceso-1.mp4', poster: 'img/video-posters/proceso-1.jpg' },
       { src: 'video/proceso-2.mp4', poster: 'img/video-posters/proceso-2.jpg' },
       { src: 'video/proceso-3.mp4', poster: 'img/video-posters/proceso-3.jpg' },
+      { src: 'video/proceso-4.mp4', poster: 'img/video-posters/proceso-4.jpg' },
     ];
-    const PROCESO = Array.from({ length: 55 }, (_, i) => {
+    const PROCESO = Array.from({ length: 52 }, (_, i) => {
       const n = String(i + 1).padStart(2, '0');
       return { src: `video/operaciones-${n}.mp4`, poster: `img/video-posters/operaciones-${n}.jpg` };
     });
