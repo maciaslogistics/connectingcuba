@@ -147,6 +147,11 @@
   }
   .header-actions{display:flex; align-items:center; gap:14px}
   @media (max-width:560px){ .header-actions > .btn-primary{display:none} }
+  .brand-secondary{display:flex; align-items:center; padding-right:14px; margin-right:2px; border-right:1px solid var(--line); transition:opacity .15s ease}
+  .brand-secondary:hover{opacity:.85}
+  .henex-logo{height:34px; width:auto; flex:none; display:block}
+  @media (max-width:480px){ .henex-logo{height:26px} }
+  @media (max-width:400px){ .brand-secondary{display:none} }
   .phone-link{font-family:'IBM Plex Mono'; font-size:.85rem; font-weight:600; text-decoration:none; color:var(--ink); display:none; white-space:nowrap}
   @media (min-width:1180px){ .phone-link{display:inline} }
   .navburger{display:none; background:none; border:1px solid var(--line); border-radius:3px; width:42px; height:38px; align-items:center; justify-content:center; cursor:pointer}
@@ -418,6 +423,9 @@
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
+      <a class="brand-secondary" href="#grupo" aria-label="Henex Worldwide Group — operación en Cuba">
+        <img class="henex-logo" src="img/logo-henex-badge.svg" alt="Henex Worldwide Group">
+      </a>
       <a class="phone-link mono" href="tel:+13056156007,0">+1 305 615 6007 ext. 0</a>
       <a class="btn btn-primary" href="#calculadora" style="padding:10px 18px">Cotizar envío</a>
       <button class="navburger" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav"><span></span></button>
