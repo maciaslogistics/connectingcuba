@@ -378,16 +378,21 @@
 
   /* ============ FOOTER ============ */
   footer{background:var(--navy-2); color:#B9CDD3; padding:56px 0 26px}
-  .footer-badge{height:56px; width:auto; display:block; margin-bottom:16px}
-  .footer-grid{display:grid; gap:32px; grid-template-columns:1.4fr 1fr 1fr 1fr}
-  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr} }
+  .footer-badge{height:56px; width:auto; display:block; margin-bottom:18px}
+  .footer-grid{display:grid; gap:40px; grid-template-columns:1.6fr 1fr 1fr}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr; gap:36px} }
+  .footer-brand-name{font-family:'Big Shoulders Display'; font-weight:800; font-size:1.6rem; letter-spacing:.01em; color:#fff; margin-bottom:14px}
+  .footer-desc{color:#B9CDD3; font-size:.88rem; line-height:1.65; max-width:36ch; margin-bottom:18px}
+  .footer-corp-id{color:#8FADB5; font-size:.8rem; line-height:1.6; margin-bottom:10px}
+  .footer-companies{color:#6E8D95; font-size:.76rem; line-height:1.65; max-width:40ch}
   .footer-grid h4{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
   .footer-grid a{display:block; font-size:.86rem; color:#D3E2E5; text-decoration:none; margin-bottom:9px}
   .footer-grid a:hover{color:#fff}
   .footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px; border-top:1px solid rgba(255,255,255,.1); margin-top:44px; padding-top:22px; font-size:.78rem; color:#7FA3AF}
-  .footer-legal{display:flex; flex-wrap:wrap; gap:16px}
+  .footer-legal{display:flex; flex-wrap:wrap; align-items:center; gap:10px}
   .footer-legal a{color:#AEC7CD; text-decoration:none; font-size:.78rem}
   .footer-legal a:hover{color:#fff}
+  .footer-legal-sep{color:#4C6B73}
   .social-row{display:flex; gap:10px}
   .social-row button{width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:transparent; color:#D3E2E5; display:flex; align-items:center; justify-content:center; cursor:pointer}
   .social-row button:hover{background:rgba(255,255,255,.1)}
@@ -881,16 +886,10 @@
     <div class="footer-grid">
       <div>
         <img src="img/logo-macias-circle.png" alt="Macias Logistics" class="footer-badge">
-        <h4>Grupo</h4>
-        <p style="color:#9DBBC2; font-size:.85rem; max-width:34ch">ConnectingCuba conecta a Estados Unidos, Europa y Cuba a través de Macias Logistics, Ola International Trading, Henex Worldwide Group, Metele y Prime Truck USA.</p>
-      </div>
-      <div>
-        <h4>Empresas</h4>
-        <a href="#grupo">Macias Logistics</a>
-        <a href="#grupo">Ola International Trading</a>
-        <a href="#grupo">Henex Worldwide Group</a>
-        <a href="#grupo">Metele</a>
-        <a href="#grupo">Prime Truck USA</a>
+        <div class="footer-brand-name">ConnectingCuba</div>
+        <p class="footer-desc">Comercio internacional, logística y soluciones de compra.<br>Conectamos Estados Unidos, Europa y Cuba.</p>
+        <p class="footer-corp-id">Un grupo encabezado por Macias Logistics LLC.</p>
+        <p class="footer-companies">Macias Logistics LLC · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA</p>
       </div>
       <div>
         <h4>Macias Logistics</h4>
@@ -905,9 +904,10 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ConnectingCuba — Macias Logistics · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA. Todos los derechos reservados.</span>
+      <span>© <span id="footer-year">2026</span> Macias Logistics LLC. Todos los derechos reservados.</span>
       <div class="footer-legal">
         <a href="privacidad.html">Política de privacidad</a>
+        <span class="footer-legal-sep">|</span>
         <a href="terminos.html">Términos y condiciones</a>
       </div>
       <div class="social-row">
@@ -1111,6 +1111,10 @@
       if (e.key === 'ArrowRight') stepLightbox(1);
     });
   })();
+
+  // Año del copyright en el pie de página
+  const footerYear = document.getElementById('footer-year');
+  if (footerYear) footerYear.textContent = new Date().getFullYear();
 
   // mobile nav
   const navToggle = document.getElementById('navToggle');
