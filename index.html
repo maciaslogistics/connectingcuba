@@ -192,6 +192,19 @@
   .hero-stat:nth-child(even) b{color:#F7C169}
   .hero-stat span{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; color:#9FC1C9; text-transform:uppercase}
 
+  .promo-banner{background:var(--navy); color:#fff; border-radius:6px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap}
+  .promo-banner-facts{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+  .promo-stat{display:flex; flex-direction:column; line-height:1.1}
+  .promo-stat b{font-family:'Big Shoulders Display'; font-size:1.7rem; font-weight:800; color:#7ADCF5}
+  .promo-stat span{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.08em; color:#9FC1C9; text-transform:uppercase}
+  .promo-tag{display:inline-flex; align-items:center; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:8px 16px; font-size:.8rem; font-weight:600; color:#fff; white-space:nowrap}
+  .promo-banner-cta{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+  .promo-question{font-family:'Big Shoulders Display'; font-weight:800; font-size:1.2rem; text-transform:uppercase; color:#F7C169; text-wrap:balance}
+  @media (max-width:760px){
+    .promo-banner{flex-direction:column; align-items:flex-start; padding:26px 24px}
+    .promo-banner-cta{width:100%; justify-content:space-between}
+  }
+
   /* ============ SECTION HEADS ============ */
   .head{max-width:56ch; margin-bottom:44px}
   .head h2{font-size:clamp(1.9rem,4.4vw,2.9rem); margin-top:8px; color:var(--ink)}
@@ -481,6 +494,24 @@
       <div class="hero-stat reveal"><b data-count="2023">2023</b><span>Nace la división Cuba</span></div>
       <div class="hero-stat reveal"><b data-count="5">5</b><span>Empresas del grupo</span></div>
       <div class="hero-stat reveal"><b style="font-size:1.15rem">EE. UU. · EUROPA · CUBA</b><span>Nuestra conexión comercial</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRANJA PROMOCIONAL (inicio) ============ -->
+<section data-page="inicio">
+  <div class="wrap">
+    <div class="promo-banner reveal">
+      <div class="promo-banner-facts">
+        <div class="promo-stat"><b id="promo-brands">23</b><span>Marcas</span></div>
+        <div class="promo-stat"><b id="promo-models">465</b><span>Modelos</span></div>
+        <span class="promo-tag">Proveedores directos en Cuba</span>
+        <span class="promo-tag">Servicio personalizado</span>
+      </div>
+      <div class="promo-banner-cta">
+        <span class="promo-question">¿Qué esperas para cotizar tu auto ya?</span>
+        <a class="btn btn-primary" href="#calculadora">Cotiza tu vehículo</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1547,6 +1578,15 @@
     if (modelCmp !== 0) return modelCmp;
     return a[1].localeCompare(b[1], 'es', { sensitivity: 'base' });
   });
+
+  // Mantiene exactos los números de la franja promocional del inicio
+  (function updatePromoCounts(){
+    const brandsEl = document.getElementById('promo-brands');
+    const modelsEl = document.getElementById('promo-models');
+    if (!brandsEl || !modelsEl) return;
+    brandsEl.textContent = new Set(CATALOG.map(r => r[0])).size;
+    modelsEl.textContent = CATALOG.length;
+  })();
 
   const catSearch = document.getElementById('cat-search');
   const catTipo = document.getElementById('cat-tipo');
