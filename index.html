@@ -765,9 +765,9 @@
     <div class="gal-tabs reveal" role="tablist" aria-label="Categoría de galería">
       <button type="button" class="gal-tab active" data-gal="puerto" role="tab" aria-selected="true">Vehículos en los puertos de Cuba y EE.UU.</button>
       <button type="button" class="gal-tab" data-gal="entregas" role="tab" aria-selected="false">Entregas reales a nuestros clientes</button>
-      <button type="button" class="gal-tab" data-gal="video" role="tab" aria-selected="false">Video del proceso</button>
     </div>
 
+    <div class="video-grid reveal" id="gal-videos" hidden></div>
     <div class="gal-grid reveal" id="gal-grid"></div>
     <button type="button" class="btn btn-ghost gal-more" id="gal-more" hidden>Ver más entregas</button>
   </div>
@@ -932,6 +932,7 @@
   (function galeria(){
     const grid = document.getElementById('gal-grid');
     if (!grid) return;
+    const videosBox = document.getElementById('gal-videos');
     const tabs = document.querySelectorAll('.gal-tab');
     const moreBtn = document.getElementById('gal-more');
     const PAGE_SIZE = 12;
@@ -1012,22 +1013,17 @@
       { src: 'video/proceso-2.mp4', poster: 'img/video-posters/proceso-2.jpg' },
       { src: 'video/proceso-3.mp4', poster: 'img/video-posters/proceso-3.jpg' },
     ];
-    const SETS = { entregas: ENTREGAS, puerto: PUERTO, video: VIDEOS };
+    const SETS = { entregas: ENTREGAS, puerto: PUERTO };
 
     let activeSet = 'puerto';
     let shown = PAGE_SIZE;
 
     function renderGrid(){
-      grid.classList.toggle('video-grid', activeSet === 'video');
-      grid.classList.toggle('gal-grid', activeSet !== 'video');
-
-      if (activeSet === 'video') {
-        grid.innerHTML = VIDEOS.map(v =>
-          `<div class="video-card"><video controls preload="none" poster="${v.poster}"><source src="${v.src}" type="video/mp4"></video></div>`
-        ).join('');
-        moreBtn.hidden = true;
-        return;
-      }
+      const showVideos = activeSet === 'entregas';
+      videosBox.hidden = !showVideos;
+      videosBox.innerHTML = showVideos ? VIDEOS.map(v =>
+        `<div class="video-card"><video controls preload="none" poster="${v.poster}"><source src="${v.src}" type="video/mp4"></video></div>`
+      ).join('') : '';
 
       const data = SETS[activeSet];
       const slice = data.slice(0, shown);
