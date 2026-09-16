@@ -176,15 +176,20 @@
   .hero-media::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,22,32,.55) 0%, rgba(7,22,32,.72) 45%, rgba(7,22,32,.96) 100%)}
   .hero-inner{position:relative; padding:72px 0 56px}
   @media (min-width:720px){ .hero-inner{padding:110px 0 76px} }
-  .hero .eyebrow{color:var(--amber-strong)}
+  .hero .eyebrow{color:#F7C169}
   .hero h1{font-size:clamp(2.5rem, 8vw, 5.2rem); font-weight:900; margin-top:10px; color:#fff}
-  .hero h1 em{font-style:normal; color:var(--amber-strong)}
+  .hero h1 em{font-style:normal; color:#F7C169}
   .hero p.lead{color:#C9DBE0; font-size:1.05rem; margin-top:18px; max-width:56ch}
   .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
   .hero-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.14); border-radius:4px; margin-top:52px; overflow:hidden}
   @media (min-width:640px){ .hero-stats{grid-template-columns:repeat(4,1fr)} }
-  .hero-stat{background:rgba(9,26,37,.55); padding:18px 20px}
-  .hero-stat b{display:block; font-family:'Big Shoulders Display'; font-size:2.1rem; font-weight:800; color:#fff}
+  .hero-stat{position:relative; background:rgba(9,26,37,.55); padding:20px 20px 18px; overflow:hidden; transition:background .35s ease, transform .35s ease}
+  .hero-stat::before{content:''; position:absolute; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, #7ADCF5, #F7C169); transition:width .8s cubic-bezier(.2,.8,.2,1) .15s}
+  .hero-stat.in::before{width:100%}
+  .hero-stat:hover{background:rgba(122,220,245,.16); transform:translateY(-3px)}
+  .hero-stat b{display:block; font-family:'Big Shoulders Display'; font-size:2.1rem; font-weight:800; color:#fff; transition:color .35s ease}
+  .hero-stat:nth-child(odd) b{color:#7ADCF5}
+  .hero-stat:nth-child(even) b{color:#F7C169}
   .hero-stat span{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; color:#9FC1C9; text-transform:uppercase}
 
   /* ============ SECTION HEADS ============ */
@@ -451,11 +456,11 @@
       </a>
       <a class="btn btn-ghost" href="#grupo" style="color:#fff; border-color:rgba(255,255,255,.5)">Conoce el grupo ↓</a>
     </div>
-    <div class="hero-stats reveal">
-      <div class="hero-stat"><b>2018</b><span>Inicio de operaciones</span></div>
-      <div class="hero-stat"><b>2023</b><span>Nace la división Cuba</span></div>
-      <div class="hero-stat"><b>5</b><span>Empresas del grupo</span></div>
-      <div class="hero-stat"><b style="font-size:1.15rem">EE. UU. · EUROPA · CUBA</b><span>Nuestra conexión comercial</span></div>
+    <div class="hero-stats">
+      <div class="hero-stat reveal"><b data-count="2018">2018</b><span>Inicio de operaciones</span></div>
+      <div class="hero-stat reveal"><b data-count="2023">2023</b><span>Nace la división Cuba</span></div>
+      <div class="hero-stat reveal"><b data-count="5">5</b><span>Empresas del grupo</span></div>
+      <div class="hero-stat reveal"><b style="font-size:1.15rem">EE. UU. · EUROPA · CUBA</b><span>Nuestra conexión comercial</span></div>
     </div>
   </div>
 </section>
@@ -1139,13 +1144,36 @@
     window.scrollTo(0, 0);
     const revealEls = document.querySelectorAll(`[data-page="${page}"] .reveal, [data-page="${page}"] .step`);
     if (reduceMotion) {
-      revealEls.forEach(el => el.classList.add('in'));
+      revealEls.forEach(el => {
+        el.classList.add('in');
+        const counter = el.querySelector('[data-count]');
+        if (counter) counter.textContent = counter.dataset.count;
+      });
     } else {
       revealEls.forEach(el => el.classList.remove('in'));
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        revealEls.forEach((el, i) => setTimeout(() => el.classList.add('in'), Math.min(i * 35, 300)));
+        revealEls.forEach((el, i) => setTimeout(() => {
+          el.classList.add('in');
+          animateCount(el);
+        }, Math.min(i * 35, 300)));
       }));
     }
+  }
+
+  function animateCount(el){
+    const counter = el.querySelector('[data-count]');
+    if (!counter) return;
+    const target = parseInt(counter.dataset.count, 10);
+    const dur = 900;
+    const start = performance.now();
+    counter.textContent = '0';
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      counter.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
   function routeFromHash(){ showPage((location.hash || '#inicio').slice(1)); }
