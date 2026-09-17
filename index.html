@@ -221,13 +221,13 @@
   .division-flagship .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
   .division-flagship .tag-row span{font-family:'IBM Plex Mono'; font-size:.68rem; color:#D3E2E5; border:1px solid rgba(255,255,255,.25); border-radius:2px; padding:4px 9px}
   .divisions-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+  .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
   .division:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(12,34,51,.1); border-color:var(--teal)}
   .division .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute); letter-spacing:.08em}
   .division h3{font-size:1.35rem; color:var(--ink)}
-  .division .role{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-strong); background:var(--teal-soft); padding:4px 9px; border-radius:2px; align-self:flex-start}
+  .division .role{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-strong); background:var(--teal-soft); padding:4px 9px; border-radius:2px; align-self:center}
   .division p{font-size:.88rem; margin:0}
-  .division .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px}
+  .division .tag-row{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:auto; padding-top:6px}
   .division .tag-row span{font-family:'IBM Plex Mono'; font-size:.64rem; color:var(--ink-mute); border:1px solid var(--line); border-radius:2px; padding:3px 7px}
   .division.soon{opacity:.8}
   .division.soon .role{background:var(--teal-soft); color:var(--teal-strong)}
@@ -546,7 +546,7 @@
     </div>
     <div class="division-flagship reveal">
       <img class="division-logo" src="img/logo-macias-white.png" alt="Macias Logistics">
-      <span class="code">EMPRESA · 01 · COMPAÑÍA PRINCIPAL · ESTADOS UNIDOS</span>
+      <span class="code">COMPAÑÍA PRINCIPAL · ESTADOS UNIDOS</span>
       <h3>Macias Logistics LLC</h3>
       <p>Desde Estados Unidos, encabezamos el grupo y gestionamos la exportación de vehículos y maquinaria hacia Cuba. Autos, vehículos utilitarios, camiones, autobuses y equipos agrícolas para distintas necesidades personales y comerciales. Te acompañamos en la coordinación de tu operación, con atención directa y un equipo presente en Estados Unidos y Cuba.</p>
       <div class="tag-row"><span>Compañía principal</span><span>Vehículos y maquinaria</span><span>Exportación a Cuba</span><span>Atención directa</span></div>
@@ -555,7 +555,7 @@
       <div class="division reveal">
         <img class="division-logo brand-logo-light" src="img/logo-ola.png" alt="Ola International Trading">
         <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" alt="Ola International Trading">
-        <span class="code">EMPRESA · 02 · COMERCIO INTERNACIONAL</span>
+        <span class="code">COMERCIO INTERNACIONAL</span>
         <h3>Ola International Trading</h3>
         <p>Ampliamos las opciones de abastecimiento del grupo a través del comercio internacional, principalmente desde Europa. Conectamos proveedores y oportunidades de compra con las necesidades de nuestros clientes, sumando nuevos mercados a nuestra actividad comercial con Cuba y Estados Unidos.</p>
         <div class="tag-row"><span>Conexión con Europa</span><span>Comercio internacional</span><span>Abastecimiento</span></div>
@@ -563,14 +563,14 @@
       <div class="division reveal">
         <img class="division-logo brand-logo-light" src="img/logo-henex.png" alt="Henex Worldwide Group">
         <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" alt="Henex Worldwide Group">
-        <span class="code">EMPRESA · 03 · OPERACIONES EN CUBA</span>
+        <span class="code">OPERACIONES EN CUBA</span>
         <h3>Henex Worldwide Group</h3>
         <p>Somos la filial que dirige y coordina la operación del grupo en Cuba. Desde La Habana, nos encargamos de las operaciones locales y de dar continuidad al trabajo de nuestras empresas en destino. Una presencia propia para conectar la gestión internacional con lo que ocurre en la isla.</p>
         <div class="tag-row"><span>Operación en Cuba</span><span>Equipo en La Habana</span><span>Coordinación local</span></div>
       </div>
       <div class="division soon reveal">
         <img class="division-logo" src="img/logo-metele.png" alt="Metele">
-        <span class="code">EMPRESA · 04 · COMERCIO ELECTRÓNICO</span>
+        <span class="code">COMERCIO ELECTRÓNICO</span>
         <span class="role">En desarrollo</span>
         <h3>Metele</h3>
         <p>Estamos construyendo un marketplace para Cuba: un espacio de compra que reunirá distintos vendedores y una amplia variedad de productos en una sola plataforma. Más opciones en un mismo lugar para conectar lo que buscas con quienes lo ofrecen.</p>
@@ -578,7 +578,7 @@
       </div>
       <div class="division reveal">
         <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" alt="Prime Truck USA"></span>
-        <span class="code">EMPRESA · 05 · PIEZAS Y REPUESTOS</span>
+        <span class="code">PIEZAS Y REPUESTOS</span>
         <h3>Prime Truck USA</h3>
         <p>Un marketplace especializado en piezas para camiones y vehículos pesados, con stock real y almacenes en Cuba. Reunimos en una plataforma repuestos para el mantenimiento y la reparación de los vehículos que mueven tu negocio, con existencias físicas en la isla.</p>
         <div class="tag-row"><span>Piezas para camiones</span><span>Stock real</span><span>Almacenes en Cuba</span></div>
