@@ -391,11 +391,12 @@
   .contact-row svg{flex:none; color:var(--teal-strong); margin-top:2px}
   .contact-row b{display:block; font-size:.92rem}
   .contact-row span{font-size:.85rem; color:var(--ink-mute)}
-  .cuba-support{position:relative; overflow:hidden; background:var(--navy); color:#fff; border-radius:6px; padding:32px 40px; margin:32px auto 0; max-width:920px; display:flex; gap:20px; align-items:flex-start}
+  .cuba-support{position:relative; overflow:hidden; background:var(--navy); color:#fff; border-radius:6px; padding:36px 40px; margin-top:32px; display:flex; justify-content:center; gap:20px; align-items:flex-start}
   @media (max-width:600px){ .cuba-support{flex-direction:column; padding:26px 22px} }
   .cuba-support::before{content:''; position:absolute; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, #7ADCF5, #F7C169); transition:width .9s cubic-bezier(.2,.8,.2,1) .15s}
   .cuba-support.in::before{width:100%}
   .cuba-support-icon-wrap{position:relative; flex:none; display:inline-flex; margin-top:2px}
+  .cuba-support-body{max-width:760px}
   .cuba-support-icon-wrap::before{content:''; position:absolute; inset:-9px; border-radius:50%; border:1.5px solid #F7C169; animation:cubaPing 2.6s ease-out infinite}
   .cuba-support-icon{position:relative; flex:none; color:#F7C169; display:block}
   @media (prefers-reduced-motion: reduce){ .cuba-support-icon-wrap::before{animation:none} }
@@ -406,7 +407,7 @@
   .cuba-support-item{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:9px 16px; font-size:.84rem; font-weight:600; color:#fff; text-decoration:none; transition:background .2s ease, transform .2s ease, border-color .2s ease}
   .cuba-support-item:hover{background:rgba(255,255,255,.16); border-color:rgba(247,193,105,.55); transform:translateY(-2px)}
   .cuba-support-item svg{flex:none}
-  .cuba-support-hours{font-family:'IBM Plex Mono'; font-size:.74rem; color:#9FC1C9; margin-top:14px}
+  .cuba-support-hours{font-family:'IBM Plex Mono'; font-size:.74rem; color:#9FC1C9; margin-top:14px; line-height:1.7}
 
   /* ============ FOOTER ============ */
   footer{background:var(--navy-2); color:#B9CDD3; padding:56px 0 26px}
@@ -1059,7 +1060,7 @@
       <div class="cuba-support-icon-wrap">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
-      <div>
+      <div class="cuba-support-body">
         <h3>¿Tu vehículo va camino a Cuba o ya llegó? Soporte en Cuba</h3>
         <p>Si tu vehículo ya salió hacia Cuba o ya está en la isla, nuestro equipo en La Habana te acompaña durante todo el proceso de extracción y entrega. Te damos seguimiento real de tu operación y coordinamos contigo cada paso hasta que lo recibas — comunícate directamente con nuestro equipo en Cuba por teléfono, WhatsApp o correo electrónico. Queremos que te sientas acompañado en cada etapa, con atención directa y respuestas claras hasta que tu vehículo llegue a tus manos.</p>
         <div class="cuba-support-rows">
@@ -1076,7 +1077,7 @@
             info@connectingcuba.com
           </a>
         </div>
-        <p class="cuba-support-hours">Lunes a viernes: 9:00 a.m. – 5:00 p.m. · Sábados: 9:00 a.m. – 3:00 p.m.</p>
+        <p class="cuba-support-hours">Lunes a viernes: 9:00 a.m. – 5:00 p.m.<br>Sábados: 9:00 a.m. – 3:00 p.m.</p>
       </div>
     </div>
   </div>
