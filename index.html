@@ -392,7 +392,20 @@
   @media (max-width:600px){ .cuba-support{flex-direction:column} }
   .cuba-support::before{content:''; position:absolute; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, #7ADCF5, #F7C169); transition:width .9s cubic-bezier(.2,.8,.2,1) .15s}
   .cuba-support.in::before{width:100%}
-  .cuba-support-icon-wrap{position:relative; flex:none; display:inline-flex; margin-top:2px}
+  .cuba-support-icon-wrap{flex:none; display:inline-flex; margin-top:2px}
+  .cuba-support-icon-wrap, .cuba-support > div{position:relative; z-index:1}
+  .cuba-map{position:absolute; right:-10px; bottom:-16px; width:360px; max-width:60%; height:auto; opacity:0; pointer-events:none; z-index:0}
+  .cuba-map path, .cuba-map ellipse{fill:none; stroke:#7ADCF5; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1500; stroke-dashoffset:1500}
+  .cuba-support.in .cuba-map{animation:cubaMapIn 1s ease .3s forwards, cubaMapBreathe 5s ease-in-out 2.3s infinite}
+  .cuba-support.in .cuba-map path, .cuba-support.in .cuba-map ellipse{animation:cubaMapDraw 2.4s ease-out .3s forwards}
+  @keyframes cubaMapIn{to{opacity:.5}}
+  @keyframes cubaMapBreathe{0%,100%{opacity:.5} 50%{opacity:.28}}
+  @keyframes cubaMapDraw{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion: reduce){
+    .cuba-support.in .cuba-map{animation:none; opacity:.4}
+    .cuba-support.in .cuba-map path, .cuba-support.in .cuba-map ellipse{animation:none; stroke-dashoffset:0}
+  }
+  @media (max-width:600px){ .cuba-map{width:220px} }
   .cuba-support-icon-wrap::before{content:''; position:absolute; inset:-9px; border-radius:50%; border:1.5px solid #F7C169; animation:cubaPing 2.6s ease-out infinite}
   .cuba-support-icon{position:relative; flex:none; color:#F7C169; display:block}
   @media (prefers-reduced-motion: reduce){ .cuba-support-icon-wrap::before{animation:none} }
@@ -1056,6 +1069,10 @@
     </div>
 
     <div class="cuba-support reveal">
+      <svg class="cuba-map" viewBox="0 0 600 200" aria-hidden="true">
+        <path d="M45,95 C65,72 105,58 155,60 C195,62 205,78 235,80 C265,82 275,66 305,63 C345,59 365,72 395,70 C425,68 445,50 475,55 C505,60 525,75 540,92 C525,103 500,108 475,102 C455,98 435,107 405,102 C375,97 350,110 320,107 C290,104 275,117 245,113 C215,110 200,121 170,116 C140,111 115,119 90,111 C65,103 50,105 45,95 Z"/>
+        <ellipse cx="62" cy="138" rx="16" ry="9"/>
+      </svg>
       <div class="cuba-support-icon-wrap">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
