@@ -382,6 +382,8 @@
     font-family:'IBM Plex Sans'; font-size:.95rem; padding:12px 13px; border:1px solid var(--line); border-radius:3px; background:var(--surface); color:var(--ink);
   }
   .field textarea{resize:vertical; min-height:110px}
+  #f-msg{min-height:230px}
+  #contacto-form{background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:26px}
   .contact-card{background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; gap:18px; justify-content:center}
   @media (max-width:860px){ .contact-card{height:auto} }
   .contact-intro{font-size:.92rem; color:var(--ink-mute); line-height:1.6; padding-bottom:4px; border-bottom:1px solid var(--line)}
@@ -1033,15 +1035,7 @@
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="name" type="text" placeholder="Tu nombre completo"></div>
         <div class="field"><label for="f-email">Correo electrónico*</label><input id="f-email" name="email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
-        <div class="field">
-          <label for="f-div">¿A qué empresa te diriges?</label>
-          <select id="f-div" name="empresa">
-            <option>Macias Logistics — envío de vehículos</option>
-            <option>Ola International Trading — comercio internacional</option>
-            <option>Henex Worldwide Group — operaciones en Cuba</option>
-            <option>Metele / Prime Truck USA — información general</option>
-          </select>
-        </div>
+        <div class="field"><label for="f-subject">Asunto</label><input id="f-subject" name="asunto" type="text"></div>
         <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" placeholder="Marca, modelo y año del vehículo, y ciudad de destino en Cuba"></textarea></div>
         <button class="btn btn-primary" type="submit" style="width:100%">Enviar solicitud</button>
         <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos por WhatsApp o correo en breve.</p>
