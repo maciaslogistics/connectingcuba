@@ -1164,7 +1164,7 @@
     const moreBtn = document.getElementById('gal-more');
     const PAGE_SIZE = 12;
 
-    const ENTREGAS = Array.from({ length: 87 }, (_, i) => {
+    const ENTREGAS = Array.from({ length: 90 }, (_, i) => {
       const n = String(i + 1).padStart(2, '0');
       return { src: `img/entregas/entrega-${n}.jpg`, alt: `Cliente recibiendo su vehículo en Cuba — entrega ${i + 1}` };
     });
@@ -1249,6 +1249,8 @@
       'Detalle del frente de un camión Freightliner en el puerto',
       'Vans Ford Transit alineadas en el puerto',
       'Camiones y vehículos listos para embarcar en el puerto',
+      'Guagua escolar siendo cargada con grúa en la cubierta del buque',
+      'Camión y guagua escolar siendo cargados con grúa en el buque',
     ];
     const PUERTO = PUERTO_ALT.map((alt, i) => {
       const n = String(i + 1).padStart(2, '0');
