@@ -274,17 +274,21 @@
   .configurator{display:grid; gap:32px; grid-template-columns:1fr 340px; align-items:start}
   @media (max-width:900px){ .configurator{grid-template-columns:1fr} }
   .config-block{margin-bottom:32px}
+  fieldset.config-block{border:0; padding:0; margin:0 0 32px; min-width:0}
+  legend.config-label{padding:0}
   .config-label{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mute); display:block; margin-bottom:14px}
   .tier-cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-  .tier-card{background:var(--surface); border:1.5px solid var(--line); border-radius:6px; padding:22px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:6px; font-family:inherit; color:var(--ink); transition:border-color .15s ease, transform .15s ease}
+  .tier-card{position:relative; background:var(--surface); border:1.5px solid var(--line); border-radius:6px; padding:22px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:6px; font-family:inherit; color:var(--ink); transition:border-color .15s ease, transform .15s ease}
   .tier-card:hover{border-color:var(--teal); transform:translateY(-2px)}
   .tier-card.active{border-color:var(--amber); background:var(--teal-soft)}
+  .tier-card:has(input:focus-visible){outline:2px solid var(--teal); outline-offset:2px}
   .tier-card-icon{font-size:1.8rem}
   .tier-card b{font-family:'Big Shoulders Display'; font-size:1.2rem; text-transform:uppercase}
   .tier-card span{font-size:.82rem; color:var(--ink-mute)}
   .tier-card-price{font-family:'IBM Plex Mono'; font-weight:700; color:var(--ink); margin-top:6px}
   .tier-card-price em{font-style:normal; font-weight:400; color:var(--ink-mute); font-size:.78rem}
   .config-row{display:flex; flex-wrap:wrap; gap:12px}
+  .cat-select:disabled{opacity:.55; cursor:not-allowed}
   .included-toggle{background:none; border:1px solid var(--line); border-radius:3px; padding:10px 16px; font-family:'IBM Plex Sans'; font-size:.86rem; font-weight:600; color:var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:8px}
   .included-list{margin:12px 0 0; padding-left:20px; color:var(--ink-mute); font-size:.88rem; line-height:1.8}
   .configurator-summary{background:var(--navy); color:#fff; border-radius:6px; padding:26px; position:sticky; top:90px}
@@ -293,11 +297,14 @@
   .summary-row{display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1); font-size:.85rem; color:#C9DBE0}
   .summary-row .strike{text-decoration:line-through; opacity:.6}
   .summary-row.highlight{color:#fff; font-weight:700}
-  .summary-row.save span:last-child{color:var(--amber-strong); font-weight:700}
-  .summary-total{display:flex; justify-content:space-between; align-items:baseline; padding:16px 0 4px; font-family:'Big Shoulders Display'; font-size:1.5rem; color:#fff}
+  .summary-row.save span:last-child{color:#F7C169; font-weight:700}
+  .summary-total{display:flex; flex-wrap:wrap; column-gap:12px; justify-content:space-between; align-items:baseline; padding:16px 0 4px; font-family:'Big Shoulders Display'; font-size:1.5rem; color:#fff}
+  .summary-total > span:first-child{white-space:nowrap}
+  .summary-total > span:last-child{margin-left:auto; text-align:right}
   .summary-disclaimer{font-size:.72rem; color:#9FC1C9; margin-top:6px; line-height:1.5}
   .summary-ctas{display:flex; flex-direction:column; gap:10px; margin-top:18px}
   .summary-ctas .btn-ghost{color:#fff; border-color:rgba(255,255,255,.4)}
+  .summary-ctas .btn-ghost:hover{background:rgba(255,255,255,.1); border-color:#fff}
   .cfg-contact{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:32px; margin-top:48px}
   .cfg-contact-form{display:grid; gap:0; margin-top:20px; max-width:480px}
   /* ============ PREGUNTAS FRECUENTES ============ */
@@ -327,11 +334,11 @@
   .step:hover .step-num, .step.in .step-num{color:var(--amber)}
   .step h3{font-size:1.15rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
   .step p{margin-top:6px; font-size:.92rem}
-  .step-list{margin:8px 0; padding-left:18px; color:var(--ink-mute); font-size:.92rem; line-height:1.7}
+  .step-list{margin:8px 0; padding-left:18px; color:var(--ink-mute); font-size:.92rem; line-height:1.7; max-width:62ch}
   .step-list li{margin-bottom:2px}
   .requirements{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:28px; margin-top:44px}
   .requirements h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.1rem; font-weight:700; color:var(--ink)}
-  .requirements ul{margin:14px 0 20px; padding-left:20px; color:var(--ink-mute); font-size:.9rem; line-height:1.8}
+  .requirements ul{margin:14px 0 20px; padding-left:20px; color:var(--ink-mute); font-size:.9rem; line-height:1.8; max-width:62ch}
   .requirements li{margin-bottom:2px}
   .fase3-note{font-size:.88rem; margin-top:20px}
   .fase3-note a{color:var(--teal-strong); font-weight:600; text-decoration:underline}
@@ -353,6 +360,13 @@
   .catalog-table td.t-marca{font-weight:700; white-space:nowrap; color:var(--ink)}
   .catalog-table td.t-tipo{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-mute); white-space:nowrap}
   .catalog-empty{padding:32px 16px; text-align:center; color:var(--ink-mute); font-size:.9rem}
+  .brand-pill:focus-visible{outline-offset:-2px}
+  @media (min-width:768px){ .brand-pills{flex-wrap:wrap; overflow-x:visible} }
+  @media (max-width:480px){
+    .catalog-controls .cat-select{flex:1 1 100%}
+    .catalog-table thead th, .catalog-table tbody td{padding-left:8px; padding-right:8px}
+    .catalog-table tbody td:nth-child(2){overflow-wrap:anywhere}
+  }
 
   /* ============ TRAILERS ============ */
   .trailer-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
@@ -657,7 +671,7 @@
         <p>El pago de los impuestos se realiza en Cuba mediante la tarjeta Clásica, conforme a los requisitos aplicables a la operación.</p>
       </div></div>
     </div>
-    <p class="fase3-note reveal">¿Tu vehículo ya está en Cuba? Habla con nuestro equipo en La Habana para conocer el estado de la extracción y coordinar los próximos pasos. <a href="#contacto">Contactar al equipo en Cuba</a>.</p>
+    <p class="fase3-note reveal">¿Tu vehículo ya está en Cuba? Habla con nuestro equipo en La Habana para conocer el estado de la extracción y coordinar los próximos pasos. <a href="#soporte-cuba">Contactar al equipo en Cuba</a>.</p>
 
     <div class="requirements reveal">
       <h3>Lo que necesitas para comenzar</h3>
@@ -669,7 +683,7 @@
         <li>Información personal requerida para la contratación, que nuestro equipo te indicará según tu operación.</li>
       </ul>
       <p>Antes de coordinar el ingreso al puerto, debemos completar la contratación y confirmar que el vehículo está aprobado para el envío a Cuba.</p>
-      <a class="btn btn-ghost" href="https://wa.me/17865200009" target="_blank" rel="noopener">Consultar mi documentación</a>
+      <a class="btn btn-ghost" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer"><span>Consultar mi documentación<span class="sr-only"> por WhatsApp (se abre en una pestaña nueva)</span></span></a>
     </div>
 
     <div class="requirements reveal">
@@ -695,14 +709,481 @@
       <select id="cat-tipo" class="cat-select" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select>
     </div>
     <div class="brand-pills reveal" id="cat-brands" role="group" aria-label="Filtrar por marca">
-      <button class="brand-pill active" data-marca="">Todas</button>
+      <button type="button" class="brand-pill active" data-marca="" aria-pressed="true">Todas</button>
     </div>
-    <p class="catalog-summary reveal"><span id="cat-count">0 modelos</span> · <span id="cat-brandcount">0 marcas</span></p>
+    <p class="catalog-summary reveal" aria-live="polite"><span id="cat-count">465 modelos</span> · <span id="cat-brandcount">23 marcas</span></p>
 
     <div class="catalog-table-wrap reveal">
       <table class="catalog-table">
         <thead><tr><th>Marca</th><th>Modelo</th><th>Categoría</th></tr></thead>
-        <tbody id="cat-tbody"></tbody>
+        <tbody id="cat-tbody">
+          <!-- Fuente única del catálogo CEMA: una fila por modelo (marca · modelo · categoría). El JS lee estas filas. -->
+          <tr><td class="t-marca">AUDI</td><td>A4 / S4</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A4 Allroad</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A5 / S5 / RS 5</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A6 / S6</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A6 Allroad</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A6 Sportback e-tron</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A7 / S7 / RS 7</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>A8 / A8 L / S8</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>e-tron GT</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>e-tron S</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>e-tron Sportback</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q3</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q4 e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q4 Sportback e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q5</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q5 Sportback</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q6 e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q6 Sportback e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q7</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q8</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q8 e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>Q8 Sportback e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>R8</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>RS 6 Avant</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>RS e-tron GT</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>RS Q8</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>S e-tron GT</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>S6 Sportback e-tron</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ5</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ6 e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ6 Sportback e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ7</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ8</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>SQ8 e-tron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">AUDI</td><td>TT / TTS / TT RS</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>i4</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>i5</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>i7</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>i8</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>iX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>iX1</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>iX2</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>iX3</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 1</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 2 Active Tourer</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 2 Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 2 Gran Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 3 Sedán</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 3 Touring</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 4 Cabrio</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 4 Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 4 Gran Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 5 Sedán</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 5 Touring</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 6 Gran Turismo</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 7</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 8 Cabrio</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 8 Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Serie 8 Gran Coupé</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X1</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X2</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X3</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X4</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X5</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X6</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>X7</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>XM</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BMW</td><td>Z4 Roadster</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Atto 2 EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Atto 3 EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Atto 3 EVO</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Dolphin EV</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Dolphin Mini</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Dolphin Surf EV</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Han EV</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride 6F</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride 8TT</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride 8Y</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride Achiever</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride Creator</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride Dreamer</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride K7M</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride K7MER</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride K8M</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride K9MD</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Ride K11M</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Seal EV</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Seal U EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Sealion 7 EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Tang EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Yangwang U8</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Yangwang U9 Xtreme</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Yuan Plus EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">BYD</td><td>Yuan Pro EV</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">CHEETAH</td><td>Flatbed 48"</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">CHEETAH</td><td>Flatbed 48" Extensible</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>108SD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>108SD Plus</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>114SD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>114SD Plus</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>122SD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>C2</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>Cascadia</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>Coronado SD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>EconicSD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>M2 (106)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>M2 (112)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>MT45</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>MT50e</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>MT55</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>S2</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>S2C</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>S2RV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>Sprinter 2500</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>Sprinter 3500</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">FREIGHTLINER</td><td>Sprinter 4500</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">HINO</td><td>155 J05E-TP (motor diésel)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">HINO</td><td>268 J08E-WU (motor diésel)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Accord</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>City</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Civic</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>CR-V (híbrido)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>CR-V (motor gasolina)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>HR-V</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Odyssey (motor gasolina)</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Passport (motor gasolina — EX-L, TrailSport, Black Edition)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Pilot</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Prologue (motor eléctrico)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HONDA</td><td>Ridgeline (motor gasolina)</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>20 Slider Tandem (fijo)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>40 Gooseneck (fijo)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>40 Lightweight Gooseneck (fijo)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>40-45 Extendable</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>40-45 Extendable HDG</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>53 Gooseneck (fijo)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Accent (CRDi diésel)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Accent (Gamma GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Accent (Gamma II MPi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Accent (MPi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Accent (T-GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Composite (seco)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Composite XT (seco)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Elantra (CRDi diésel)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Elantra (GDi Hybrid)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Elantra (MPi Gamma)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Elantra (T-GDi Gamma Turbo)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Elantra (T-GDi Theta II)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Extendable 40 (reacondicionado)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Lambda II GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Lambda II MPi/GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (R II CRDi diésel)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Smartstream GDi V6)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Smartstream GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (T-GDi Hybrid)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Theta II GDi)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Grandeur (Theta II MPi Hybrid)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>H Y-Cube (seco)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Ioniq 5 (AWD)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Ioniq 5 (RWD)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Ioniq 5 N</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Ioniq 6 (AWD)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Ioniq 6 (RWD)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Kona (eléctrico)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Kona (GDi Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Kona (MPi)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Kona (T-GDi)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Latitude (flatbed)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Original (seco)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Palisade (CRDi I5 diésel)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Palisade (GDi Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Palisade (GDi V6 Smartstream)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Palisade (GDi V6)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Palisade (MPi V6)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Cruz (I4 atmosférico)</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Cruz (I4 turbo)</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Fe (CRDi diésel)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Fe (Smartstream G2.5T turbo)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Fe (T-GDi Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Santa Fe (T-GDi Plug-in Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tandem 6 (extensible)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tandem Spread 12 (extensible)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Termotech (refrigerado)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tri-Axle (fijo)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tri-Axle 12 (extensible)</td><td class="t-tipo">Chasis</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (CRDi diésel)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (GDi Smartstream)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (MPi atmosférico)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (T-GDi Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (T-GDi Plug-in Hybrid)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Tucson (T-GDi turbo)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Venue (Gamma MPi Smartstream)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Venue (Kappa II MPi atmosférico)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Venue (Kappa II T-GDi turbo)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">HYUNDAI</td><td>Venue (U II CRDi diésel)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>Q50</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>Q60</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>Q70</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>Q70L</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX30</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX50</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX55</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX60</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX70</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INFINITI</td><td>QX80</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>4300</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>4400</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>CV Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>CV515</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>DuraStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>eMV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>eMV Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HV Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HV507</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HV513</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HV607</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HV613</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HX Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HX520</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HX615</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>HX620</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>LoneStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>LT Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>LT625</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>MV Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>MV60H</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>MV607</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>PayStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>ProStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>RH Series</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>RH613</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>TerraStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>TranStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">INTERNATIONAL</td><td>WorkStar</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>FTR</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>FVR</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>FVR Derate</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NPR</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NPR-HD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NPR-XD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NQR</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NRR</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>NRR EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">ISUZU</td><td>Reach</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>963</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>C500</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>C580</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>K270</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>K270E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>K370</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>K370E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T170</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T180</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T270</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T280</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T280E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T370</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T380</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T380E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T440</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T470</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T480</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T480E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T660</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T680 (motor diésel)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T700</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T800</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T800W</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T880</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T880E</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>T880S</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W900</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W900 Legacy Edition</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W900B</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W900L</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W900S</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">KENWORTH</td><td>W990</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">LAND ROVER</td><td>Range Rover</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LAND ROVER</td><td>Range Rover Evoque</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LAND ROVER</td><td>Range Rover Sport</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LAND ROVER</td><td>Range Rover Velar</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>CT 200h</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>ES</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>GS</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>GX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>IS</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>LC</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>LS</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>LX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>NX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>RC</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>RX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>RZ</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>TX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">LEXUS</td><td>UX</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>370Z</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Altima</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Ariya (eléctrico)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Armada</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Frontier</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>GT-R</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Juke</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Kicks</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Leaf (eléctrico)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Maxima</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Murano</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV200 Compact Cargo</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV200 Taxi</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV1500 Cargo</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV2500 HD Cargo</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV3500 HD Cargo</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>NV3500 HD Passenger</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Pathfinder</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Quest</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Rogue Sport</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Sentra</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Titan</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Titan XD</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Versa</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>X-Trail (híbrido)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>X-Trail (motor gasolina)</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">NISSAN</td><td>Z</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>210</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>220</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>220EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>325</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>330</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>337</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>348</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>365</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>367</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>386</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>388</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>389</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>389 Heavy Haul</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>520</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>520EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>535</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>536</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>536EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>537</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>537EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>548</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>548EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>567</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>567EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>579</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>579EV</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>587</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>589</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PETERBILT</td><td>New Model 579</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>718</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>911</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>918 Spyder</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>Cayenne</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>Macan</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>Panamera</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">PORSCHE</td><td>Taycan</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">SHENGDA</td><td>Flatbed 20"</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">SHENGDA</td><td>Flatbed 40"</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>4Runner</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>86</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Avalon</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>bZ Woodland</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>bZ4X / bZ</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>C-HR</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Camry</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Corolla</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Corolla Cross</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Corolla Hatchback</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Corolla iM</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Crown</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Crown Signia</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>GR Corolla</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>GR Supra</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>GR86</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Grand Highlander</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Highlander</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Land Cruiser</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Prius</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Prius c</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Prius Prime</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Prius v</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>RAV4</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>RAV4 Prime / Plug-in Hybrid</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Sequoia</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Sienna</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Tacoma</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Tundra</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Venza</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Yaris Hatchback</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">TOYOTA</td><td>Yaris iA / Yaris Sedán</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">UTILITY</td><td>3000R (refrigerado)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">UTILITY</td><td>4000A (semirremolque)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">UTILITY</td><td>4000AE (semirremolque)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">UTILITY</td><td>4000D-X (seco)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">UTILITY</td><td>4000S (semirremolque)</td><td class="t-tipo">Trailer</td></tr>
+          <tr><td class="t-marca">VOLVO</td><td>VNL (motor diésel)</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">VW</td><td>Amarok</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">VW</td><td>Arteon</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Beetle</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Caddy</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">VW</td><td>California (caravana)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Caravelle</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">VW</td><td>CC</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Constellation</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">VW</td><td>Crafter</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">VW</td><td>Delivery</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">VW</td><td>e-Delivery</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">VW</td><td>e-Golf</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>e-Transporter</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">VW</td><td>e-up!</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>e-Volksbus</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">VW</td><td>Golf</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Grand California (caravana)</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID. Buzz</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID. Unyx</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID.3</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID.4</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID.5</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID.6</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>ID.7</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Jetta / GLI</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Lamando</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Lavida</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Meteor</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">VW</td><td>Multivan</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">VW</td><td>Nivus / Taigo</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Passat</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Phideon</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Santana</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Saveiro</td><td class="t-tipo">Camioneta</td></tr>
+          <tr><td class="t-marca">VW</td><td>Sharan</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">VW</td><td>T-Cross</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>T-Roc</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Taigun</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Talagon</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Taos / Tharu</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Tavendor</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Tayron</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Tera</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Teramont / Atlas</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Tiguan</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Touareg</td><td class="t-tipo">SUV</td></tr>
+          <tr><td class="t-marca">VW</td><td>Touran</td><td class="t-tipo">Microbús</td></tr>
+          <tr><td class="t-marca">VW</td><td>Transporter</td><td class="t-tipo">Panel</td></tr>
+          <tr><td class="t-marca">VW</td><td>Virtus</td><td class="t-tipo">Auto</td></tr>
+          <tr><td class="t-marca">VW</td><td>Volksbus de Fletamento y Carretera</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">VW</td><td>Volksbus Escolar y Rural</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">VW</td><td>Volksbus Urbano</td><td class="t-tipo">Ómnibus</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>47X</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>49X</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>49X Power Hood</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>57X</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4700</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4800</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900EX</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900FA</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900SA</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900TS</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>4900XD</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>5700XE</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>6900TS</td><td class="t-tipo">Camión</td></tr>
+          <tr><td class="t-marca">WESTERN STAR</td><td>6900XD</td><td class="t-tipo">Camión</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -721,47 +1202,53 @@
     <div class="configurator">
       <div class="configurator-main">
 
-        <div class="config-block reveal">
-          <span class="config-label">Paso 1 · Tipo de vehículo</span>
+        <fieldset class="config-block reveal">
+          <legend class="config-label">Paso 1 · Tipo de vehículo</legend>
           <div class="tier-cards" id="tier-cards">
-            <button type="button" class="tier-card" data-tier="regular">
+            <label class="tier-card" data-tier="regular">
+              <input class="sr-only" type="radio" name="cfg-tier" value="regular">
               <span class="tier-card-icon" aria-hidden="true">🚗</span>
               <b>Vehículo regular / turismo</b>
               <span>Autos, SUV, pick up, paneles, microbuses, ómnibus…</span>
               <span class="tier-card-price">$4,500 <em>flete regular</em></span>
-            </button>
-            <button type="button" class="tier-card" data-tier="camion">
+            </label>
+            <label class="tier-card" data-tier="camion">
+              <input class="sr-only" type="radio" name="cfg-tier" value="camion">
               <span class="tier-card-icon" aria-hidden="true">🚛</span>
               <b>Camión / tracto-camión</b>
               <span>Freightliner, Kenworth, Peterbilt, Western Star, Volvo, Hino, International, Isuzu…</span>
               <span class="tier-card-price">$10,500 <em>flete regular</em></span>
-            </button>
-            <button type="button" class="tier-card" data-tier="remolque">
+            </label>
+            <label class="tier-card" data-tier="remolque">
+              <input class="sr-only" type="radio" name="cfg-tier" value="remolque">
               <span class="tier-card-icon" aria-hidden="true">🚚</span>
               <b>Remolques y chasis</b>
               <span>Trailers, semirremolques y chasis nuevos</span>
               <span class="tier-card-price">Cotización <em>personalizada</em></span>
-            </button>
+            </label>
           </div>
-        </div>
+        </fieldset>
 
-        <div class="config-block reveal" id="block-model" hidden>
-          <span class="config-label">Paso 2 · Marca y modelo</span>
+        <fieldset class="config-block reveal" id="block-model" hidden>
+          <legend class="config-label">Paso 2 · Marca y modelo</legend>
           <div class="config-row">
+            <label class="sr-only" for="cfg-marca">Marca</label>
             <select id="cfg-marca" class="cat-select" style="flex:1; min-width:180px"><option value="">Selecciona la marca…</option></select>
+            <label class="sr-only" for="cfg-modelo">Modelo</label>
             <select id="cfg-modelo" class="cat-select" style="flex:1; min-width:180px" disabled><option value="">Selecciona el modelo…</option></select>
           </div>
-        </div>
+        </fieldset>
 
-        <div class="config-block reveal" id="block-year" hidden>
-          <span class="config-label">Paso 3 · Año del vehículo</span>
+        <fieldset class="config-block reveal" id="block-year" hidden>
+          <legend class="config-label">Paso 3 · Año del vehículo</legend>
           <div class="config-row">
+            <label class="sr-only" for="cfg-ano">Año</label>
             <select id="cfg-ano" class="cat-select" style="flex:1; min-width:180px"><option value="">Selecciona el año…</option></select>
           </div>
-        </div>
+        </fieldset>
 
         <div class="config-block reveal" id="block-included" hidden>
-          <button type="button" class="included-toggle" id="included-toggle">¿Qué incluye el flete? <span>▾</span></button>
+          <button type="button" class="included-toggle" id="included-toggle" aria-expanded="false" aria-controls="included-list">¿Qué incluye el flete? <span aria-hidden="true">▾</span></button>
           <ul class="included-list" id="included-list" hidden>
             <li>Transporte marítimo puerto a puerto (Puerto Everglades → Puerto de Mariel)</li>
             <li>Contratos y acreditaciones de exportación</li>
@@ -774,19 +1261,19 @@
 
       </div>
 
-      <aside class="configurator-summary" id="cfg-summary" hidden>
-        <span class="eyebrow" style="color:var(--amber-strong)">Tu cotización</span>
-        <div class="summary-vehicle" id="summary-vehicle">—</div>
+      <aside class="configurator-summary" id="cfg-summary">
+        <span class="eyebrow" style="color:#F7C169">Tu cotización</span>
+        <div class="summary-vehicle" id="summary-vehicle">Selecciona tu vehículo para calcular</div>
         <div class="summary-rows" id="summary-rows">
-          <div class="summary-row"><span>Flete regular</span><span class="strike" id="summary-base">$0</span></div>
-          <div class="summary-row highlight"><span>Flete con promoción</span><span id="summary-online">$0</span></div>
-          <div class="summary-row save"><span>Descuento promoción web</span><span id="summary-save">$0</span></div>
-          <div class="summary-row"><span>Impuestos estimados en Cuba</span><span id="summary-tax">Por confirmar</span></div>
+          <div class="summary-row"><span>Flete regular</span><span id="summary-base">—</span></div>
+          <div class="summary-row highlight"><span>Flete con promoción</span><span id="summary-online">—</span></div>
+          <div class="summary-row save"><span>Descuento promoción web</span><span id="summary-save">—</span></div>
+          <div class="summary-row"><span>Impuestos estimados en Cuba</span><span id="summary-tax">—</span></div>
         </div>
-        <div class="summary-total"><span id="summary-total-label">Total estimado</span><span id="summary-total">$0</span></div>
+        <div class="summary-total" aria-live="polite"><span id="summary-total-label">Total estimado</span><span id="summary-total">—</span></div>
         <p class="summary-disclaimer" id="summary-disclaimer">El descuento se aplica al flete. El flete no incluye seguro — el seguro se contrata por separado. Los impuestos en Cuba se pagan aparte, mediante tarjeta Clásica.</p>
         <div class="summary-ctas">
-          <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17865200009" target="_blank" rel="noopener">Consultar mi envío por WhatsApp</a>
+          <a class="btn btn-primary" id="summary-whatsapp" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer"><span>Consultar mi envío por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></span></a>
           <a class="btn btn-ghost" href="#cfg-contact-anchor">Prefiero que me escriban</a>
         </div>
       </aside>
@@ -803,8 +1290,8 @@
         <div class="field"><label for="cfg-email">Correo electrónico*</label><input id="cfg-email" name="email" type="email" required placeholder="tucorreo@ejemplo.com"></div>
         <div class="field"><label for="cfg-phone">Teléfono / WhatsApp</label><input id="cfg-phone" name="telefono" type="tel" placeholder="+1 786 000 0000"></div>
         <button class="btn btn-primary" type="submit">Solicitar mi cotización con descuento</button>
-        <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos en breve con los siguientes pasos.</p>
-        <p class="err mono" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
+        <p class="sent mono" role="status" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos en breve con los siguientes pasos.</p>
+        <p class="err mono" role="alert" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
       </form>
     </div>
   </div>
@@ -1056,8 +1543,8 @@
         <div class="field"><label for="f-subject">Asunto</label><input id="f-subject" name="asunto" type="text"></div>
         <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" placeholder="Haznos saber en qué te podemos asistir"></textarea></div>
         <button class="btn btn-primary" type="submit" style="width:100%">Enviar solicitud</button>
-        <p class="sent mono" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos por WhatsApp o correo en breve.</p>
-        <p class="err mono" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
+        <p class="sent mono" role="status" hidden style="color:var(--teal-strong); font-size:.82rem; margin-top:12px">✓ Recibido — te contactaremos por WhatsApp o correo en breve.</p>
+        <p class="err mono" role="alert" hidden style="color:#c0392b; font-size:.82rem; margin-top:12px">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>
       </form>
       <div class="contact-card reveal">
         <p class="contact-intro">Nuestro equipo en Estados Unidos te acompaña en cada etapa de tu envío, desde la cotización hasta la coordinación del embarque. Escríbenos por el canal que prefieras y te atenderemos de forma personal.</p>
@@ -1081,7 +1568,7 @@
       </div>
     </div>
 
-    <div class="cuba-support reveal">
+    <div class="cuba-support reveal" id="soporte-cuba">
       <div class="cuba-support-icon-wrap">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
@@ -1479,7 +1966,17 @@
     const host = target && target.closest('[data-page]');
     const page = host ? host.dataset.page : id;
     if (page !== currentPage) showPage(page);
-    if (host) target.scrollIntoView();
+    if (host) {
+      target.classList.add('in');
+      // en carga directa, espera a las fuentes web: al cambiar de fuente se mueve el contenido
+      document.fonts.ready.then(() => scrollToTarget(target));
+    }
+  }
+  // posición real del destino: ignora el desplazamiento temporal de la animación de entrada (.reveal)
+  function scrollToTarget(el){
+    let y = 0;
+    for (let n = el; n; n = n.offsetParent) y += n.offsetTop;
+    window.scrollTo({top: y - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)});
   }
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
@@ -1497,194 +1994,14 @@
   });
 
   // ===== Catálogo de vehículos autorizados (CEMA) =====
-  // [marca, tipo, modelo]
-  const CATALOG = [
-    // AUDI
-    ['AUDI','Auto','A4 / S4'],['AUDI','Auto','A4 Allroad'],['AUDI','Auto','A5 / S5 / RS 5'],
-    ['AUDI','Auto','A6 / S6'],['AUDI','Auto','A6 Allroad'],['AUDI','Auto','RS 6 Avant'],
-    ['AUDI','Auto','A7 / S7 / RS 7'],['AUDI','Auto','A8 / A8 L / S8'],['AUDI','Auto','TT / TTS / TT RS'],
-    ['AUDI','Auto','R8'],['AUDI','SUV','Q3'],['AUDI','SUV','Q5'],['AUDI','SUV','Q5 Sportback'],
-    ['AUDI','SUV','SQ5'],['AUDI','SUV','Q7'],['AUDI','SUV','SQ7'],['AUDI','SUV','Q8'],
-    ['AUDI','SUV','SQ8'],['AUDI','SUV','RS Q8'],['AUDI','SUV','e-tron'],['AUDI','SUV','e-tron Sportback'],
-    ['AUDI','SUV','e-tron S'],['AUDI','SUV','Q4 e-tron'],['AUDI','SUV','Q4 Sportback e-tron'],
-    ['AUDI','SUV','Q6 e-tron'],['AUDI','SUV','SQ6 e-tron'],['AUDI','SUV','Q6 Sportback e-tron'],
-    ['AUDI','SUV','SQ6 Sportback e-tron'],['AUDI','SUV','Q8 e-tron'],['AUDI','SUV','Q8 Sportback e-tron'],
-    ['AUDI','SUV','SQ8 e-tron'],['AUDI','Auto','A6 Sportback e-tron'],['AUDI','Auto','S6 Sportback e-tron'],
-    ['AUDI','Auto','e-tron GT'],['AUDI','Auto','S e-tron GT'],['AUDI','Auto','RS e-tron GT'],
-    // BMW
-    ['BMW','Auto','Serie 1'],['BMW','Auto','Serie 2 Coupé'],['BMW','Auto','Serie 2 Gran Coupé'],
-    ['BMW','Auto','Serie 2 Active Tourer'],['BMW','Auto','Serie 3 Sedán'],['BMW','Auto','Serie 3 Touring'],
-    ['BMW','Auto','Serie 4 Coupé'],['BMW','Auto','Serie 4 Cabrio'],['BMW','Auto','Serie 4 Gran Coupé'],
-    ['BMW','Auto','Serie 5 Sedán'],['BMW','Auto','Serie 5 Touring'],['BMW','Auto','Serie 6 Gran Turismo'],
-    ['BMW','Auto','Serie 7'],['BMW','Auto','Serie 8 Coupé'],['BMW','Auto','Serie 8 Cabrio'],
-    ['BMW','Auto','Serie 8 Gran Coupé'],['BMW','Auto','Z4 Roadster'],['BMW','SUV','X1'],['BMW','SUV','X2'],
-    ['BMW','SUV','X3'],['BMW','SUV','X4'],['BMW','SUV','X5'],['BMW','SUV','X6'],['BMW','SUV','X7'],
-    ['BMW','SUV','XM'],['BMW','Auto','i4'],['BMW','Auto','i5'],['BMW','Auto','i7'],['BMW','SUV','iX1'],
-    ['BMW','SUV','iX2'],['BMW','SUV','iX'],['BMW','Auto','i8'],['BMW','SUV','iX3'],
-    // INFINITI
-    ['INFINITI','Auto','Q50'],['INFINITI','Auto','Q60'],['INFINITI','Auto','Q70'],['INFINITI','Auto','Q70L'],
-    ['INFINITI','SUV','QX30'],['INFINITI','SUV','QX50'],['INFINITI','SUV','QX55'],['INFINITI','SUV','QX60'],
-    ['INFINITI','SUV','QX70'],['INFINITI','SUV','QX80'],
-    // LAND ROVER
-    ['LAND ROVER','SUV','Range Rover'],['LAND ROVER','SUV','Range Rover Sport'],
-    ['LAND ROVER','SUV','Range Rover Velar'],['LAND ROVER','SUV','Range Rover Evoque'],
-    // LEXUS
-    ['LEXUS','Auto','CT 200h'],['LEXUS','Auto','IS'],['LEXUS','Auto','ES'],['LEXUS','Auto','GS'],
-    ['LEXUS','Auto','LS'],['LEXUS','Auto','RC'],['LEXUS','Auto','LC'],['LEXUS','SUV','UX'],
-    ['LEXUS','SUV','NX'],['LEXUS','SUV','RX'],['LEXUS','SUV','TX'],['LEXUS','SUV','GX'],
-    ['LEXUS','SUV','LX'],['LEXUS','SUV','RZ'],
-    // NISSAN
-    ['NISSAN','Auto','Maxima'],['NISSAN','Auto','370Z'],['NISSAN','Auto','Z'],['NISSAN','Auto','GT-R'],
-    ['NISSAN','SUV','Juke'],['NISSAN','SUV','Kicks'],['NISSAN','SUV','Rogue Sport'],
-    ['NISSAN','SUV','Murano'],['NISSAN','SUV','Pathfinder'],['NISSAN','SUV','Armada'],
-    ['NISSAN','Microbús','Quest'],['NISSAN','SUV','Ariya (eléctrico)'],['NISSAN','Auto','Leaf (eléctrico)'],
-    ['NISSAN','Auto','Altima'],['NISSAN','Auto','Sentra'],['NISSAN','Auto','Versa'],
-    ['NISSAN','SUV','X-Trail (híbrido)'],['NISSAN','SUV','X-Trail (motor gasolina)'],
-    ['NISSAN','Camioneta','Frontier'],
-    ['NISSAN','Camioneta','Titan'],['NISSAN','Camioneta','Titan XD'],
-    ['NISSAN','Panel','NV1500 Cargo'],['NISSAN','Panel','NV2500 HD Cargo'],['NISSAN','Panel','NV3500 HD Cargo'],
-    ['NISSAN','Panel','NV3500 HD Passenger'],['NISSAN','Panel','NV200 Compact Cargo'],['NISSAN','Panel','NV200 Taxi'],
-    // PORSCHE
-    ['PORSCHE','Auto','718'],['PORSCHE','Auto','911'],['PORSCHE','Auto','Panamera'],['PORSCHE','SUV','Macan'],
-    ['PORSCHE','SUV','Cayenne'],['PORSCHE','Auto','Taycan'],['PORSCHE','Auto','918 Spyder'],
-    // TOYOTA
-    ['TOYOTA','Auto','Avalon'],['TOYOTA','Auto','Camry'],['TOYOTA','Auto','Corolla'],
-    ['TOYOTA','Auto','Corolla Hatchback'],['TOYOTA','Auto','Corolla iM'],['TOYOTA','Auto','Crown'],
-    ['TOYOTA','Auto','Prius'],['TOYOTA','Auto','Prius c'],['TOYOTA','Auto','Prius v'],
-    ['TOYOTA','Auto','Prius Prime'],['TOYOTA','Auto','Yaris Hatchback'],['TOYOTA','Auto','Yaris iA / Yaris Sedán'],
-    ['TOYOTA','SUV','4Runner'],['TOYOTA','SUV','C-HR'],['TOYOTA','SUV','Corolla Cross'],
-    ['TOYOTA','SUV','Crown Signia'],['TOYOTA','SUV','Highlander'],['TOYOTA','SUV','Grand Highlander'],
-    ['TOYOTA','SUV','Land Cruiser'],['TOYOTA','SUV','RAV4'],
-    ['TOYOTA','SUV','RAV4 Prime / Plug-in Hybrid'],['TOYOTA','SUV','Sequoia'],['TOYOTA','SUV','Venza'],
-    ['TOYOTA','SUV','bZ4X / bZ'],['TOYOTA','SUV','bZ Woodland'],['TOYOTA','Auto','86'],
-    ['TOYOTA','Auto','GR86'],['TOYOTA','Auto','GR Corolla'],['TOYOTA','Auto','GR Supra'],
-    ['TOYOTA','Microbús','Sienna'],['TOYOTA','Camioneta','Tacoma'],['TOYOTA','Camioneta','Tundra'],
-    // HONDA
-    ['HONDA','Auto','Accord'],['HONDA','Auto','City'],['HONDA','Auto','Civic'],
-    ['HONDA','SUV','CR-V (motor gasolina)'],['HONDA','SUV','CR-V (híbrido)'],['HONDA','SUV','HR-V'],
-    ['HONDA','SUV','Prologue (motor eléctrico)'],['HONDA','SUV','Pilot'],['HONDA','Microbús','Odyssey (motor gasolina)'],
-    ['HONDA','SUV','Passport (motor gasolina — EX-L, TrailSport, Black Edition)'],
-    ['HONDA','Camioneta','Ridgeline (motor gasolina)'],
-    // HYUNDAI
-    ['HYUNDAI','Auto','Accent (Gamma GDi)'],['HYUNDAI','Auto','Accent (Gamma II MPi)'],
-    ['HYUNDAI','Auto','Accent (MPi)'],['HYUNDAI','Auto','Accent (T-GDi)'],['HYUNDAI','Auto','Accent (CRDi diésel)'],
-    ['HYUNDAI','Auto','Elantra (MPi Gamma)'],['HYUNDAI','Auto','Elantra (T-GDi Gamma Turbo)'],
-    ['HYUNDAI','Auto','Elantra (T-GDi Theta II)'],['HYUNDAI','Auto','Elantra (GDi Hybrid)'],
-    ['HYUNDAI','Auto','Elantra (CRDi diésel)'],['HYUNDAI','Auto','Grandeur (Theta II GDi)'],
-    ['HYUNDAI','Auto','Grandeur (Smartstream GDi)'],['HYUNDAI','Auto','Grandeur (Lambda II MPi/GDi)'],
-    ['HYUNDAI','Auto','Grandeur (Lambda II GDi)'],['HYUNDAI','Auto','Grandeur (Theta II MPi Hybrid)'],
-    ['HYUNDAI','Auto','Grandeur (R II CRDi diésel)'],['HYUNDAI','Auto','Grandeur (Smartstream GDi V6)'],
-    ['HYUNDAI','Auto','Grandeur (T-GDi Hybrid)'],['HYUNDAI','Auto','Ioniq 5 (RWD)'],
-    ['HYUNDAI','Auto','Ioniq 5 (AWD)'],['HYUNDAI','Auto','Ioniq 5 N'],['HYUNDAI','Auto','Ioniq 6 (RWD)'],
-    ['HYUNDAI','Auto','Ioniq 6 (AWD)'],
-    ['HYUNDAI','SUV','Kona (T-GDi)'],['HYUNDAI','SUV','Kona (MPi)'],['HYUNDAI','SUV','Kona (GDi Hybrid)'],
-    ['HYUNDAI','SUV','Kona (eléctrico)'],['HYUNDAI','SUV','Palisade (MPi V6)'],['HYUNDAI','SUV','Palisade (GDi V6)'],
-    ['HYUNDAI','SUV','Palisade (GDi V6 Smartstream)'],['HYUNDAI','SUV','Palisade (GDi Hybrid)'],
-    ['HYUNDAI','SUV','Palisade (CRDi I5 diésel)'],['HYUNDAI','SUV','Santa Fe (Smartstream G2.5T turbo)'],
-    ['HYUNDAI','SUV','Santa Fe (T-GDi Hybrid)'],['HYUNDAI','SUV','Santa Fe (T-GDi Plug-in Hybrid)'],
-    ['HYUNDAI','SUV','Santa Fe (CRDi diésel)'],['HYUNDAI','SUV','Tucson (MPi atmosférico)'],
-    ['HYUNDAI','SUV','Tucson (GDi Smartstream)'],['HYUNDAI','SUV','Tucson (T-GDi turbo)'],
-    ['HYUNDAI','SUV','Tucson (T-GDi Hybrid)'],['HYUNDAI','SUV','Tucson (T-GDi Plug-in Hybrid)'],
-    ['HYUNDAI','SUV','Tucson (CRDi diésel)'],['HYUNDAI','SUV','Venue (Gamma MPi Smartstream)'],
-    ['HYUNDAI','SUV','Venue (Kappa II T-GDi turbo)'],['HYUNDAI','SUV','Venue (Kappa II MPi atmosférico)'],
-    ['HYUNDAI','SUV','Venue (U II CRDi diésel)'],
-    ['HYUNDAI','Camioneta','Santa Cruz (I4 atmosférico)'],['HYUNDAI','Camioneta','Santa Cruz (I4 turbo)'],
-    ['HYUNDAI','Trailer','Original (seco)'],['HYUNDAI','Trailer','Composite (seco)'],
-    ['HYUNDAI','Trailer','Composite XT (seco)'],['HYUNDAI','Trailer','H Y-Cube (seco)'],
-    ['HYUNDAI','Trailer','Termotech (refrigerado)'],['HYUNDAI','Trailer','Latitude (flatbed)'],
-    ['HYUNDAI','Chasis','40-45 Extendable'],['HYUNDAI','Chasis','40-45 Extendable HDG'],
-    ['HYUNDAI','Chasis','Tandem 6 (extensible)'],['HYUNDAI','Chasis','Tandem Spread 12 (extensible)'],
-    ['HYUNDAI','Chasis','Tri-Axle 12 (extensible)'],['HYUNDAI','Chasis','20 Slider Tandem (fijo)'],
-    ['HYUNDAI','Chasis','40 Lightweight Gooseneck (fijo)'],['HYUNDAI','Chasis','40 Gooseneck (fijo)'],
-    ['HYUNDAI','Chasis','53 Gooseneck (fijo)'],['HYUNDAI','Chasis','Tri-Axle (fijo)'],
-    ['HYUNDAI','Chasis','Extendable 40 (reacondicionado)'],
-    // BYD
-    ['BYD','Auto','Dolphin Mini'],['BYD','SUV','Atto 2 EV'],['BYD','SUV','Atto 3 EV'],
-    ['BYD','SUV','Atto 3 EVO'],['BYD','Auto','Dolphin EV'],['BYD','Auto','Dolphin Surf EV'],
-    ['BYD','Auto','Han EV'],['BYD','Auto','Seal EV'],['BYD','SUV','Seal U EV'],['BYD','SUV','Sealion 7 EV'],
-    ['BYD','SUV','Tang EV'],['BYD','SUV','Yangwang U8'],['BYD','Auto','Yangwang U9 Xtreme'],
-    ['BYD','SUV','Yuan Plus EV'],['BYD','SUV','Yuan Pro EV'],
-    ['BYD','Ómnibus','Ride Achiever'],['BYD','Ómnibus','Ride Creator'],['BYD','Ómnibus','Ride Dreamer'],
-    ['BYD','Ómnibus','Ride K7M'],['BYD','Ómnibus','Ride K7MER'],['BYD','Ómnibus','Ride K8M'],
-    ['BYD','Ómnibus','Ride K9MD'],['BYD','Ómnibus','Ride K11M'],
-    ['BYD','Camión','Ride 6F'],['BYD','Camión','Ride 8TT'],['BYD','Camión','Ride 8Y'],
-    // VW
-    ['VW','Auto','Virtus'],['VW','Auto','Jetta / GLI'],['VW','Auto','Golf'],['VW','Auto','Passat'],
-    ['VW','Auto','Arteon'],['VW','Auto','CC'],['VW','Auto','Beetle'],['VW','Microbús','Touran'],
-    ['VW','Microbús','Sharan'],['VW','Auto','Santana'],['VW','Auto','Lavida'],['VW','Auto','Lamando'],
-    ['VW','Auto','Phideon'],['VW','SUV','Tera'],['VW','SUV','Taigun'],['VW','SUV','Nivus / Taigo'],
-    ['VW','SUV','T-Cross'],['VW','SUV','Taos / Tharu'],['VW','SUV','T-Roc'],['VW','SUV','Tiguan'],
-    ['VW','SUV','Tayron'],['VW','SUV','Teramont / Atlas'],['VW','SUV','Touareg'],['VW','SUV','Talagon'],
-    ['VW','SUV','Tavendor'],['VW','Auto','e-up!'],['VW','Auto','e-Golf'],['VW','Auto','ID.3'],
-    ['VW','SUV','ID.4'],['VW','SUV','ID.5'],['VW','SUV','ID.6'],['VW','Auto','ID.7'],
-    ['VW','Microbús','ID. Buzz'],['VW','SUV','ID. Unyx'],['VW','Panel','Caddy'],
-    ['VW','Auto','California (caravana)'],['VW','Auto','Grand California (caravana)'],
-    ['VW','Camioneta','Saveiro'],['VW','Camioneta','Amarok'],
-    ['VW','Microbús','Caravelle'],['VW','Microbús','Multivan'],
-    ['VW','Panel','Transporter'],['VW','Panel','e-Transporter'],['VW','Panel','Crafter'],
-    ['VW','Camión','e-Delivery'],['VW','Camión','Delivery'],['VW','Camión','Constellation'],
-    ['VW','Camión','Meteor'],
-    ['VW','Ómnibus','Volksbus Escolar y Rural'],['VW','Ómnibus','Volksbus Urbano'],
-    ['VW','Ómnibus','Volksbus de Fletamento y Carretera'],['VW','Ómnibus','e-Volksbus'],
-    // FREIGHTLINER
-    ['FREIGHTLINER','Camión','108SD'],['FREIGHTLINER','Camión','108SD Plus'],['FREIGHTLINER','Camión','114SD'],
-    ['FREIGHTLINER','Camión','114SD Plus'],['FREIGHTLINER','Camión','122SD'],['FREIGHTLINER','Camión','MT45'],
-    ['FREIGHTLINER','Camión','MT55'],['FREIGHTLINER','Camión','MT50e'],['FREIGHTLINER','Camión','Cascadia'],
-    ['FREIGHTLINER','Camión','M2 (106)'],['FREIGHTLINER','Camión','M2 (112)'],
-    ['FREIGHTLINER','Camión','Coronado SD'],['FREIGHTLINER','Camión','EconicSD'],['FREIGHTLINER','Camión','S2'],
-    ['FREIGHTLINER','Camión','S2C'],['FREIGHTLINER','Camión','S2RV'],['FREIGHTLINER','Camión','C2'],
-    ['FREIGHTLINER','Panel','Sprinter 2500'],['FREIGHTLINER','Panel','Sprinter 3500'],['FREIGHTLINER','Panel','Sprinter 4500'],
-    // KENWORTH
-    ['KENWORTH','Camión','T680 (motor diésel)'],
-    ['KENWORTH','Camión','T660'],['KENWORTH','Camión','T700'],['KENWORTH','Camión','W900'],['KENWORTH','Camión','W900B'],
-    ['KENWORTH','Camión','W900L'],['KENWORTH','Camión','W900 Legacy Edition'],['KENWORTH','Camión','W900S'],
-    ['KENWORTH','Camión','W990'],['KENWORTH','Camión','T800'],['KENWORTH','Camión','T800W'],['KENWORTH','Camión','T880'],
-    ['KENWORTH','Camión','T880S'],['KENWORTH','Camión','T440'],['KENWORTH','Camión','T470'],['KENWORTH','Camión','T480'],
-    ['KENWORTH','Camión','C500'],['KENWORTH','Camión','C580'],['KENWORTH','Camión','963'],['KENWORTH','Camión','T180'],
-    ['KENWORTH','Camión','T280'],['KENWORTH','Camión','T380'],['KENWORTH','Camión','T170'],['KENWORTH','Camión','T270'],
-    ['KENWORTH','Camión','T370'],['KENWORTH','Camión','K270'],['KENWORTH','Camión','K370'],['KENWORTH','Camión','T880E'],
-    ['KENWORTH','Camión','T280E'],['KENWORTH','Camión','T380E'],['KENWORTH','Camión','T480E'],
-    ['KENWORTH','Camión','K270E'],['KENWORTH','Camión','K370E'],
-    // WESTERN STAR
-    ['WESTERN STAR','Camión','47X'],['WESTERN STAR','Camión','49X'],['WESTERN STAR','Camión','49X Power Hood'],
-    ['WESTERN STAR','Camión','57X'],['WESTERN STAR','Camión','5700XE'],['WESTERN STAR','Camión','4700'],
-    ['WESTERN STAR','Camión','4800'],['WESTERN STAR','Camión','4900'],['WESTERN STAR','Camión','4900FA'],
-    ['WESTERN STAR','Camión','4900SA'],['WESTERN STAR','Camión','4900EX'],['WESTERN STAR','Camión','4900TS'],
-    ['WESTERN STAR','Camión','4900XD'],['WESTERN STAR','Camión','6900XD'],['WESTERN STAR','Camión','6900TS'],
-    // PETERBILT
-    ['PETERBILT','Camión','579'],['PETERBILT','Camión','New Model 579'],['PETERBILT','Camión','589'],
-    ['PETERBILT','Camión','389'],['PETERBILT','Camión','388'],['PETERBILT','Camión','587'],['PETERBILT','Camión','386'],
-    ['PETERBILT','Camión','567'],['PETERBILT','Camión','367'],['PETERBILT','Camión','365'],['PETERBILT','Camión','520'],
-    ['PETERBILT','Camión','389 Heavy Haul'],['PETERBILT','Camión','220'],['PETERBILT','Camión','210'],
-    ['PETERBILT','Camión','535'],['PETERBILT','Camión','536'],['PETERBILT','Camión','537'],['PETERBILT','Camión','548'],
-    ['PETERBILT','Camión','325'],['PETERBILT','Camión','330'],['PETERBILT','Camión','337'],['PETERBILT','Camión','348'],
-    ['PETERBILT','Camión','579EV'],['PETERBILT','Camión','567EV'],['PETERBILT','Camión','520EV'],
-    ['PETERBILT','Camión','548EV'],['PETERBILT','Camión','537EV'],['PETERBILT','Camión','536EV'],['PETERBILT','Camión','220EV'],
-    // INTERNATIONAL
-    ['INTERNATIONAL','Camión','LT Series'],['INTERNATIONAL','Camión','LT625'],['INTERNATIONAL','Camión','RH Series'],
-    ['INTERNATIONAL','Camión','RH613'],['INTERNATIONAL','Camión','LoneStar'],['INTERNATIONAL','Camión','ProStar'],
-    ['INTERNATIONAL','Camión','TranStar'],['INTERNATIONAL','Camión','HX Series'],['INTERNATIONAL','Camión','HX520'],
-    ['INTERNATIONAL','Camión','HX615'],['INTERNATIONAL','Camión','HX620'],['INTERNATIONAL','Camión','HV Series'],
-    ['INTERNATIONAL','Camión','HV507'],['INTERNATIONAL','Camión','HV513'],['INTERNATIONAL','Camión','HV607'],
-    ['INTERNATIONAL','Camión','HV613'],['INTERNATIONAL','Camión','WorkStar'],['INTERNATIONAL','Camión','PayStar'],
-    ['INTERNATIONAL','Camión','MV Series'],['INTERNATIONAL','Camión','MV607'],['INTERNATIONAL','Camión','MV60H'],
-    ['INTERNATIONAL','Camión','CV Series'],['INTERNATIONAL','Camión','CV515'],['INTERNATIONAL','Camión','DuraStar'],
-    ['INTERNATIONAL','Camión','4300'],['INTERNATIONAL','Camión','4400'],['INTERNATIONAL','Camión','TerraStar'],
-    ['INTERNATIONAL','Camión','eMV Series'],['INTERNATIONAL','Camión','eMV'],
-    // ISUZU
-    ['ISUZU','Camión','NPR'],['ISUZU','Camión','NPR-HD'],['ISUZU','Camión','NPR-XD'],['ISUZU','Camión','NQR'],
-    ['ISUZU','Camión','NRR'],['ISUZU','Camión','NRR EV'],['ISUZU','Camión','FTR'],['ISUZU','Camión','FVR Derate'],
-    ['ISUZU','Camión','FVR'],['ISUZU','Camión','Reach'],
-    // VOLVO / HINO
-    ['VOLVO','Camión','VNL (motor diésel)'],
-    ['HINO','Camión','268 J08E-WU (motor diésel)'],['HINO','Camión','155 J05E-TP (motor diésel)'],
-    // TRAILERS / CHASIS independientes
-    ['UTILITY','Trailer','3000R (refrigerado)'],['UTILITY','Trailer','4000D-X (seco)'],
-    ['UTILITY','Trailer','4000AE (semirremolque)'],['UTILITY','Trailer','4000S (semirremolque)'],
-    ['UTILITY','Trailer','4000A (semirremolque)'],
-    ['CHEETAH','Trailer','Flatbed 48"'],['CHEETAH','Trailer','Flatbed 48" Extensible'],
-    ['SHENGDA','Trailer','Flatbed 20"'],['SHENGDA','Trailer','Flatbed 40"'],
-  ];
+  // Fuente única: las filas de <tbody id="cat-tbody"> del HTML. Se leen como [marca, tipo, modelo].
+  const catTbody = document.getElementById('cat-tbody');
+  const CATALOG = [...catTbody.rows].map(tr => {
+    const [marca, modelo, tipo] = [...tr.cells].map(td => td.textContent.trim());
+    const row = [marca, tipo, modelo];
+    row.tr = tr;
+    return row;
+  });
 
   // Orden: marca (A-Z) -> modelo (alfanumérico natural) -> categoría (tiebreak)
   CATALOG.sort((a, b) => {
@@ -1694,6 +2011,8 @@
     if (modelCmp !== 0) return modelCmp;
     return a[1].localeCompare(b[1], 'es', { sensitivity: 'base' });
   });
+  // si alguien añade filas fuera de orden en el HTML, se reordenan una vez
+  if (CATALOG.some((r, i) => catTbody.rows[i] !== r.tr)) catTbody.append(...CATALOG.map(r => r.tr));
 
   // Mantiene exactos los números de la franja promocional del inicio
   (function updatePromoCounts(){
@@ -1707,36 +2026,47 @@
   const catSearch = document.getElementById('cat-search');
   const catTipo = document.getElementById('cat-tipo');
   const catBrands = document.getElementById('cat-brands');
-  const catTbody = document.getElementById('cat-tbody');
   const catCount = document.getElementById('cat-count');
   const catBrandCount = document.getElementById('cat-brandcount');
   let activeBrand = '';
 
   const tipos = [...new Set(CATALOG.map(r => r[1]))].sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
-  tipos.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; catTipo.appendChild(o); });
+  tipos.forEach(t => catTipo.add(new Option(t, t)));
 
   const marcas = [...new Set(CATALOG.map(r => r[0]))].sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
   marcas.forEach(m => {
     const b = document.createElement('button');
-    b.className = 'brand-pill'; b.dataset.marca = m; b.textContent = m;
+    b.type = 'button'; b.className = 'brand-pill'; b.dataset.marca = m; b.textContent = m;
+    b.setAttribute('aria-pressed', 'false');
     catBrands.appendChild(b);
   });
 
   const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
   function normalize(s){ return s.toLowerCase().normalize('NFD').replace(DIACRITICS_RE,''); }
+  // tolera separadores: "crv" encuentra "CR-V", "etron" encuentra "e-tron", "santafe" encuentra "Santa Fe"
+  const dehyphen = s => s.replace(/[-_./]+/g, '');
+  const compact = s => s.replace(/[\s\-_./]+/g, '');
+  CATALOG.forEach(r => {
+    r.search = normalize(r[0] + ' ' + r[2]);
+    r.dehyphen = dehyphen(r.search);
+    r.compact = compact(r.search);
+  });
+
+  const catEmpty = document.createElement('tr');
+  catEmpty.innerHTML = '<td colspan="3" class="catalog-empty">No encontramos coincidencias. Prueba con otra marca, modelo o categoría.</td>';
 
   function renderCatalog(){
-    const q = normalize(catSearch.value.trim());
+    const query = normalize(catSearch.value);
+    const tokens = query.split(/\s+/).filter(Boolean);
+    const whole = compact(query);
     const tipoSel = catTipo.value;
-    const rows = CATALOG.filter(([marca, tipo, modelo]) => {
-      if (activeBrand && marca !== activeBrand) return false;
-      if (tipoSel && tipo !== tipoSel) return false;
-      if (q && !normalize(marca + ' ' + modelo).includes(q)) return false;
-      return true;
+    const rows = CATALOG.filter(r => {
+      if (activeBrand && r[0] !== activeBrand) return false;
+      if (tipoSel && r[1] !== tipoSel) return false;
+      return tokens.every(t => r.search.includes(t) || r.dehyphen.includes(dehyphen(t)))
+        || (whole.length >= 3 && r.compact.includes(whole));
     });
-    catTbody.innerHTML = rows.length ? rows.map(([marca, tipo, modelo]) =>
-      `<tr><td class="t-marca">${marca}</td><td>${modelo}</td><td class="t-tipo">${tipo}</td></tr>`
-    ).join('') : `<tr><td colspan="3" class="catalog-empty">No encontramos coincidencias. Prueba con otra marca, modelo o categoría.</td></tr>`;
+    catTbody.replaceChildren(...(rows.length ? rows.map(r => r.tr) : [catEmpty]));
     const modelCount = rows.length;
     const brandCount = new Set(rows.map(r => r[0])).size;
     catCount.textContent = `${modelCount} ${modelCount === 1 ? 'modelo' : 'modelos'}`;
@@ -1749,7 +2079,10 @@
     const btn = e.target.closest('.brand-pill');
     if (!btn) return;
     activeBrand = btn.dataset.marca;
-    catBrands.querySelectorAll('.brand-pill').forEach(b => b.classList.toggle('active', b === btn));
+    catBrands.querySelectorAll('.brand-pill').forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
     renderCatalog();
   });
   renderCatalog();
@@ -1774,7 +2107,10 @@
 
   function fmtUSD(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
   function safeStorage(fn){ try { return fn(); } catch(e){ return null; } }
+  const WA_NUMBER = '17865200009';
+  const SUMMARY_DISCLAIMER = 'El descuento se aplica al flete. El flete no incluye seguro — el seguro se contrata por separado. Los impuestos en Cuba se pagan aparte, mediante tarjeta Clásica.';
 
+  const tierInputs = document.querySelectorAll('input[name="cfg-tier"]');
   const tierCards = document.querySelectorAll('.tier-card');
   const blockModel = document.getElementById('block-model');
   const blockYear = document.getElementById('block-year');
@@ -1784,139 +2120,193 @@
   const cfgMarca = document.getElementById('cfg-marca');
   const cfgModelo = document.getElementById('cfg-modelo');
   const cfgAno = document.getElementById('cfg-ano');
-  const cfgSummary = document.getElementById('cfg-summary');
+  const summaryEl = {
+    vehicle: document.getElementById('summary-vehicle'),
+    rows: document.getElementById('summary-rows'),
+    base: document.getElementById('summary-base'),
+    online: document.getElementById('summary-online'),
+    save: document.getElementById('summary-save'),
+    tax: document.getElementById('summary-tax'),
+    totalLabel: document.getElementById('summary-total-label'),
+    total: document.getElementById('summary-total'),
+    disclaimer: document.getElementById('summary-disclaimer'),
+    whatsapp: document.getElementById('summary-whatsapp')
+  };
   let currentTier = null;
+
+  const tierRows = tier => CATALOG.filter(r => TIER_TIPOS[tier].includes(r[1]));
+  // new Option() evita romper el HTML con modelos que llevan comillas (p. ej. Flatbed 48")
+  function fillSelect(select, placeholder, values){
+    select.replaceChildren(new Option(placeholder, ''), ...values.map(v => new Option(v, v)));
+  }
+  const forget = (...keys) => keys.forEach(k => safeStorage(() => localStorage.removeItem(k)));
+  const remember = (key, value) => value ? safeStorage(() => localStorage.setItem(key, value)) : forget(key);
+
+  // Devuelve la cotización solo si la combinación es válida según el catálogo y las reglas de año
+  function getQuote(){
+    if (!currentTier) return null;
+    const pricing = TIER_PRICING[currentTier];
+    const marca = cfgMarca.value, modelo = cfgModelo.value;
+    if (!tierRows(currentTier).some(r => r[0] === marca && r[2] === modelo)) return null;
+    if (pricing.custom) return { pricing, marca, modelo };
+    const ano = Number(cfgAno.value);
+    if (!Number.isInteger(ano) || ano < TIER_MIN_YEAR[currentTier] || ano > new Date().getFullYear()) return null;
+    const tax = CUBA_TAXES[marca + '|' + modelo + '|' + ano];
+    return {
+      pricing, marca, modelo, ano,
+      taxText: tax != null ? fmtUSD(tax) + ' aprox.' : 'Por confirmar',
+      totalText: tax != null ? fmtUSD(pricing.online + tax) + ' aprox.' : fmtUSD(pricing.online) + ' + impuestos por confirmar'
+    };
+  }
+
+  function vehicleLines(q){
+    const lines = [];
+    if (currentTier) lines.push('Tipo de vehículo: ' + TIER_PRICING[currentTier].label);
+    if (cfgMarca.value) lines.push('Marca: ' + cfgMarca.value);
+    if (cfgModelo.value) lines.push('Modelo: ' + cfgModelo.value);
+    if (q && q.ano) lines.push('Año: ' + q.ano);
+    return lines;
+  }
+
+  function whatsappHref(q){
+    const groups = [['Hola, estoy realizando una cotización desde ConnectingCuba.']];
+    if (q && q.pricing.custom) {
+      groups.push([...vehicleLines(q), 'Cotización: Personalizada'], ['Quisiera revisar esta solicitud con su equipo.']);
+    } else if (q) {
+      groups.push(vehicleLines(q), [
+        'Flete regular: ' + fmtUSD(q.pricing.base),
+        'Promoción web: ' + fmtUSD(q.pricing.online),
+        'Descuento: ' + fmtUSD(q.pricing.discount),
+        'Total estimado: ' + q.totalText
+      ], ['Quisiera revisar esta cotización con su equipo.']);
+    } else {
+      const partial = vehicleLines(null);
+      if (partial.length) groups.push(partial);
+      groups.push(['Quisiera ayuda para completar mi cotización.']);
+    }
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(groups.map(g => g.join('\n')).join('\n\n'))}`;
+  }
+
+  function updateSummary(){
+    const q = getQuote();
+    const e = summaryEl;
+    if (!q) {
+      e.vehicle.textContent = 'Selecciona tu vehículo para calcular';
+      e.rows.hidden = false;
+      e.base.classList.remove('strike');
+      [e.base, e.online, e.save, e.tax, e.total].forEach(el => { el.textContent = '—'; });
+      e.totalLabel.textContent = 'Total estimado';
+      e.disclaimer.textContent = SUMMARY_DISCLAIMER;
+    } else if (q.pricing.custom) {
+      // Remolques y chasis: equipo nuevo, sin año ni impuesto estimado — cotización directa.
+      e.vehicle.textContent = `${q.marca} ${q.modelo}`;
+      e.rows.hidden = true;
+      e.totalLabel.textContent = 'Flete';
+      e.total.textContent = 'Cotización personalizada';
+      e.disclaimer.textContent = 'Este equipo no tiene una tarifa fija en línea — te confirmamos el flete directamente según las condiciones de tu operación. El flete no incluye seguro; el seguro se contrata por separado.';
+    } else {
+      e.vehicle.textContent = `${q.marca} ${q.modelo} (${q.ano})`;
+      e.rows.hidden = false;
+      e.base.classList.add('strike');
+      e.base.textContent = fmtUSD(q.pricing.base);
+      e.online.textContent = fmtUSD(q.pricing.online);
+      e.save.textContent = '−' + fmtUSD(q.pricing.discount);
+      e.tax.textContent = q.taxText;
+      e.totalLabel.textContent = 'Total estimado';
+      e.total.textContent = q.totalText;
+      e.disclaimer.textContent = SUMMARY_DISCLAIMER;
+    }
+    e.whatsapp.href = whatsappHref(q);
+    blockIncluded.hidden = !q || !!q.pricing.custom;
+  }
 
   function selectTier(tier, persist){
     currentTier = tier;
+    tierInputs.forEach(i => { i.checked = i.value === tier; });
     tierCards.forEach(c => c.classList.toggle('active', c.dataset.tier === tier));
-    const tipos = TIER_TIPOS[tier];
-    const marcas = [...new Set(CATALOG.filter(r => tipos.includes(r[1])).map(r => r[0]))].sort();
-    cfgMarca.innerHTML = '<option value="">Selecciona la marca…</option>' + marcas.map(m => `<option value="${m}">${m}</option>`).join('');
-    cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
+    fillSelect(cfgMarca, 'Selecciona la marca…', [...new Set(tierRows(tier).map(r => r[0]))].sort());
+    fillSelect(cfgModelo, 'Selecciona el modelo…', []);
     cfgModelo.disabled = true;
-    cfgAno.innerHTML = '<option value="">Selecciona el año…</option>';
+    fillSelect(cfgAno, 'Selecciona el año…', []);
     blockModel.hidden = false;
     blockYear.hidden = true;
-    blockIncluded.hidden = true;
-    cfgSummary.hidden = true;
-    if (persist !== false) safeStorage(() => localStorage.setItem('cc_cfg_tier', tier));
+    if (persist !== false) {
+      remember('cc_cfg_tier', tier);
+      forget('cc_cfg_marca', 'cc_cfg_modelo', 'cc_cfg_ano');
+    }
+    updateSummary();
   }
 
-  tierCards.forEach(card => card.addEventListener('click', () => selectTier(card.dataset.tier)));
+  tierInputs.forEach(input => input.addEventListener('change', () => { if (input.checked) selectTier(input.value); }));
 
   cfgMarca.addEventListener('change', () => {
     const marca = cfgMarca.value;
-    cfgModelo.innerHTML = '<option value="">Selecciona el modelo…</option>';
+    fillSelect(cfgModelo, 'Selecciona el modelo…', marca ? tierRows(currentTier).filter(r => r[0] === marca).map(r => r[2]) : []);
+    cfgModelo.disabled = !marca;
+    fillSelect(cfgAno, 'Selecciona el año…', []);
     blockYear.hidden = true;
-    blockIncluded.hidden = true;
-    cfgSummary.hidden = true;
-    if (!marca) { cfgModelo.disabled = true; return; }
-    const tipos = TIER_TIPOS[currentTier];
-    const modelos = CATALOG.filter(r => r[0] === marca && tipos.includes(r[1]));
-    cfgModelo.innerHTML += modelos.map(r => `<option value="${r[2]}">${r[2]}</option>`).join('');
-    cfgModelo.disabled = false;
-    safeStorage(() => localStorage.setItem('cc_cfg_marca', marca));
+    remember('cc_cfg_marca', marca);
+    forget('cc_cfg_modelo', 'cc_cfg_ano');
+    updateSummary();
   });
 
   cfgModelo.addEventListener('change', () => {
-    blockIncluded.hidden = true;
-    cfgSummary.hidden = true;
-    if (!cfgModelo.value) { blockYear.hidden = true; return; }
-    safeStorage(() => localStorage.setItem('cc_cfg_modelo', cfgModelo.value));
-
-    if (TIER_PRICING[currentTier].custom) {
-      // Remolques y chasis: equipo nuevo, sin año ni impuesto estimado — cotización directa.
-      blockYear.hidden = true;
-      showSummary();
-      return;
-    }
-
-    const minYear = TIER_MIN_YEAR[currentTier];
-    const maxYear = new Date().getFullYear();
-    let opts = '<option value="">Selecciona el año…</option>';
-    for (let y = maxYear; y >= minYear; y--) opts += `<option value="${y}">${y}</option>`;
-    cfgAno.innerHTML = opts;
-    blockYear.hidden = false;
+    const modelo = cfgModelo.value;
+    const needsYear = !!modelo && !TIER_PRICING[currentTier].custom;
+    const years = [];
+    if (needsYear) for (let y = new Date().getFullYear(); y >= TIER_MIN_YEAR[currentTier]; y--) years.push(String(y));
+    fillSelect(cfgAno, 'Selecciona el año…', years);
+    blockYear.hidden = !needsYear;
+    remember('cc_cfg_modelo', modelo);
+    forget('cc_cfg_ano');
+    updateSummary();
   });
 
   cfgAno.addEventListener('change', () => {
-    if (!cfgAno.value) { blockIncluded.hidden = true; cfgSummary.hidden = true; return; }
-    safeStorage(() => localStorage.setItem('cc_cfg_ano', cfgAno.value));
-    showSummary();
+    remember('cc_cfg_ano', cfgAno.value);
+    updateSummary();
   });
 
-  function showSummary(){
-    const marca = cfgMarca.value, modelo = cfgModelo.value, ano = cfgAno.value;
-    const pricing = TIER_PRICING[currentTier];
-    const tax = pricing.custom ? null : CUBA_TAXES[marca + '|' + modelo + '|' + ano];
-    const vehiculoLabel = ano ? `${marca} ${modelo} (${ano})` : `${marca} ${modelo}`;
-
-    document.getElementById('summary-vehicle').textContent = vehiculoLabel;
-    const summaryRows = document.getElementById('summary-rows');
-    const totalLabel = document.getElementById('summary-total-label');
-    const totalEl = document.getElementById('summary-total');
-    const disclaimerEl = document.getElementById('summary-disclaimer');
-    let waText;
-
-    if (pricing.custom) {
-      summaryRows.hidden = true;
-      totalLabel.textContent = 'Flete';
-      totalEl.textContent = 'Cotización personalizada';
-      disclaimerEl.textContent = 'Este equipo no tiene una tarifa fija en línea — te confirmamos el flete directamente según las condiciones de tu operación. El flete no incluye seguro; el seguro se contrata por separado.';
-      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${vehiculoLabel} (${pricing.label}). Necesito una cotización personalizada.`);
-    } else {
-      summaryRows.hidden = false;
-      totalLabel.textContent = 'Total estimado';
-      document.getElementById('summary-base').textContent = fmtUSD(pricing.base);
-      document.getElementById('summary-online').textContent = fmtUSD(pricing.online);
-      document.getElementById('summary-save').textContent = '−' + fmtUSD(pricing.discount);
-      const taxEl = document.getElementById('summary-tax');
-      let waTaxPart;
-      if (tax != null) {
-        taxEl.textContent = fmtUSD(tax) + ' aprox.';
-        totalEl.textContent = fmtUSD(pricing.online + tax) + ' aprox.';
-        waTaxPart = `, más impuestos aproximados de ${fmtUSD(tax)} en Cuba`;
-      } else {
-        taxEl.textContent = 'Por confirmar';
-        totalEl.textContent = fmtUSD(pricing.online) + ' + impuestos por confirmar';
-        waTaxPart = ', más los impuestos correspondientes en Cuba (por confirmar)';
-      }
-      disclaimerEl.textContent = 'El descuento se aplica al flete. El flete no incluye seguro — el seguro se contrata por separado. Los impuestos en Cuba se pagan aparte, mediante tarjeta Clásica.';
-      waText = encodeURIComponent(`Hola, quiero cotizar el envío de mi ${vehiculoLabel} (${pricing.label}). Flete con promoción web: ${fmtUSD(pricing.online)} (descuento de ${fmtUSD(pricing.discount)} aplicado al flete regular de ${fmtUSD(pricing.base)})${waTaxPart}.`);
-    }
-
-    document.getElementById('summary-whatsapp').href = `https://wa.me/17865200009?text=${waText}`;
-
-    blockIncluded.hidden = !!pricing.custom;
-    cfgSummary.hidden = false;
-  }
-
-  includedToggle?.addEventListener('click', () => {
-    includedList.hidden = !includedList.hidden;
-    includedToggle.querySelector('span').textContent = includedList.hidden ? '▾' : '▴';
+  includedToggle.addEventListener('click', () => {
+    const open = includedList.hidden;
+    includedList.hidden = !open;
+    includedToggle.setAttribute('aria-expanded', String(open));
+    includedToggle.querySelector('span').textContent = open ? '▴' : '▾';
   });
 
   // Restaura la última configuración del visitante (si la hay)
   (function restoreConfig(){
-    const savedTier = safeStorage(() => localStorage.getItem('cc_cfg_tier'));
-    if (!savedTier || !TIER_TIPOS[savedTier]) return;
+    const [savedTier, savedMarca, savedModelo, savedAno] = ['cc_cfg_tier', 'cc_cfg_marca', 'cc_cfg_modelo', 'cc_cfg_ano'].map(k => safeStorage(() => localStorage.getItem(k)));
+    if (!savedTier || !TIER_TIPOS[savedTier]) { updateSummary(); return; }
     selectTier(savedTier, false);
-    const savedMarca = safeStorage(() => localStorage.getItem('cc_cfg_marca'));
-    if (!savedMarca) return;
-    cfgMarca.value = savedMarca;
-    cfgMarca.dispatchEvent(new Event('change'));
-    const savedModelo = safeStorage(() => localStorage.getItem('cc_cfg_modelo'));
-    if (!savedModelo) return;
-    cfgModelo.value = savedModelo;
-    if (cfgModelo.value !== savedModelo) return;
-    cfgModelo.dispatchEvent(new Event('change'));
-    if (TIER_PRICING[savedTier].custom) return;
-    const savedAno = safeStorage(() => localStorage.getItem('cc_cfg_ano'));
-    if (!savedAno) return;
-    cfgAno.value = savedAno;
-    if (cfgAno.value === savedAno) cfgAno.dispatchEvent(new Event('change'));
+    const apply = (select, value) => {
+      if (!value) return false;
+      select.value = value;
+      if (select.value !== value) return false;
+      select.dispatchEvent(new Event('change'));
+      return true;
+    };
+    if (apply(cfgMarca, savedMarca) && apply(cfgModelo, savedModelo) && !TIER_PRICING[savedTier].custom) apply(cfgAno, savedAno);
   })();
+
+  // Contexto de la cotización para el formulario "Solicita tu cotización"
+  function quoteFormFields(){
+    const q = getQuote();
+    const base = { tipo_vehiculo: currentTier ? TIER_PRICING[currentTier].label : '', marca: cfgMarca.value, modelo: cfgModelo.value };
+    if (!q) return { ...base, cotizacion: currentTier ? 'Configuración incompleta' : 'Sin configurar' };
+    if (q.pricing.custom) return { ...base, vehiculo: `${q.marca} ${q.modelo}`, cotizacion: 'Personalizada' };
+    return {
+      ...base,
+      'año': String(q.ano),
+      vehiculo: `${q.marca} ${q.modelo} (${q.ano})`,
+      flete_regular: fmtUSD(q.pricing.base),
+      descuento: fmtUSD(q.pricing.discount),
+      flete_promocion: fmtUSD(q.pricing.online),
+      impuestos_cuba: q.taxText,
+      total_estimado: q.totalText,
+      cotizacion: 'Promoción web'
+    };
+  }
 
   // Pausa cualquier otro video al reproducir uno nuevo (evita audio superpuesto)
   document.addEventListener('play', (e) => {
@@ -1931,20 +2321,27 @@
     const errEl = form.querySelector('.err');
     const btn = form.querySelector('button[type="submit"]');
     const btnLabel = btn ? btn.textContent : '';
+    let busy = false;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (busy) return;
+      busy = true;
       if (sentEl) sentEl.hidden = true;
       if (errEl) errEl.hidden = true;
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
       const data = new FormData(form);
+      for (const [k, v] of [...data]) if (typeof v === 'string') data.set(k, v.trim());
       if (getExtraFields) {
         Object.entries(getExtraFields()).forEach(([k, v]) => { if (v) data.append(k, v); });
       }
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 15000);
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: data
+          body: data,
+          signal: ctrl.signal
         });
         const json = await res.json();
         if (json.success) {
@@ -1956,14 +2353,13 @@
       } catch (err) {
         if (errEl) errEl.hidden = false;
       } finally {
+        clearTimeout(timer);
+        busy = false;
         if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
       }
     });
   }
 
-  wireQuoteForm(document.getElementById('cfg-contact-form'), () => ({
-    vehiculo: document.getElementById('summary-vehicle')?.textContent || '',
-    total_estimado: document.getElementById('summary-total')?.textContent || ''
-  }));
+  wireQuoteForm(document.getElementById('cfg-contact-form'), quoteFormFields);
   wireQuoteForm(document.getElementById('contacto-form'));
 </script>
