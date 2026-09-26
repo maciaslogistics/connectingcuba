@@ -23,7 +23,10 @@
     --amber-strong:#9C5E14;
     --shadow: 0 1px 2px rgba(12,34,51,.06);
     --route-line: repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 20px);
+    --gutter:24px;
+    --header-h:77px;
   }
+  @media (max-width:480px){ :root{--header-h:63px} }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       --paper:#0A1B26;
@@ -75,7 +78,8 @@
   }
   img{max-width:100%;display:block}
   a{color:inherit}
-  .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 var(--gutter)}
+  section[id], section [id]{scroll-margin-top:var(--header-h)}
   h1,h2,h3{font-family:'Big Shoulders Display', 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:.01em; text-wrap:balance; margin:0; line-height:.98}
   .eyebrow{font-family:'IBM Plex Mono', ui-monospace, monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-strong); font-weight:600}
   .mono{font-family:'IBM Plex Mono', ui-monospace, monospace}
@@ -118,12 +122,12 @@
 
   /* ============ HEADER ============ */
   header.site{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
-  @media (max-width:959px){ header.site{backdrop-filter:none} }
-  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:11px 24px; gap:20px}
-  @media (max-width:480px){ header.site .wrap{padding:10px 16px; gap:10px} }
+  @media (max-width:1023px){ header.site{backdrop-filter:none} }
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between; padding:11px var(--gutter); gap:20px}
+  @media (max-width:480px){ header.site .wrap{padding:10px var(--gutter); gap:10px} }
   .brand{display:flex; align-items:center; gap:12px; text-decoration:none; transition:opacity .15s ease; flex-shrink:0}
   .brand:hover{opacity:.85}
-  .brand-logo{height:54px; width:auto; flex:none; display:block}
+  .brand-logo{height:54px; width:auto; max-width:none; flex:none; display:block}
   .brand-logo-dark{display:none}
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]) .brand-logo-light{display:none}
@@ -132,9 +136,9 @@
   :root[data-theme="dark"] .brand-logo-light{display:none}
   :root[data-theme="dark"] .brand-logo-dark{display:block}
   @media (max-width:480px){ .brand-logo{height:42px} }
-  nav.primary{display:flex; align-items:center; gap:18px}
+  nav.primary{display:flex; align-items:center; gap:16px}
   nav.primary a{font-size:.88rem; font-weight:500; text-decoration:none; color:var(--ink-mute); white-space:nowrap}
-  @media (min-width:960px){
+  @media (min-width:1024px){
     nav.primary a{position:relative; padding-bottom:7px}
     nav.primary a::after{content:''; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--teal); transition:width .22s ease}
     nav.primary a:hover{color:var(--teal-strong)}
@@ -143,26 +147,30 @@
     nav.primary a.active::after{width:100%; background:var(--amber)}
     nav.primary a.active:hover::after{background:var(--amber)}
   }
-  @media (max-width:959px){
+  @media (max-width:1023px){
     nav.primary a{transition:background .15s ease, border-left-color .15s ease, padding-left .15s ease; border-left:3px solid transparent}
     nav.primary a:hover{color:var(--teal-strong); background:var(--surface-2)}
-    nav.primary a.active{color:var(--teal-strong); border-left-color:var(--amber); padding-left:12px; margin-left:-15px}
+    nav.primary a.active{color:var(--teal-strong); border-left-color:var(--amber); padding-left:15px; margin-left:-15px; width:calc(100% + 15px)}
   }
-  .header-actions{display:flex; align-items:center; gap:14px}
+  .header-actions{display:flex; align-items:center; gap:14px; flex-shrink:0}
   .brand-secondary{display:flex; align-items:center; transition:opacity .15s ease}
   .brand-secondary:hover{opacity:.85}
-  .henex-logo{height:42px; width:auto; flex:none; display:block}
+  .henex-logo{height:42px; width:auto; max-width:none; flex:none; display:block}
   @media (max-width:480px){ .henex-logo{height:34px} }
   .phone-link{font-family:'IBM Plex Mono'; font-size:.85rem; font-weight:600; text-decoration:none; color:var(--ink); display:none; white-space:nowrap}
-  @media (min-width:1180px){ .phone-link{display:inline} }
+  @media (min-width:1200px){ .phone-link{display:inline} }
+  nav.primary a.nav-phone{display:none}
   .navburger{display:none; background:none; border:1px solid var(--line); border-radius:3px; width:42px; height:38px; align-items:center; justify-content:center; cursor:pointer}
   .navburger span, .navburger span::before, .navburger span::after{content:''; display:block; width:18px; height:2px; background:var(--ink); position:relative; transition:transform .2s ease, opacity .2s ease}
   .navburger span::before{position:absolute; top:-6px}
   .navburger span::after{position:absolute; top:6px}
-  @media (max-width:959px){
-    nav.primary{position:fixed; inset:61px 0 0 0; background:var(--paper); flex-direction:column; align-items:flex-start; padding:28px 24px; gap:4px; transform:translateX(100%); transition:transform .25s ease; overflow-y:auto}
+  @media (max-width:1023px){
+    nav.primary{position:fixed; inset:var(--nav-top, var(--header-h)) 0 0 0; background:var(--paper); flex-direction:column; align-items:flex-start; padding:28px var(--gutter); gap:4px; transform:translateX(100%); visibility:hidden; transition:transform .25s ease, visibility 0s linear .25s; overflow-y:auto; overscroll-behavior:contain}
     nav.primary a{padding:14px 0; width:100%; border-bottom:1px solid var(--line); font-size:1.05rem}
-    body.nav-open nav.primary{transform:translateX(0)}
+    nav.primary a.nav-phone{display:block; font-weight:600; color:var(--ink)}
+    nav.primary a.nav-phone:hover{color:var(--teal-strong)}
+    body.nav-open{overflow:hidden}
+    body.nav-open nav.primary{transform:translateX(0); visibility:visible; transition:transform .25s ease, visibility 0s}
     .navburger{display:flex}
   }
   body.nav-open .navburger span{background:transparent}
@@ -174,24 +182,30 @@
   .hero-media{position:absolute; inset:0}
   .hero-media img{width:100%; height:100%; object-fit:cover; opacity:.55}
   .hero-media::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,22,32,.55) 0%, rgba(7,22,32,.72) 45%, rgba(7,22,32,.96) 100%)}
-  .hero-inner{position:relative; padding:56px 0 44px}
-  @media (min-width:720px){ .hero-inner{padding:80px 0 60px} }
+  .hero-inner{position:relative; padding-top:56px; padding-bottom:44px}
+  @media (min-width:720px){ .hero-inner{padding-top:80px; padding-bottom:60px} }
   .hero .eyebrow{color:#F7C169}
   .hero h1{font-size:clamp(2.5rem, 8vw, 5.2rem); font-weight:900; margin-top:10px; color:#fff}
   .hero h1 em{font-style:normal; color:#F7C169}
   .hero p.lead{color:#C9DBE0; font-size:1.05rem; margin-top:18px; max-width:56ch}
   .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
+  .hero .btn-ghost{color:#fff; border-color:rgba(255,255,255,.5)}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.1); border-color:#fff}
   .hero-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.14); border-radius:4px; margin-top:52px; overflow:hidden}
-  @media (min-width:640px){ .hero-stats{grid-template-columns:repeat(4,1fr)} }
-  .hero-stat{position:relative; background:rgba(9,26,37,.55); padding:20px 20px 18px; overflow:hidden; transition:background .35s ease, transform .35s ease}
+  @media (min-width:900px){ .hero-stats{grid-template-columns:repeat(4,1fr)} }
+  .hero-stat{position:relative; display:grid; grid-row:span 2; grid-template-rows:subgrid; background:rgba(9,26,37,.55); padding:20px 20px 18px; overflow:hidden; transition:background .35s ease, transform .55s ease, opacity .55s ease}
   .hero-stat::before{content:''; position:absolute; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, #7ADCF5, #F7C169); transition:width .8s cubic-bezier(.2,.8,.2,1) .15s}
   .hero-stat.in::before{width:100%}
-  .hero-stat:hover{background:rgba(122,220,245,.16); transform:translateY(-3px)}
-  .hero-stat b{display:block; font-family:'Big Shoulders Display'; font-size:2.1rem; font-weight:800; color:#fff; transition:color .35s ease}
+  .hero-stat:hover{background:rgba(122,220,245,.16)}
+  .hero-stat > *{transition:transform .35s ease}
+  .hero-stat:hover > *{transform:translateY(-3px)}
+  .hero-stat b{display:block; align-self:last baseline; font-family:'Big Shoulders Display'; font-size:2.1rem; font-weight:800; color:#fff}
+  .hero-stat b.hero-stat-text{font-size:1.15rem}
   .hero-stat:nth-child(odd) b{color:#7ADCF5}
   .hero-stat:nth-child(even) b{color:#F7C169}
-  .hero-stat span{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; color:#9FC1C9; text-transform:uppercase}
+  .hero-stat span{margin-top:5px; font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; color:#9FC1C9; text-transform:uppercase}
 
+  .promo-section{padding-bottom:0}
   .promo-banner{background:var(--navy); color:#fff; border-radius:6px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap}
   .promo-banner-facts{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
   .promo-stat{display:flex; flex-direction:column; line-height:1.1}
@@ -215,12 +229,13 @@
   .division-flagship::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(242,169,59,.22), transparent 62%); pointer-events:none}
   .division-flagship > *{position:relative}
   .division-flagship .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:#9FC1C9; letter-spacing:.08em}
-  .division-flagship .role{font-family:'IBM Plex Mono'; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--amber-strong); background:rgba(242,169,59,.16); padding:4px 9px; border-radius:2px; display:inline-block; margin-top:10px}
   .division-flagship h3{font-size:clamp(1.8rem,4vw,2.6rem); color:#fff; margin-top:12px}
   .division-flagship p{color:#C9DBE0; margin-top:12px; max-width:60ch; font-size:.95rem}
   .division-flagship .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
   .division-flagship .tag-row span{font-family:'IBM Plex Mono'; font-size:.68rem; color:#D3E2E5; border:1px solid rgba(255,255,255,.25); border-radius:2px; padding:4px 9px}
-  .divisions-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .divisions-grid{display:grid; gap:20px; grid-template-columns:1fr}
+  @media (min-width:640px){ .divisions-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:1100px){ .divisions-grid{grid-template-columns:repeat(4,1fr)} }
   .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
   .division:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(12,34,51,.1); border-color:var(--teal)}
   .division .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute); letter-spacing:.08em}
@@ -230,7 +245,6 @@
   .division .tag-row{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:auto; padding-top:6px}
   .division .tag-row span{font-family:'IBM Plex Mono'; font-size:.64rem; color:var(--ink-mute); border:1px solid var(--line); border-radius:2px; padding:3px 7px}
   .division.soon{opacity:.8}
-  .division.soon .role{background:var(--teal-soft); color:var(--teal-strong)}
   .division-link{font-size:.86rem; font-weight:600; color:var(--teal-strong); text-decoration:none; margin-top:4px}
   .division-link:hover{text-decoration:underline}
   .division-logo{height:38px; width:auto; align-self:center; display:block}
@@ -239,9 +253,18 @@
   .division-logo-chip .division-logo{height:26px}
 
   /* ============ QUICKLINKS (inicio) ============ */
-  .quicklinks{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .quicklinks{display:grid; gap:14px; grid-template-columns:1fr}
+  @media (min-width:760px){
+    .quicklinks{grid-template-columns:repeat(6,1fr)}
+    .quicklink{grid-column:span 2}
+    .quicklink:nth-child(n+4){grid-column:span 3}
+  }
+  @media (min-width:1100px){
+    .quicklinks{grid-template-columns:repeat(5,1fr)}
+    .quicklink, .quicklink:nth-child(n+4){grid-column:auto}
+  }
   .quicklink{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:22px; text-decoration:none; display:flex; flex-direction:column; gap:6px; transition:border-color .15s ease, transform .15s ease; box-shadow:var(--shadow)}
-  .quicklink:hover{border-color:var(--teal); transform:translateY(-2px)}
+  .quicklink:hover, .quicklink:focus-visible{border-color:var(--teal); transform:translateY(-2px)}
   .quicklink .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute)}
   .quicklink b{font-family:'Big Shoulders Display'; font-size:1.25rem; text-transform:uppercase; color:var(--ink); font-weight:800}
   .quicklink em{font-style:normal; font-size:.82rem; color:var(--ink-mute)}
@@ -431,7 +454,8 @@
   .social-row button:hover{background:rgba(255,255,255,.1)}
 
   /* ============ WHATSAPP FAB ============ */
-  .fab{position:fixed; right:20px; bottom:20px; z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.5); text-decoration:none; transition:transform .15s ease, filter .15s ease; animation:fab-pulse 2.8s ease-out infinite}
+  .fab{position:fixed; right:calc(20px + env(safe-area-inset-right, 0px)); bottom:calc(20px + env(safe-area-inset-bottom, 0px)); z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.5); text-decoration:none; transition:transform .15s ease, filter .15s ease, opacity .2s ease, visibility 0s; animation:fab-pulse 2.8s ease-out infinite}
+  .fab.fab-away, body.nav-open .fab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s linear .2s}
   .fab:hover{filter:brightness(1.06); transform:scale(1.06); animation-play-state:paused}
   .fab-badge{position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:50%; border:2px solid var(--paper); background:var(--navy); box-shadow:0 1px 3px rgba(0,0,0,.3)}
   @keyframes fab-pulse{
@@ -455,8 +479,8 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="#inicio">
-      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
-      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" width="917" height="431" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" width="917" height="431" alt="Macias Logistics">
     </a>
     <nav class="primary" id="primaryNav">
       <a href="#inicio">Inicio</a>
@@ -467,11 +491,12 @@
       <a href="#galeria">Galería</a>
       <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
       <a href="#contacto">Contacto</a>
+      <a class="nav-phone mono" href="tel:+13056156007,0">+1 305 615 6007 ext. 0</a>
     </nav>
     <a class="phone-link mono" href="tel:+13056156007,0">+1 305 615 6007 ext. 0</a>
     <div class="header-actions">
       <a class="brand-secondary" href="#grupo" aria-label="Henex Worldwide Group — operación en Cuba">
-        <img class="henex-logo" src="img/logo-henex-mark.svg" alt="Henex Worldwide Group">
+        <img class="henex-logo" src="img/logo-henex-mark.svg" width="687" height="240" alt="Henex Worldwide Group">
       </a>
       <button class="navburger" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav"><span></span></button>
     </div>
@@ -481,7 +506,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" data-page="inicio" style="padding:0">
   <div class="hero-media">
-    <img src="img/hero.jpg" alt="Autos y camiones listos para embarcar en Puerto Everglades">
+    <img src="img/hero.jpg" width="2000" height="1121" fetchpriority="high" alt="Autos y camiones listos para embarcar en Puerto Everglades">
   </div>
   <div class="wrap hero-inner">
     <span class="eyebrow reveal">GRUPO CONNECTINGCUBA · DESDE 2018</span>
@@ -489,23 +514,23 @@
     <p class="lead reveal">Movemos vehículos, mercancías y oportunidades para quienes hacen crecer sus negocios en Cuba. ConnectingCuba reúne a un grupo de cinco empresas encabezado por Macias Logistics LLC, nuestra compañía principal en Estados Unidos. Combinamos comercio internacional, exportación y operaciones en destino para conectar cada parte del proceso.</p>
     <p class="lead reveal" style="margin-top:12px">Estamos activos desde 2018 y en 2023 pusimos en marcha nuestra división Cuba. Hoy sumamos conexiones comerciales desde Europa, operaciones propias en La Habana y nuevas plataformas de compra para ampliar el acceso a productos, equipos y piezas. Con atención directa y un propósito claro: que tu próximo paso cuente con el respaldo de todo un grupo.</p>
     <div class="hero-ctas reveal">
-      <a class="btn btn-primary" href="https://wa.me/17865200009" target="_blank" rel="noopener">
+      <a class="btn btn-primary" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-        Comunícate con nosotros
+        <span>Comunícate con nosotros<span class="sr-only"> por WhatsApp (se abre en una pestaña nueva)</span></span>
       </a>
-      <a class="btn btn-ghost" href="#grupo" style="color:#fff; border-color:rgba(255,255,255,.5)">Conoce el grupo ↓</a>
+      <a class="btn btn-ghost" href="#grupo"><span>Conoce el grupo <span aria-hidden="true">↓</span></span></a>
     </div>
     <div class="hero-stats">
       <div class="hero-stat reveal"><b data-count="2018">2018</b><span>Inicio de operaciones</span></div>
       <div class="hero-stat reveal"><b data-count="2023">2023</b><span>Nace la división Cuba</span></div>
       <div class="hero-stat reveal"><b data-count="5">5</b><span>Empresas del grupo</span></div>
-      <div class="hero-stat reveal"><b style="font-size:1.15rem">EE. UU. · EUROPA · CUBA</b><span>Nuestra conexión comercial</span></div>
+      <div class="hero-stat reveal"><b class="hero-stat-text">EE. UU. · EUROPA · CUBA</b><span>Nuestra conexión comercial</span></div>
     </div>
   </div>
 </section>
 
 <!-- ============ FRANJA PROMOCIONAL (inicio) ============ -->
-<section data-page="inicio">
+<section class="promo-section" data-page="inicio">
   <div class="wrap">
     <div class="promo-banner reveal">
       <div class="promo-banner-facts">
@@ -549,7 +574,7 @@
       <p style="margin-top:10px">Nuestra actividad comenzó en 2018. En 2023 creamos la división Cuba para impulsar una conexión comercial que hoy incorpora operaciones en La Habana y relaciones comerciales desde Europa. Cada empresa aporta una capacidad concreta. Juntas, dan respaldo a cada nueva oportunidad.</p>
     </div>
     <div class="division-flagship reveal">
-      <img class="division-logo" src="img/logo-macias-white.png" alt="Macias Logistics">
+      <img class="division-logo" src="img/logo-macias-white.png" width="917" height="431" loading="lazy" alt="">
       <span class="code">COMPAÑÍA PRINCIPAL · ESTADOS UNIDOS</span>
       <h3>Macias Logistics LLC</h3>
       <p>Desde Estados Unidos, encabezamos el grupo y gestionamos la exportación de vehículos y maquinaria hacia Cuba. Autos, vehículos utilitarios, camiones, autobuses y equipos agrícolas para distintas necesidades personales y comerciales. Te acompañamos en la coordinación de tu operación, con atención directa y un equipo presente en Estados Unidos y Cuba.</p>
@@ -557,23 +582,23 @@
     </div>
     <div class="divisions-grid">
       <div class="division reveal">
-        <img class="division-logo brand-logo-light" src="img/logo-ola.png" alt="Ola International Trading">
-        <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" alt="Ola International Trading">
+        <img class="division-logo brand-logo-light" src="img/logo-ola.png" width="834" height="530" loading="lazy" alt="">
+        <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" width="834" height="530" loading="lazy" alt="">
         <span class="code">COMERCIO INTERNACIONAL</span>
         <h3>Ola International Trading</h3>
         <p>Ampliamos las opciones de abastecimiento del grupo a través del comercio internacional, principalmente desde Europa. Conectamos proveedores y oportunidades de compra con las necesidades de nuestros clientes, sumando nuevos mercados a nuestra actividad comercial con Cuba y Estados Unidos.</p>
         <div class="tag-row"><span>Conexión con Europa</span><span>Comercio internacional</span><span>Abastecimiento</span></div>
       </div>
       <div class="division reveal">
-        <img class="division-logo brand-logo-light" src="img/logo-henex.png" alt="Henex Worldwide Group">
-        <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" alt="Henex Worldwide Group">
+        <img class="division-logo brand-logo-light" src="img/logo-henex.png" width="936" height="323" loading="lazy" alt="">
+        <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" width="936" height="323" loading="lazy" alt="">
         <span class="code">OPERACIONES EN CUBA</span>
         <h3>Henex Worldwide Group</h3>
         <p>Somos la filial que dirige y coordina la operación del grupo en Cuba. Desde La Habana, nos encargamos de las operaciones locales y de dar continuidad al trabajo de nuestras empresas en destino. Una presencia propia para conectar la gestión internacional con lo que ocurre en la isla.</p>
         <div class="tag-row"><span>Operación en Cuba</span><span>Equipo en La Habana</span><span>Coordinación local</span></div>
       </div>
       <div class="division soon reveal">
-        <img class="division-logo" src="img/logo-metele.png" alt="Metele">
+        <img class="division-logo" src="img/logo-metele.png" width="739" height="195" loading="lazy" alt="">
         <span class="code">COMERCIO ELECTRÓNICO</span>
         <span class="role">En desarrollo</span>
         <h3>Metele</h3>
@@ -581,12 +606,12 @@
         <div class="tag-row"><span>Múltiples vendedores</span><span>Variedad de productos</span><span>Próximamente</span></div>
       </div>
       <div class="division reveal">
-        <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" alt="Prime Truck USA"></span>
+        <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" width="1402" height="295" loading="lazy" alt=""></span>
         <span class="code">PIEZAS Y REPUESTOS</span>
         <h3>Prime Truck USA</h3>
         <p>Un marketplace especializado en piezas para camiones y vehículos pesados, con stock real y almacenes en Cuba. Reunimos en una plataforma repuestos para el mantenimiento y la reparación de los vehículos que mueven tu negocio, con existencias físicas en la isla.</p>
         <div class="tag-row"><span>Piezas para camiones</span><span>Stock real</span><span>Almacenes en Cuba</span></div>
-        <a class="division-link" href="https://www.primetruckusa.com" target="_blank" rel="noopener">Visitar sitio ↗</a>
+        <a class="division-link" href="https://www.primetruckusa.com" target="_blank" rel="noopener noreferrer">Visitar sitio <span aria-hidden="true">↗</span><span class="sr-only"> de Prime Truck USA (se abre en una pestaña nueva)</span></a>
       </div>
     </div>
   </div>
@@ -1345,22 +1370,64 @@
 
   // mobile nav
   const navToggle = document.getElementById('navToggle');
-  navToggle.addEventListener('click', () => {
-    const open = document.body.classList.toggle('nav-open');
-    navToggle.setAttribute('aria-expanded', open);
+  const primaryNav = document.getElementById('primaryNav');
+  const siteHeader = document.querySelector('header.site');
+  const isNavOpen = () => document.body.classList.contains('nav-open');
+  const placeNav = () => primaryNav.style.setProperty('--nav-top', siteHeader.getBoundingClientRect().bottom + 'px');
+  function setNavOpen(open, returnFocus){
+    if (open === isNavOpen()) return;
+    if (open) {
+      // compensa la barra de scroll que desaparece al bloquear el body, para que el header no salte
+      const sbw = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = sbw > 0 ? sbw + 'px' : '';
+      placeNav();
+    } else {
+      document.body.style.paddingRight = '';
+    }
+    document.body.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    document.querySelectorAll('body > :not(header.site):not(script)').forEach(el => { el.inert = open; });
+    if (!open && returnFocus) navToggle.focus();
+  }
+  navToggle.addEventListener('click', (e) => {
+    const open = !isNavOpen();
+    setNavOpen(open);
+    if (open && e.detail === 0) primaryNav.querySelector('a').focus({preventScroll: true});
   });
-  document.querySelectorAll('nav.primary a').forEach(a => a.addEventListener('click', () => {
-    document.body.classList.remove('nav-open');
-    navToggle.setAttribute('aria-expanded', false);
-  }));
+  primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isNavOpen()) setNavOpen(false, true); });
+  window.matchMedia('(min-width:1024px)').addEventListener('change', (e) => { if (e.matches) setNavOpen(false); });
+  window.addEventListener('resize', () => { if (isNavOpen()) placeNav(); });
+
+  // WhatsApp flotante: se aparta mientras quedaría encima del texto o los CTA del hero (que ya ofrece el mismo WhatsApp)
+  const fab = document.querySelector('.fab');
+  const heroText = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero p.lead');
+  const heroBoxes = document.querySelectorAll('.hero-ctas .btn, .hero-stat');
+  const heroRange = document.createRange();
+  function updateFab(){
+    const pad = 8, l = fab.offsetLeft - pad, t = fab.offsetTop - pad, r = fab.offsetLeft + fab.offsetWidth + pad, b = fab.offsetTop + fab.offsetHeight + pad;
+    const rects = [...heroBoxes].map(el => el.getBoundingClientRect());
+    heroText.forEach(el => { heroRange.selectNodeContents(el); rects.push(...heroRange.getClientRects()); });
+    // franja vertical del contenido del hero que cae en la columna del botón: evita que parpadee entre bloques
+    let top = Infinity, bottom = -Infinity;
+    rects.forEach(rc => { if (rc.width && rc.left < r && rc.right > l) { top = Math.min(top, rc.top); bottom = Math.max(bottom, rc.bottom); } });
+    fab.classList.toggle('fab-away', top < b && bottom > t);
+  }
+  let fabFrame = 0;
+  const queueFab = () => { if (!fabFrame) fabFrame = requestAnimationFrame(() => { fabFrame = 0; updateFab(); }); };
+  window.addEventListener('scroll', queueFab, {passive: true});
+  window.addEventListener('resize', queueFab);
 
   // ===== Router de páginas =====
   const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','preguntas-frecuentes','contacto'];
   const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', 'preguntas-frecuentes':'Preguntas frecuentes', contacto:'Contacto'};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  let currentPage = null;
   function showPage(page){
     if (!PAGES.includes(page)) page = 'inicio';
+    currentPage = page;
     document.querySelectorAll('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; });
     document.querySelectorAll('nav.primary a').forEach(a => {
       const isActive = a.getAttribute('href') === '#' + page;
@@ -1368,7 +1435,7 @@
       if (isActive) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.title = page === 'inicio' ? PAGE_TITLES.inicio : PAGE_TITLES[page] + ' · ConnectingCuba';
-    window.scrollTo(0, 0);
+    window.scrollTo({top: 0, behavior: 'instant'});
     const revealEls = document.querySelectorAll(`[data-page="${page}"] .reveal, [data-page="${page}"] .step`);
     if (reduceMotion) {
       revealEls.forEach(el => {
@@ -1385,6 +1452,8 @@
         }, Math.min(i * 35, 300)));
       }));
     }
+    updateFab();
+    setTimeout(updateFab, 900);
   }
 
   function animateCount(el){
@@ -1403,9 +1472,29 @@
     requestAnimationFrame(tick);
   }
 
-  function routeFromHash(){ showPage((location.hash || '#inicio').slice(1)); }
+  function routeFromHash(){
+    setNavOpen(false);
+    const id = decodeURIComponent((location.hash || '#inicio').slice(1));
+    const target = PAGES.includes(id) ? null : document.getElementById(id);
+    const host = target && target.closest('[data-page]');
+    const page = host ? host.dataset.page : id;
+    if (page !== currentPage) showPage(page);
+    if (host) target.scrollIntoView();
+  }
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
+
+  // #inicio no tiene elemento destino: si ya estás en Inicio, el enlace no haría nada
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const page = a.getAttribute('href').slice(1);
+    if (PAGES.includes(page) && page === currentPage && !document.getElementById(page)) {
+      e.preventDefault();
+      if (location.hash !== '#' + page) history.replaceState(null, '', '#' + page);
+      window.scrollTo({top: 0});
+    }
+  });
 
   // ===== Catálogo de vehículos autorizados (CEMA) =====
   // [marca, tipo, modelo]
