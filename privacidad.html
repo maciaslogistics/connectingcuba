@@ -1,8 +1,14 @@
 <!doctype html>
+<html lang="es">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Política de Privacidad · ConnectingCuba</title>
+<meta name="description" content="Política de Privacidad de ConnectingCuba: qué información recopilamos, cómo la usamos, con quién la compartimos y cuáles son tus derechos.">
+<link rel="canonical" href="https://www.connectingcuba.com/privacidad">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
@@ -81,11 +87,11 @@
 
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="index.html#inicio">
+    <a class="brand" href="/#inicio">
       <img class="brand-logo brand-logo-light" src="img/logo-macias.png" alt="Macias Logistics">
       <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" alt="Macias Logistics">
     </a>
-    <a class="btn" href="index.html#inicio">← Volver al sitio</a>
+    <a class="btn" href="/#inicio">← Volver al sitio</a>
   </div>
 </header>
 
@@ -95,9 +101,9 @@
     <h1 data-es="Política de Privacidad" data-en="Privacy Policy"></h1>
   </div>
 
-  <div class="lang-tabs" role="tablist" aria-label="Idioma / Language">
-    <button type="button" class="lang-tab" data-lang="es" role="tab">Español</button>
-    <button type="button" class="lang-tab" data-lang="en" role="tab">English</button>
+  <div class="lang-tabs" role="group" aria-label="Idioma / Language">
+    <button type="button" class="lang-tab" data-lang="es" lang="es">Español</button>
+    <button type="button" class="lang-tab" data-lang="en" lang="en">English</button>
   </div>
 
   <div class="legal-body" id="content-es" lang="es">
@@ -133,7 +139,7 @@
     <h2>10. Actualizaciones de esta política</h2>
     <p>Podemos actualizar esta Política de Privacidad. La fecha de la versión vigente se indicará al momento de su publicación.</p>
 
-    <p class="legal-updated">Última actualización: se indicará al publicar esta página.</p>
+    <p class="legal-updated">Última actualización: 26 de septiembre de 2026</p>
   </div>
 
   <div class="legal-body" id="content-en" lang="en" hidden>
@@ -169,7 +175,7 @@
     <h2>10. Updates to this policy</h2>
     <p>We may update this Privacy Policy. The date of the current version will be indicated when it is published.</p>
 
-    <p class="legal-updated">Last updated: to be indicated upon publication.</p>
+    <p class="legal-updated">Last updated: September 26, 2026</p>
   </div>
 </main>
 
@@ -182,22 +188,22 @@
       </div>
       <div>
         <h3>Empresas</h3>
-        <a href="index.html#grupo">Macias Logistics</a>
-        <a href="index.html#grupo">Ola International Trading</a>
-        <a href="index.html#grupo">Henex Worldwide Group</a>
-        <a href="index.html#grupo">Metele</a>
-        <a href="index.html#grupo">Prime Truck USA</a>
+        <a href="/#grupo">Macias Logistics</a>
+        <a href="/#grupo">Ola International Trading</a>
+        <a href="/#grupo">Henex Worldwide Group</a>
+        <a href="/#grupo">Metele</a>
+        <a href="/#grupo">Prime Truck USA</a>
       </div>
       <div>
         <h3>Sitio</h3>
-        <a href="index.html#calculadora">Configura tu envío</a>
-        <a href="index.html#vehiculos">Vehículos autorizados</a>
-        <a href="index.html#contacto">Contacto</a>
+        <a href="/#calculadora">Configura tu envío</a>
+        <a href="/#vehiculos">Vehículos autorizados</a>
+        <a href="/#contacto">Contacto</a>
       </div>
       <div>
         <h3>Legal</h3>
-        <a href="privacidad.html">Política de privacidad</a>
-        <a href="terminos.html">Términos y condiciones</a>
+        <a href="/privacidad">Política de privacidad</a>
+        <a href="/terminos">Términos y condiciones</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -220,7 +226,7 @@
       tabs.forEach(t => {
         const active = t.dataset.lang === lang;
         t.classList.toggle('active', active);
-        t.setAttribute('aria-selected', active);
+        t.setAttribute('aria-pressed', String(active));
       });
       titleEl.textContent = titleEl.dataset[lang];
       document.documentElement.lang = lang;

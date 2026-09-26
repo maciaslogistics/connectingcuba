@@ -1,9 +1,104 @@
 <!doctype html>
+<html lang="es">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ConnectingCuba</title>
+<title>ConnectingCuba · Conectamos Estados Unidos con Cuba</title>
+<meta name="description" content="Movemos vehículos, mercancías y oportunidades para quienes hacen crecer sus negocios en Cuba. Un grupo de cinco empresas encabezado por Macias Logistics LLC.">
+<link rel="canonical" href="https://www.connectingcuba.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConnectingCuba">
+<meta property="og:locale" content="es_LA">
+<meta property="og:url" content="https://www.connectingcuba.com/">
+<meta property="og:title" content="ConnectingCuba · Conectamos Estados Unidos con Cuba">
+<meta property="og:description" content="Movemos vehículos, mercancías y oportunidades para quienes hacen crecer sus negocios en Cuba. Un grupo de cinco empresas encabezado por Macias Logistics LLC.">
+<meta property="og:image" content="https://www.connectingcuba.com/img/hero.jpg">
+<meta property="og:image:width" content="2000">
+<meta property="og:image:height" content="1121">
+<meta property="og:image:alt" content="Autos y camiones listos para embarcar en Puerto Everglades">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ConnectingCuba · Conectamos Estados Unidos con Cuba">
+<meta name="twitter:description" content="Movemos vehículos, mercancías y oportunidades para quienes hacen crecer sus negocios en Cuba. Un grupo de cinco empresas encabezado por Macias Logistics LLC.">
+<meta name="twitter:image" content="https://www.connectingcuba.com/img/hero.jpg">
+<meta name="twitter:image:alt" content="Autos y camiones listos para embarcar en Puerto Everglades">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@graph": [
+    {
+     "@type": "Organization",
+     "@id": "https://www.connectingcuba.com/#organization",
+     "name": "ConnectingCuba",
+     "url": "https://www.connectingcuba.com/",
+     "description": "Comercio internacional, logística y soluciones de compra. Conectamos Estados Unidos, Europa y Cuba.",
+     "email": "info@connectingcuba.com",
+     "contactPoint": [
+      {
+       "@type": "ContactPoint",
+       "contactType": "customer service",
+       "name": "Oficina en Estados Unidos",
+       "telephone": "+1 305 615 6007 ext. 0",
+       "areaServed": "US",
+       "availableLanguage": "es"
+      },
+      {
+       "@type": "ContactPoint",
+       "contactType": "customer service",
+       "name": "WhatsApp",
+       "telephone": "+1 786 520 0009",
+       "areaServed": "US",
+       "availableLanguage": "es"
+      },
+      {
+       "@type": "ContactPoint",
+       "contactType": "customer support",
+       "name": "Soporte en Cuba",
+       "telephone": "+53 5 6368 7207",
+       "email": "info@connectingcuba.com",
+       "areaServed": "CU",
+       "availableLanguage": "es"
+      }
+     ],
+     "subOrganization": [
+      {
+       "@type": "Organization",
+       "name": "Macias Logistics LLC"
+      },
+      {
+       "@type": "Organization",
+       "name": "Ola International Trading"
+      },
+      {
+       "@type": "Organization",
+       "name": "Henex Worldwide Group"
+      },
+      {
+       "@type": "Organization",
+       "name": "Metele"
+      },
+      {
+       "@type": "Organization",
+       "name": "Prime Truck USA",
+       "url": "https://www.primetruckusa.com"
+      }
+     ]
+    },
+    {
+     "@type": "WebSite",
+     "@id": "https://www.connectingcuba.com/#website",
+     "url": "https://www.connectingcuba.com/",
+     "name": "ConnectingCuba",
+     "inLanguage": "es",
+     "publisher": {
+      "@id": "https://www.connectingcuba.com/#organization"
+     }
+    }
+   ]
+  }
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   /* ============ TOKENS ============ */
@@ -64,6 +159,9 @@
 
   *{box-sizing:border-box}
   [hidden]{display:none !important}
+  .skip-link{position:absolute; left:16px; top:-64px; z-index:120; background:var(--navy); color:#fff; padding:10px 16px; border-radius:3px; font-weight:600; font-size:.92rem; text-decoration:none}
+  .skip-link:focus{top:12px}
+  #contenido:focus{outline:none}
   .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important} }
@@ -221,7 +319,7 @@
 
   /* ============ SECTION HEADS ============ */
   .head{max-width:56ch; margin-bottom:44px}
-  .head h2{font-size:clamp(1.9rem,4.4vw,2.9rem); margin-top:8px; color:var(--ink)}
+  .head h1, .head h2{font-size:clamp(1.9rem,4.4vw,2.9rem); margin-top:8px; color:var(--ink)}
   .head p{margin-top:14px}
 
   /* ============ DIVISIONS ============ */
@@ -229,7 +327,7 @@
   .division-flagship::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(242,169,59,.22), transparent 62%); pointer-events:none}
   .division-flagship > *{position:relative}
   .division-flagship .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:#9FC1C9; letter-spacing:.08em}
-  .division-flagship h3{font-size:clamp(1.8rem,4vw,2.6rem); color:#fff; margin-top:12px}
+  .division-flagship h2{font-size:clamp(1.8rem,4vw,2.6rem); color:#fff; margin-top:12px}
   .division-flagship p{color:#C9DBE0; margin-top:12px; max-width:60ch; font-size:.95rem}
   .division-flagship .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
   .division-flagship .tag-row span{font-family:'IBM Plex Mono'; font-size:.68rem; color:#D3E2E5; border:1px solid rgba(255,255,255,.25); border-radius:2px; padding:4px 9px}
@@ -239,7 +337,7 @@
   .division{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:26px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
   .division:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(12,34,51,.1); border-color:var(--teal)}
   .division .code{font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-mute); letter-spacing:.08em}
-  .division h3{font-size:1.35rem; color:var(--ink)}
+  .division h2{font-size:1.35rem; color:var(--ink)}
   .division .role{font-family:'IBM Plex Mono'; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-strong); background:var(--teal-soft); padding:4px 9px; border-radius:2px; align-self:center}
   .division p{font-size:.88rem; margin:0}
   .division .tag-row{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:auto; padding-top:6px}
@@ -305,6 +403,7 @@
   .summary-ctas{display:flex; flex-direction:column; gap:10px; margin-top:18px}
   .summary-ctas .btn-ghost{color:#fff; border-color:rgba(255,255,255,.4)}
   .summary-ctas .btn-ghost:hover{background:rgba(255,255,255,.1); border-color:#fff}
+  .cfg-contact h2{font-size:1.17em}
   .cfg-contact{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:32px; margin-top:48px}
   .cfg-contact-form{display:grid; gap:0; margin-top:20px; max-width:480px}
   /* ============ PREGUNTAS FRECUENTES ============ */
@@ -318,7 +417,7 @@
   .faq-block details p{margin-top:10px; font-size:.88rem; line-height:1.6}
   .faq-block details p + p{margin-top:10px}
   .faq-closing{background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:36px; margin-top:56px; text-align:center}
-  .faq-closing h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.4rem; font-weight:700; color:var(--ink)}
+  .faq-closing h2{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.4rem; font-weight:700; color:var(--ink)}
   .faq-closing p{color:var(--ink-mute); max-width:56ch; margin:10px auto 22px}
   .faq-closing-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
 
@@ -333,12 +432,12 @@
   .step:last-child{border-bottom:1px solid var(--line)}
   .step-num{font-family:'Big Shoulders Display'; font-weight:800; font-size:2.1rem; color:var(--line); line-height:1}
   .step:hover .step-num, .step.in .step-num{color:var(--amber)}
-  .step h3{font-size:1.15rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
+  .step h2{font-size:1.15rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:var(--ink)}
   .step p{margin-top:6px; font-size:.92rem}
   .step-list{margin:8px 0; padding-left:18px; color:var(--ink-mute); font-size:.92rem; line-height:1.7; max-width:62ch}
   .step-list li{margin-bottom:2px}
   .requirements{background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:28px; margin-top:44px}
-  .requirements h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.1rem; font-weight:700; color:var(--ink)}
+  .requirements h2{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.1rem; font-weight:700; color:var(--ink)}
   .requirements ul{margin:14px 0 20px; padding-left:20px; color:var(--ink-mute); font-size:.9rem; line-height:1.8; max-width:62ch}
   .requirements li{margin-bottom:2px}
   .fase3-note{font-size:.88rem; margin-top:20px}
@@ -387,7 +486,7 @@
   @media (min-width:800px){ .trust .wrap{grid-template-columns:repeat(3,1fr)} }
   .trust-item{display:flex; gap:14px; align-items:flex-start}
   .trust-item svg{flex:none; margin-top:2px; color:#F7C169}
-  .trust-item h3{font-size:1rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:#fff}
+  .trust-item h2{font-size:1rem; text-transform:none; letter-spacing:0; font-family:'IBM Plex Sans'; font-weight:700; color:#fff}
   .trust-item p{color:#AEC7CD; font-size:.85rem; margin-top:4px}
 
   /* ============ GALLERY ============ */
@@ -450,7 +549,7 @@
   .cuba-support-icon{position:relative; flex:none; color:#F7C169; display:block}
   @media (prefers-reduced-motion: reduce){ .cuba-support-icon-wrap::before{animation:none} }
   @keyframes cubaPing{0%{transform:scale(.55); opacity:.8} 70%{transform:scale(1.7); opacity:0} 100%{transform:scale(1.7); opacity:0}}
-  .cuba-support h3{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.15rem; font-weight:700; color:#fff}
+  .cuba-support h2{font-family:'IBM Plex Sans'; text-transform:none; letter-spacing:0; font-size:1.15rem; font-weight:700; color:#fff}
   .cuba-support p{color:#C9DBE0; font-size:.9rem; margin-top:8px; line-height:1.6}
   .cuba-support-rows{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
   .cuba-support-item{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:20px; padding:9px 16px; font-size:.84rem; font-weight:600; color:#fff; text-decoration:none; transition:background .2s ease, transform .2s ease, border-color .2s ease}
@@ -466,8 +565,8 @@
   .footer-brand-name{font-family:'Big Shoulders Display'; font-weight:800; font-size:1.6rem; letter-spacing:.01em; color:#fff; margin-bottom:14px}
   .footer-desc{color:#B9CDD3; font-size:.88rem; line-height:1.65; max-width:36ch; margin-bottom:18px}
   .footer-corp-id{color:#8FADB5; font-size:.8rem; line-height:1.6; margin-bottom:10px}
-  .footer-companies{color:#6E8D95; font-size:.76rem; line-height:1.65; max-width:40ch}
-  .footer-grid h4{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px}
+  .footer-companies{color:#7FA3AF; font-size:.76rem; line-height:1.65; max-width:40ch}
+  .footer-grid h2{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#7FA3AF; margin:0 0 14px; line-height:normal; text-wrap:wrap}
   .footer-grid a{display:block; font-size:.86rem; color:#D3E2E5; text-decoration:none; padding:4px 0; margin:-4px 0 9px}
   .footer-grid a:hover{color:#fff}
   .footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px; border-top:1px solid rgba(255,255,255,.1); margin-top:44px; padding-top:22px; font-size:.78rem; color:#7FA3AF}
@@ -493,6 +592,8 @@
 
   ::selection{background:var(--amber); color:#1A0F00}
 </style>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <!-- ============ ROUTE STRIP / BRAND TICKER ============ -->
 <div class="route-strip">
@@ -530,6 +631,7 @@
   </div>
 </header>
 
+<main id="contenido" tabindex="-1">
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" data-page="inicio" style="padding:0">
   <div class="hero-media">
@@ -596,14 +698,14 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">EL GRUPO</span>
-      <h2>Cinco empresas, una misma red</h2>
+      <h1>Cinco empresas, una misma red</h1>
       <p>ConnectingCuba reúne a cinco empresas con especialidades que se complementan: exportación, comercio internacional, operaciones en Cuba y plataformas de compra. Macias Logistics LLC encabeza el grupo desde Estados Unidos, con una visión compartida: acercar a nuestros clientes los recursos que necesitan para avanzar.</p>
       <p style="margin-top:10px">Nuestra actividad comenzó en 2018. En 2023 creamos la división Cuba para impulsar una conexión comercial que hoy incorpora operaciones en La Habana y relaciones comerciales desde Europa. Cada empresa aporta una capacidad concreta. Juntas, dan respaldo a cada nueva oportunidad.</p>
     </div>
     <div class="division-flagship reveal">
       <img class="division-logo" src="img/logo-macias-white.png" width="917" height="431" loading="lazy" alt="">
       <span class="code">COMPAÑÍA PRINCIPAL · ESTADOS UNIDOS</span>
-      <h3>Macias Logistics LLC</h3>
+      <h2>Macias Logistics LLC</h2>
       <p>Desde Estados Unidos, encabezamos el grupo y gestionamos la exportación de vehículos y maquinaria hacia Cuba. Autos, vehículos utilitarios, camiones, autobuses y equipos agrícolas para distintas necesidades personales y comerciales. Te acompañamos en la coordinación de tu operación, con atención directa y un equipo presente en Estados Unidos y Cuba.</p>
       <div class="tag-row"><span>Compañía principal</span><span>Vehículos y maquinaria</span><span>Exportación a Cuba</span><span>Atención directa</span></div>
     </div>
@@ -612,7 +714,7 @@
         <img class="division-logo brand-logo-light" src="img/logo-ola.png" width="834" height="530" loading="lazy" alt="">
         <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" width="834" height="530" loading="lazy" alt="">
         <span class="code">COMERCIO INTERNACIONAL</span>
-        <h3>Ola International Trading</h3>
+        <h2>Ola International Trading</h2>
         <p>Ampliamos las opciones de abastecimiento del grupo a través del comercio internacional, principalmente desde Europa. Conectamos proveedores y oportunidades de compra con las necesidades de nuestros clientes, sumando nuevos mercados a nuestra actividad comercial con Cuba y Estados Unidos.</p>
         <div class="tag-row"><span>Conexión con Europa</span><span>Comercio internacional</span><span>Abastecimiento</span></div>
       </div>
@@ -620,7 +722,7 @@
         <img class="division-logo brand-logo-light" src="img/logo-henex.png" width="936" height="323" loading="lazy" alt="">
         <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" width="936" height="323" loading="lazy" alt="">
         <span class="code">OPERACIONES EN CUBA</span>
-        <h3>Henex Worldwide Group</h3>
+        <h2>Henex Worldwide Group</h2>
         <p>Somos la filial que dirige y coordina la operación del grupo en Cuba. Desde La Habana, nos encargamos de las operaciones locales y de dar continuidad al trabajo de nuestras empresas en destino. Una presencia propia para conectar la gestión internacional con lo que ocurre en la isla.</p>
         <div class="tag-row"><span>Operación en Cuba</span><span>Equipo en La Habana</span><span>Coordinación local</span></div>
       </div>
@@ -628,14 +730,14 @@
         <img class="division-logo" src="img/logo-metele.png" width="739" height="195" loading="lazy" alt="">
         <span class="code">COMERCIO ELECTRÓNICO</span>
         <span class="role">En desarrollo</span>
-        <h3>Metele</h3>
+        <h2>Metele</h2>
         <p>Estamos construyendo un marketplace para Cuba: un espacio de compra que reunirá distintos vendedores y una amplia variedad de productos en una sola plataforma. Más opciones en un mismo lugar para conectar lo que buscas con quienes lo ofrecen.</p>
         <div class="tag-row"><span>Múltiples vendedores</span><span>Variedad de productos</span><span>Próximamente</span></div>
       </div>
       <div class="division reveal">
         <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" width="1402" height="295" loading="lazy" alt=""></span>
         <span class="code">PIEZAS Y REPUESTOS</span>
-        <h3>Prime Truck USA</h3>
+        <h2>Prime Truck USA</h2>
         <p>Un marketplace especializado en piezas para camiones y vehículos pesados, con stock real y almacenes en Cuba. Reunimos en una plataforma repuestos para el mantenimiento y la reparación de los vehículos que mueven tu negocio, con existencias físicas en la isla.</p>
         <div class="tag-row"><span>Piezas para camiones</span><span>Stock real</span><span>Almacenes en Cuba</span></div>
         <a class="division-link" href="https://www.primetruckusa.com" target="_blank" rel="noopener noreferrer">Visitar sitio <span aria-hidden="true">↗</span><span class="sr-only"> de Prime Truck USA (se abre en una pestaña nueva)</span></a>
@@ -649,7 +751,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">PROCESO DE ENVÍO</span>
-      <h2>Tu vehículo en Cuba, en cinco pasos</h2>
+      <h1>Tu vehículo en Cuba, en cinco pasos</h1>
       <p>Puedes entregarnos tu vehículo o adquirirlo a través de nuestra red de distribuidores autorizados. Desde la contratación hasta la entrega en Cuba, coordinamos cada etapa con supervisión de nuestros equipos en Estados Unidos y La Habana. Tú conoces el camino. Nosotros te acompañamos a recorrerlo.</p>
     </div>
 
@@ -658,9 +760,9 @@
       <span class="phase-owner">A cargo de Macias Logistics LLC</span>
     </div>
     <div class="timeline">
-      <div class="step reveal"><span class="step-num">01</span><div><h3>Selección y contratación</h3><p>El proceso comienza con el vehículo que quieres enviar: puede ser tuyo o puedes adquirirlo a través de nuestra red de distribuidores autorizados. Una vez seleccionado, iniciamos la contratación. Para ello, nos envías el título de propiedad, la factura de compraventa —Bill of Sale—, el número de motor y la información personal requerida para formalizar la operación.</p></div></div>
-      <div class="step reveal"><span class="step-num">02</span><div><h3>Reserva y coordinación logística</h3><p>Con la contratación finalizada y el vehículo aprobado para su envío a Cuba, ponemos en marcha la logística. Solicitamos la reserva de embarque —booking— a la naviera y coordinamos el ingreso del vehículo a nuestro lote en el puerto designado.</p></div></div>
-      <div class="step reveal"><span class="step-num">03</span><div><h3>Validación y liberación aduanal</h3><p>Una vez que el vehículo está en el puerto, gestionamos su validación ante la Oficina de Aduanas y Protección Fronteriza de Estados Unidos —CBP, por sus siglas en inglés—. Si se requiere una inspección física, coordinamos su solicitud. El vehículo queda listo para embarcar cuando CBP completa la validación y autoriza su salida.</p></div></div>
+      <div class="step reveal"><span class="step-num">01</span><div><h2>Selección y contratación</h2><p>El proceso comienza con el vehículo que quieres enviar: puede ser tuyo o puedes adquirirlo a través de nuestra red de distribuidores autorizados. Una vez seleccionado, iniciamos la contratación. Para ello, nos envías el título de propiedad, la factura de compraventa —Bill of Sale—, el número de motor y la información personal requerida para formalizar la operación.</p></div></div>
+      <div class="step reveal"><span class="step-num">02</span><div><h2>Reserva y coordinación logística</h2><p>Con la contratación finalizada y el vehículo aprobado para su envío a Cuba, ponemos en marcha la logística. Solicitamos la reserva de embarque —booking— a la naviera y coordinamos el ingreso del vehículo a nuestro lote en el puerto designado.</p></div></div>
+      <div class="step reveal"><span class="step-num">03</span><div><h2>Validación y liberación aduanal</h2><p>Una vez que el vehículo está en el puerto, gestionamos su validación ante la Oficina de Aduanas y Protección Fronteriza de Estados Unidos —CBP, por sus siglas en inglés—. Si se requiere una inspección física, coordinamos su solicitud. El vehículo queda listo para embarcar cuando CBP completa la validación y autoriza su salida.</p></div></div>
     </div>
 
     <div class="phase-head reveal">
@@ -668,7 +770,7 @@
       <span class="phase-owner">Del puerto de salida al puerto de Mariel</span>
     </div>
     <div class="timeline">
-      <div class="step reveal"><span class="step-num">04</span><div><h3>Embarque rumbo a Cuba</h3><p>Con la liberación aduanal completada, coordinamos el embarque del vehículo rumbo a Cuba. Nuestro equipo supervisa la operación de salida y mantiene la coordinación con el equipo en La Habana para preparar los siguientes pasos a su llegada.</p></div></div>
+      <div class="step reveal"><span class="step-num">04</span><div><h2>Embarque rumbo a Cuba</h2><p>Con la liberación aduanal completada, coordinamos el embarque del vehículo rumbo a Cuba. Nuestro equipo supervisa la operación de salida y mantiene la coordinación con el equipo en La Habana para preparar los siguientes pasos a su llegada.</p></div></div>
     </div>
 
     <div class="phase-head reveal">
@@ -676,7 +778,7 @@
       <span class="phase-owner">A cargo de Henex Worldwide Group</span>
     </div>
     <div class="timeline">
-      <div class="step reveal"><span class="step-num">05</span><div><h3>Extracción y entrega</h3><p>Al llegar a Cuba, nuestro equipo en La Habana gestiona el proceso de extracción y coordina contigo la entrega según el tipo de vehículo:</p>
+      <div class="step reveal"><span class="step-num">05</span><div><h2>Extracción y entrega</h2><p>Al llegar a Cuba, nuestro equipo en La Habana gestiona el proceso de extracción y coordina contigo la entrega según el tipo de vehículo:</p>
         <ul class="step-list">
           <li><strong>Vehículos ligeros y regulares:</strong> se entregan en nuestro lote, ubicado en las instalaciones de la importadora.</li>
           <li><strong>Vehículos comerciales y pesados:</strong> se entregan directamente en el puerto de Mariel, previa coordinación contigo.</li>
@@ -687,7 +789,7 @@
     <p class="fase3-note reveal">¿Tu vehículo ya está en Cuba? Habla con nuestro equipo en La Habana para conocer el estado de la extracción y coordinar los próximos pasos. <a href="#soporte-cuba">Contactar al equipo en Cuba</a>.</p>
 
     <div class="requirements reveal">
-      <h3>Lo que necesitas para comenzar</h3>
+      <h2>Lo que necesitas para comenzar</h2>
       <p>Una vez seleccionado el vehículo, reúne la documentación para iniciar la contratación:</p>
       <ul>
         <li>Título de propiedad del vehículo.</li>
@@ -700,7 +802,7 @@
     </div>
 
     <div class="requirements reveal">
-      <h3>Supervisión de principio a fin</h3>
+      <h2>Supervisión de principio a fin</h2>
       <p>Tu vehículo cuenta con el respaldo de nuestros equipos en Estados Unidos y Cuba. Supervisamos cada etapa y coordinamos a las partes involucradas, con altos estándares de cuidado y seguimiento para proteger el vehículo y reducir incidencias durante el proceso.</p>
     </div>
   </div>
@@ -711,7 +813,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">MACIAS LOGISTICS · CATÁLOGO CEMA</span>
-      <h2>Vehículos autorizados para Cuba</h2>
+      <h1>Vehículos autorizados para Cuba</h1>
       <p>Para enviar un vehículo a Cuba, su marca y modelo deben estar aprobados por el Comité Evaluador de Medios Automotores (CEMA) y cumplir los requisitos aplicables a la operación.</p>
       <p style="margin-top:10px">En Macias Logistics contamos con todas las licencias del Departamento de Comercio de Estados Unidos requeridas para nuestras operaciones de exportación a Cuba. Somos proveedores oficiales directos en Cuba y gestionamos tu operación a través de nuestros canales, sin intermediarios comerciales y conforme a las leyes vigentes en ambos países.</p>
       <p style="margin-top:10px">A continuación, te presentamos la lista oficial de vehículos que podemos gestionar bajo nuestros contratos y de los que somos proveedores directos en Cuba. Encuentra tu opción por marca, modelo o categoría: nuestro equipo te acompaña de principio a fin.</p>
@@ -1207,7 +1309,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">MACIAS LOGISTICS · PROMOCIÓN WEB</span>
-      <h2>Configura tu envío</h2>
+      <h1>Configura tu envío</h1>
       <p>Tu próximo envío comienza con un beneficio: hasta $500 de descuento en el flete. Completa el formulario online o solicita tu cotización a nuestro equipo desde esta web para acceder a la promoción. Selecciona tu vehículo, consulta el precio y da el siguiente paso con nosotros.</p>
       <p style="margin-top:10px; font-size:.88rem">Recibimos solicitudes para vehículos de turismo del año 2017 en adelante y camiones del año 2012 en adelante. Cada operación está sujeta a la revisión del vehículo y su documentación.</p>
     </div>
@@ -1293,7 +1395,7 @@
     </div>
 
     <div class="cfg-contact reveal" id="cfg-contact-anchor">
-      <h3>Solicita tu cotización con descuento</h3>
+      <h2>Solicita tu cotización con descuento</h2>
       <p style="margin-top:6px">Completa tus datos y envíanos tu solicitud para acceder a la promoción web. Nuestro equipo se pondrá en contacto contigo para revisar los detalles de tu envío. También puedes continuar por WhatsApp con la cotización que acabas de configurar.</p>
       <form class="cfg-contact-form" id="cfg-contact-form">
         <input type="hidden" name="access_key" value="fb605cfe-6569-4f2f-825c-e3b6fa166d8e">
@@ -1344,15 +1446,15 @@
   <div class="wrap">
     <div class="trust-item reveal">
       <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z" stroke="currentColor" stroke-width="1.6"/></svg>
-      <div><h3>Atención directa</h3><p>Hablamos contigo para entender qué necesitas y acompañarte durante tu operación. Con equipos en Estados Unidos y Cuba, tienes con quién contar en ambos lados.</p></div>
+      <div><h2>Atención directa</h2><p>Hablamos contigo para entender qué necesitas y acompañarte durante tu operación. Con equipos en Estados Unidos y Cuba, tienes con quién contar en ambos lados.</p></div>
     </div>
     <div class="trust-item reveal">
       <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6"/></svg>
-      <div><h3>Impulso a tu negocio</h3><p>Acercamos vehículos, maquinaria, mercancías y repuestos a quienes hacen crecer el sector privado cubano. Recursos para poner proyectos en marcha y mantener negocios en movimiento.</p></div>
+      <div><h2>Impulso a tu negocio</h2><p>Acercamos vehículos, maquinaria, mercancías y repuestos a quienes hacen crecer el sector privado cubano. Recursos para poner proyectos en marcha y mantener negocios en movimiento.</p></div>
     </div>
     <div class="trust-item reveal">
       <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <div><h3>Respaldo de grupo</h3><p>Cinco empresas con funciones que se complementan. Coordinamos comercio internacional, exportación y operaciones en Cuba para dar continuidad a cada etapa del proceso.</p></div>
+      <div><h2>Respaldo de grupo</h2><p>Cinco empresas con funciones que se complementan. Coordinamos comercio internacional, exportación y operaciones en Cuba para dar continuidad a cada etapa del proceso.</p></div>
     </div>
   </div>
 </section>
@@ -1362,7 +1464,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Galería</span>
-      <h2>El proceso, de punta a punta</h2>
+      <h1>El proceso, de punta a punta</h1>
       <p>Desde el puerto hasta la entrega final: fotos y videos reales, publicados con autorización de nuestros clientes.</p>
     </div>
 
@@ -1378,25 +1480,17 @@
   </div>
 </section>
 
-<!-- ============ LIGHTBOX ============ -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
-  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">✕</button>
-  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto anterior">‹</button>
-  <img id="lightbox-img" src="" alt="">
-  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto siguiente">›</button>
-</div>
-
 <!-- ============ PREGUNTAS FRECUENTES ============ -->
 <section id="preguntas-frecuentes" data-page="preguntas-frecuentes">
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">RESOLVEMOS TUS DUDAS</span>
-      <h2>Preguntas frecuentes</h2>
+      <h1>Preguntas frecuentes</h1>
       <p>Todo lo que necesitas saber para preparar tu envío, conocer el proceso y coordinar la entrega en Cuba. Si necesitas revisar un caso particular, comunícate con nuestro equipo a través de los canales oficiales.</p>
     </div>
 
     <div class="faq-block reveal">
-      <h3 class="faq-block-title">Bloque 1 · Compra y requisitos</h3>
+      <h2 class="faq-block-title">Bloque 1 · Compra y requisitos</h2>
       <details>
         <summary>1. ¿Puedo enviar un vehículo que ya tengo o comprarlo a través de ustedes?</summary>
         <p>Sí. Puedes enviarnos un vehículo de tu propiedad o adquirirlo a través de nuestra red de distribuidores autorizados. En ambos casos, nuestro equipo te acompaña con la contratación, la revisión documental y la coordinación del envío hasta su entrega en Cuba.</p>
@@ -1430,7 +1524,7 @@
     </div>
 
     <div class="faq-block reveal">
-      <h3 class="faq-block-title">Bloque 2 · Cotización y pagos</h3>
+      <h2 class="faq-block-title">Bloque 2 · Cotización y pagos</h2>
       <details>
         <summary>7. ¿Qué incluye el precio del flete y qué gastos se pagan por separado?</summary>
         <p>Nuestra tarifa comprende los servicios de gestión y transporte necesarios para coordinar tu envío: acreditación para la operación, preparación y tramitación de contratos, revisión documental, reserva de embarque, coordinación de ingreso al puerto, gestión de las validaciones aduanales y flete marítimo hacia Cuba.</p>
@@ -1456,7 +1550,7 @@
     </div>
 
     <div class="faq-block reveal">
-      <h3 class="faq-block-title">Bloque 3 · Seguro, preparación y envío</h3>
+      <h2 class="faq-block-title">Bloque 3 · Seguro, preparación y envío</h2>
       <details>
         <summary>11. ¿Cómo puedo contratar el seguro de transporte y qué cubre?</summary>
         <p>El seguro de transporte no está incluido en el flete y se contrata por separado con la naviera. Nuestro equipo te facilita las vías y la orientación necesarias para gestionarlo.</p>
@@ -1487,7 +1581,7 @@
     </div>
 
     <div class="faq-block reveal">
-      <h3 class="faq-block-title">Bloque 4 · Seguimiento y entrega en Cuba</h3>
+      <h2 class="faq-block-title">Bloque 4 · Seguimiento y entrega en Cuba</h2>
       <details>
         <summary>16. ¿Cómo recibo actualizaciones sobre el estado de mi envío?</summary>
         <p>Nuestro centro de atención está disponible a través del <a href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer">número oficial de WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>, donde puedes escribirnos o llamarnos dentro de nuestros horarios establecidos.</p>
@@ -1512,7 +1606,7 @@
     </div>
 
     <div class="faq-block reveal">
-      <h3 class="faq-block-title">Bloque 5 · Cancelaciones e incidencias</h3>
+      <h2 class="faq-block-title">Bloque 5 · Cancelaciones e incidencias</h2>
       <details>
         <summary>20. ¿Puedo cancelar el envío y solicitar un reembolso?</summary>
         <p>Sí, aceptamos solicitudes de cancelación. Si los contratos ya han sido elaborados y aprobados, la cancelación conlleva costes adicionales, que se determinarán según la fase de la operación y las gestiones realizadas.</p>
@@ -1528,7 +1622,7 @@
     </div>
 
     <div class="faq-closing reveal">
-      <h3>¿Tienes otra pregunta?</h3>
+      <h2>¿Tienes otra pregunta?</h2>
       <p>Cada operación tiene sus particularidades. Cuéntanos qué necesitas y nuestro equipo te ayudará a definir el siguiente paso.</p>
       <div class="faq-closing-ctas">
         <a class="btn btn-primary" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer"><span>Habla con nuestro equipo<span class="sr-only"> por WhatsApp (se abre en una pestaña nueva)</span></span></a>
@@ -1543,7 +1637,7 @@
   <div class="wrap">
     <div class="head reveal">
       <span class="eyebrow">Hablemos</span>
-      <h2>Solicita tu cotización</h2>
+      <h1>Solicita tu cotización</h1>
       <p>Cuéntanos qué vehículo quieres enviar y a qué empresa del grupo corresponde tu consulta.</p>
     </div>
     <div class="contact-grid">
@@ -1586,7 +1680,7 @@
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" class="cuba-support-icon" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
       </div>
       <div class="cuba-support-body">
-        <h3>¿Tu vehículo va camino a Cuba o ya llegó? Soporte en Cuba</h3>
+        <h2>¿Tu vehículo va camino a Cuba o ya llegó? Soporte en Cuba</h2>
         <p>Si tu vehículo ya salió hacia Cuba o ya está en la isla, nuestro equipo en La Habana te acompaña durante todo el proceso de extracción y entrega. Te damos seguimiento real de tu operación y coordinamos contigo cada paso hasta que lo recibas — comunícate directamente con nuestro equipo en Cuba por teléfono, WhatsApp o correo electrónico. Queremos que te sientas acompañado en cada etapa, con atención directa y respuestas claras hasta que tu vehículo llegue a tus manos.</p>
         <div class="cuba-support-rows">
           <a class="cuba-support-item" href="tel:+53563687207">
@@ -1608,6 +1702,8 @@
   </div>
 </section>
 
+</main>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
@@ -1620,13 +1716,13 @@
         <p class="footer-companies">Macias Logistics LLC · Ola International Trading · Henex Worldwide Group · Metele · Prime Truck USA</p>
       </div>
       <div>
-        <h4>Macias Logistics</h4>
+        <h2>Macias Logistics</h2>
         <a href="#calculadora">Configura tu envío</a>
         <a href="#vehiculos">Vehículos autorizados</a>
         <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
       </div>
       <div>
-        <h4>Contacto</h4>
+        <h2>Contacto</h2>
         <a href="tel:+13056156007,0" class="mono">+1 305 615 6007 ext. 0</a>
         <a href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer">WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
         <a href="#contacto">Formulario</a>
@@ -1635,9 +1731,9 @@
     <div class="footer-bottom">
       <span>© <span id="footer-year">2026</span> Macias Logistics LLC. Todos los derechos reservados.</span>
       <div class="footer-legal">
-        <a href="privacidad.html">Política de privacidad</a>
-        <span class="footer-legal-sep">|</span>
-        <a href="terminos.html">Términos y condiciones</a>
+        <a href="/privacidad">Política de privacidad</a>
+        <span class="footer-legal-sep" aria-hidden="true">|</span>
+        <a href="/terminos">Términos y condiciones</a>
       </div>
       <div class="social-row" aria-hidden="true">
         <span><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5h1.6V3.7c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.2H7.6V13h2.7v8h3.2Z"/></svg></span>
@@ -1648,7 +1744,15 @@
   </div>
 </footer>
 
-<a class="fab" href="https://wa.me/17865200009" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">✕</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto anterior">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto siguiente">›</button>
+</div>
+
+<a class="fab" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
   <img src="img/logo-macias-circle.png" alt="" aria-hidden="true" class="fab-badge">
 </a>
@@ -1961,7 +2065,7 @@
 
   // ===== Router de páginas =====
   const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','preguntas-frecuentes','contacto'];
-  const PAGE_TITLES = {inicio:'ConnectingCuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', 'preguntas-frecuentes':'Preguntas frecuentes', contacto:'Contacto'};
+  const PAGE_TITLES = {inicio:'ConnectingCuba · Conectamos Estados Unidos con Cuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', 'preguntas-frecuentes':'Preguntas frecuentes', contacto:'Contacto'};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let currentPage = null;
@@ -2033,6 +2137,12 @@
   }
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
+
+  // "Saltar al contenido": lleva el foco al contenido de la vista actual sin cambiar de página
+  document.querySelector('.skip-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('contenido').focus();
+  });
 
   // #inicio no tiene elemento destino: si ya estás en Inicio, el enlace no haría nada
   document.addEventListener('click', (e) => {

@@ -1,0 +1,24 @@
+/privacidad.html  /privacidad  301
+/terminos.html    /terminos    301
+
+# URLs del sitio anterior (GoDaddy) -> su equivalente actual, redirección permanente.
+# Rutas con tildes en forma codificada: Cloudflare normaliza la forma literal a esta misma regla.
+
+# Páginas legales antiguas
+/pol%C3%ADtica-de-privacidad-1  /privacidad  301
+/t%C3%A9rminos-y-condiciones-1  /terminos  301
+
+# Páginas de contenido antiguas -> vista equivalente de la web actual
+/veh%C3%ADculos-autorizados  /#vehiculos  301
+/blog/f/%C3%BAltimos-veh%C3%ADculos-autorizados  /#vehiculos  301
+/envio-de-autos  /#calculadora  301
+/nuestros-socios  /#grupo  301
+/galeria  /#galeria  301
+/remolques-y-plataformas  /#vehiculos  301
+
+# Sitemaps antiguos de GoDaddy -> sitemap actual
+/sitemap.website.xml  /sitemap.xml  301
+/sitemap.blog.xml  /sitemap.xml  301
+
+# Icono por defecto que piden navegadores y buscadores
+/favicon.ico  /img/favicon.png  301
