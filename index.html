@@ -22,8 +22,24 @@
 <meta name="twitter:image:alt" content="Autos y camiones listos para embarcar en Puerto Everglades">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>
+  // Vista inicial según el hash, antes del primer pintado: el CSS muestra solo esa vista hasta que el router
+  // toma el control (sin destello de la portada al entrar directo a otra vista) y solo la portada precarga su foto.
+  window.CC_PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','preguntas-frecuentes','contacto'];
+  document.documentElement.classList.add('cc-cargando');
+  (function(){
+    var id = 'inicio';
+    try { if (location.hash) id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+    if (CC_PAGES.indexOf(id) < 0) return; // anclas internas: decide el router
+    document.documentElement.setAttribute('data-view', id);
+    if (id !== 'inicio') return;
+    [['(max-width: 480px)', 'img/hero/hero-560.avif'], ['(min-width: 480.1px) and (max-width: 1024px)', 'img/hero/hero-1240.avif'], ['(min-width: 1024.1px)', 'img/hero/hero-2000.avif']].forEach(function (h) {
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'image'; l.type = 'image/avif'; l.media = h[0]; l.href = h[1]; l.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(l);
+    });
+  })();
+</script>
 <script type="application/ld+json">
   {
    "@context": "https://schema.org",
@@ -99,8 +115,19 @@
    ]
   }
 </script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
+  /* ============ FUENTES (alojadas en el sitio: los mismos archivos latinos de Google Fonts) ============ */
+  @font-face {font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/big-shoulders-display-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/big-shoulders-display-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 800; font-display: swap; src: url(fonts/big-shoulders-display-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 900; font-display: swap; src: url(fonts/big-shoulders-display-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/ibm-plex-mono-400-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/ibm-plex-mono-600-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; font-stretch: 100%; font-display: swap; src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 500; font-stretch: 100%; font-display: swap; src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; font-stretch: 100%; font-display: swap; src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+  @font-face {font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 700; font-stretch: 100%; font-display: swap; src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
   /* ============ TOKENS ============ */
   :root{
     --paper:#F1F4F3;
@@ -159,11 +186,23 @@
 
   *{box-sizing:border-box}
   [hidden]{display:none !important}
+  /* Hasta que el router toma el control, solo se pinta la vista inicial (data-view lo pone el script del <head>) */
+  html[data-view="inicio"] [data-page]:not([data-page="inicio"]),
+  html[data-view="grupo"] [data-page]:not([data-page="grupo"]),
+  html[data-view="proceso"] [data-page]:not([data-page="proceso"]),
+  html[data-view="vehiculos"] [data-page]:not([data-page="vehiculos"]),
+  html[data-view="calculadora"] [data-page]:not([data-page="calculadora"]),
+  html[data-view="galeria"] [data-page]:not([data-page="galeria"]),
+  html[data-view="preguntas-frecuentes"] [data-page]:not([data-page="preguntas-frecuentes"]),
+  html[data-view="contacto"] [data-page]:not([data-page="contacto"]){display:none}
   .skip-link{position:absolute; left:16px; top:-64px; z-index:120; background:var(--navy); color:#fff; padding:10px 16px; border-radius:3px; font-weight:600; font-size:.92rem; text-decoration:none}
   .skip-link:focus{top:12px}
   #contenido:focus{outline:none}
   .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
   html{scroll-behavior:smooth}
+  /* durante la carga, el salto automático del navegador al ancla del hash es inmediato (misma posición final):
+     un desplazamiento animado en ese momento cuenta como interacción y corta la medición del LCP */
+  html.cc-cargando{scroll-behavior:auto}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important} }
 
   body{
@@ -208,7 +247,7 @@
   /* ============ ROUTE STRIP / BRAND TICKER ============ */
   .route-strip{background:var(--navy); color:#CBDDE3; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; overflow:hidden}
   .ticker{overflow:hidden; width:100%; -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%); mask-image:linear-gradient(90deg, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%)}
-  .ticker-track{display:flex; align-items:center; gap:22px; width:max-content; padding:10px 0; animation:ticker-scroll 48s linear infinite}
+  .ticker-track{display:flex; align-items:center; gap:22px; width:max-content; padding:10px 0; animation:ticker-scroll 48s linear infinite; min-height:calc(1.3em + 20px) /* alto de su línea en IBM Plex Mono: la franja no crece al rellenarla el JS */}
   .ticker:hover .ticker-track{animation-play-state:paused}
   .ticker-item{flex:none; white-space:nowrap}
   .ticker-item.is-lead{color:#fff; font-weight:700}
@@ -607,8 +646,8 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="#inicio">
-      <img class="brand-logo brand-logo-light" src="img/logo-macias.png" width="917" height="431" alt="Macias Logistics">
-      <img class="brand-logo brand-logo-dark" src="img/logo-macias-white.png" width="917" height="431" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-light" src="img/logos/logo-macias-188.png" width="917" height="431" alt="Macias Logistics">
+      <img class="brand-logo brand-logo-dark" src="img/logos/logo-macias-white-188.png" width="917" height="431" alt="Macias Logistics">
     </a>
     <nav class="primary" id="primaryNav">
       <a href="#inicio">Inicio</a>
@@ -635,7 +674,27 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" data-page="inicio" style="padding:0">
   <div class="hero-media">
-    <img src="img/hero.jpg" width="2000" height="1121" fetchpriority="high" alt="Autos y camiones listos para embarcar en Puerto Everglades">
+    <!-- Recortes centrados de altura completa: la misma región que muestra object-fit:cover en cada ancho.
+         Sin src hasta que se muestra Inicio, para que las vistas internas no descarguen la foto. -->
+    <picture>
+      <source media="(max-width: 480px)" type="image/avif" data-srcset="img/hero/hero-560.avif" width="560" height="1121">
+      <source media="(max-width: 480px)" data-srcset="img/hero/hero-560.jpg" width="560" height="1121">
+      <source media="(max-width: 1024px)" type="image/avif" data-srcset="img/hero/hero-1240.avif" width="1240" height="1121">
+      <source type="image/avif" data-srcset="img/hero/hero-2000.avif">
+      <img id="hero-img" data-src="img/hero.jpg" width="2000" height="1121" alt="Autos y camiones listos para embarcar en Puerto Everglades">
+    </picture>
+    <script>
+      // Activa la foto del Hero (la primera vez que se muestra Inicio). En carga directa de la portada, aquí mismo:
+      // el archivo ya viene precargado desde el <head> con prioridad alta.
+      window.activateHero = function (priority) {
+        var img = document.getElementById('hero-img');
+        if (!img.dataset.src) return;
+        img.fetchPriority = priority;
+        img.parentNode.querySelectorAll('source[data-srcset]').forEach(function (s) { s.srcset = s.dataset.srcset; s.removeAttribute('data-srcset'); });
+        img.src = img.dataset.src; img.removeAttribute('data-src');
+      };
+      if (document.documentElement.getAttribute('data-view') === 'inicio') activateHero('high');
+    </script>
   </div>
   <div class="wrap hero-inner">
     <span class="eyebrow reveal">GRUPO CONNECTINGCUBA · DESDE 2018</span>
@@ -703,7 +762,7 @@
       <p style="margin-top:10px">Nuestra actividad comenzó en 2018. En 2023 creamos la división Cuba para impulsar una conexión comercial que hoy incorpora operaciones en La Habana y relaciones comerciales desde Europa. Cada empresa aporta una capacidad concreta. Juntas, dan respaldo a cada nueva oportunidad.</p>
     </div>
     <div class="division-flagship reveal">
-      <img class="division-logo" src="img/logo-macias-white.png" width="917" height="431" loading="lazy" alt="">
+      <img class="division-logo" src="img/logos/logo-macias-white-188.png" width="917" height="431" loading="lazy" alt="">
       <span class="code">COMPAÑÍA PRINCIPAL · ESTADOS UNIDOS</span>
       <h2>Macias Logistics LLC</h2>
       <p>Desde Estados Unidos, encabezamos el grupo y gestionamos la exportación de vehículos y maquinaria hacia Cuba. Autos, vehículos utilitarios, camiones, autobuses y equipos agrícolas para distintas necesidades personales y comerciales. Te acompañamos en la coordinación de tu operación, con atención directa y un equipo presente en Estados Unidos y Cuba.</p>
@@ -711,23 +770,23 @@
     </div>
     <div class="divisions-grid">
       <div class="division reveal">
-        <img class="division-logo brand-logo-light" src="img/logo-ola.png" width="834" height="530" loading="lazy" alt="">
-        <img class="division-logo brand-logo-dark" src="img/logo-ola-white.png" width="834" height="530" loading="lazy" alt="">
+        <img class="division-logo brand-logo-light" src="img/logos/logo-ola-136.png" width="834" height="530" loading="lazy" alt="">
+        <img class="division-logo brand-logo-dark" src="img/logos/logo-ola-white-136.png" width="834" height="530" loading="lazy" alt="">
         <span class="code">COMERCIO INTERNACIONAL</span>
         <h2>Ola International Trading</h2>
         <p>Ampliamos las opciones de abastecimiento del grupo a través del comercio internacional, principalmente desde Europa. Conectamos proveedores y oportunidades de compra con las necesidades de nuestros clientes, sumando nuevos mercados a nuestra actividad comercial con Cuba y Estados Unidos.</p>
         <div class="tag-row"><span>Conexión con Europa</span><span>Comercio internacional</span><span>Abastecimiento</span></div>
       </div>
       <div class="division reveal">
-        <img class="division-logo brand-logo-light" src="img/logo-henex.png" width="936" height="323" loading="lazy" alt="">
-        <img class="division-logo brand-logo-dark" src="img/logo-henex-white.png" width="936" height="323" loading="lazy" alt="">
+        <img class="division-logo brand-logo-light" src="img/logos/logo-henex-186.png" width="936" height="323" loading="lazy" alt="">
+        <img class="division-logo brand-logo-dark" src="img/logos/logo-henex-white-186.png" width="936" height="323" loading="lazy" alt="">
         <span class="code">OPERACIONES EN CUBA</span>
         <h2>Henex Worldwide Group</h2>
         <p>Somos la filial que dirige y coordina la operación del grupo en Cuba. Desde La Habana, nos encargamos de las operaciones locales y de dar continuidad al trabajo de nuestras empresas en destino. Una presencia propia para conectar la gestión internacional con lo que ocurre en la isla.</p>
         <div class="tag-row"><span>Operación en Cuba</span><span>Equipo en La Habana</span><span>Coordinación local</span></div>
       </div>
       <div class="division soon reveal">
-        <img class="division-logo" src="img/logo-metele.png" width="739" height="195" loading="lazy" alt="">
+        <img class="division-logo" src="img/logos/logo-metele-114.png" width="739" height="195" loading="lazy" alt="">
         <span class="code">COMERCIO ELECTRÓNICO</span>
         <span class="role">En desarrollo</span>
         <h2>Metele</h2>
@@ -735,7 +794,7 @@
         <div class="tag-row"><span>Múltiples vendedores</span><span>Variedad de productos</span><span>Próximamente</span></div>
       </div>
       <div class="division reveal">
-        <span class="division-logo-chip"><img class="division-logo" src="img/logo-primetruck.png" width="1402" height="295" loading="lazy" alt=""></span>
+        <span class="division-logo-chip"><img class="division-logo" src="img/logos/logo-primetruck-97.png" width="1402" height="295" loading="lazy" alt=""></span>
         <span class="code">PIEZAS Y REPUESTOS</span>
         <h2>Prime Truck USA</h2>
         <p>Un marketplace especializado en piezas para camiones y vehículos pesados, con stock real y almacenes en Cuba. Reunimos en una plataforma repuestos para el mantenimiento y la reparación de los vehículos que mueven tu negocio, con existencias físicas en la isla.</p>
@@ -1475,8 +1534,10 @@
     </div>
 
     <div class="video-grid reveal" id="gal-videos" hidden></div>
-    <div class="gal-grid reveal" id="gal-grid"></div>
-    <button type="button" class="btn btn-ghost gal-more" id="gal-more" hidden>Cargar más</button>
+    <!-- Reserva el hueco de la primera página (PAGE_SIZE = 12 fotos) y el botón visible, tal como los deja el script
+         con la pestaña inicial: si se pinta antes de que el script monte la galería, el pie de página no salta -->
+    <div class="gal-grid reveal" id="gal-grid"><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span><span class="gal-item" aria-hidden="true"></span></div>
+    <button type="button" class="btn btn-ghost gal-more" id="gal-more">Cargar más</button>
   </div>
 </section>
 
@@ -1707,7 +1768,7 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
-    <img src="img/logo-macias-circle.png" width="1024" height="1024" loading="lazy" decoding="async" alt="Macias Logistics" class="footer-badge">
+    <img src="img/logos/logo-macias-circle-234.png" width="1024" height="1024" loading="lazy" decoding="async" alt="Macias Logistics" class="footer-badge">
     <div class="footer-grid">
       <div>
         <div class="footer-brand-name">ConnectingCuba</div>
@@ -1754,7 +1815,7 @@
 
 <a class="fab" href="https://wa.me/17865200009" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.2.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-  <img src="img/logo-macias-circle.png" alt="" aria-hidden="true" class="fab-badge">
+  <img src="img/logos/logo-macias-circle-66.png" width="66" height="66" alt="" aria-hidden="true" class="fab-badge">
 </a>
 
 <script>
@@ -1901,7 +1962,12 @@
     let shown = 0;
 
     const videoCard = (v, label) => `<div class="video-card"><video controls preload="none" poster="${v.poster}" aria-label="${label}"><source src="${v.src}" type="video/mp4"></video></div>`;
-    const photoItem = (item, i) => `<button type="button" class="gal-item" data-index="${i}"><img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async"></button>`;
+    // Tarjeta: miniatura con el mismo recorte 3:4 que ya aplicaba la tarjeta; el visor sigue abriendo la foto original (item.src)
+    const thumb = src => src.replace(/^img\/(puertos|entregas)\/(.+)\.jpg$/, 'img/galeria/miniaturas/$1/$2');
+    // entrando directo a Galería, la primera fila queda a la vista: sin lazy (es el LCP). En otras vistas la galería
+    // está oculta y todas quedan en lazy, para no descargarlas
+    let eagerCount = document.documentElement.getAttribute('data-view') === 'galeria' ? 6 : 0;
+    const photoItem = (item, i) => `<button type="button" class="gal-item" data-index="${i}"><picture><source type="image/avif" srcset="${thumb(item.src)}.avif"><img src="${thumb(item.src)}.jpg" alt="${item.alt}" loading="${i < eagerCount ? 'eager' : 'lazy'}" decoding="async"></picture></button>`;
 
     // "Cargar más" añade la siguiente página sin reconstruir lo ya mostrado (no corta videos en reproducción)
     function appendItems(){
@@ -1923,6 +1989,7 @@
       grid.innerHTML = '';
       shown = 0;
       appendItems();
+      eagerCount = 0; // solo la carga inicial: al cambiar de pestaña la galería ya está a la vista y lazy carga al momento
     }
 
     tabs.forEach(tab => tab.addEventListener('click', () => {
@@ -2064,15 +2131,18 @@
   window.addEventListener('resize', queueFab);
 
   // ===== Router de páginas =====
-  const PAGES = ['inicio','grupo','proceso','vehiculos','calculadora','galeria','preguntas-frecuentes','contacto'];
+  const PAGES = window.CC_PAGES; // definido en el <head>, junto a la vista inicial
   const PAGE_TITLES = {inicio:'ConnectingCuba · Conectamos Estados Unidos con Cuba', grupo:'El grupo', proceso:'Cómo funciona', vehiculos:'Vehículos autorizados', calculadora:'Configura tu envío', remolques:'Remolques y plataformas', galeria:'Galería', 'preguntas-frecuentes':'Preguntas frecuentes', contacto:'Contacto'};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let currentPage = null;
   function showPage(page){
     if (!PAGES.includes(page)) page = 'inicio';
+    // la foto del Hero solo se descarga cuando Inicio se muestra; con prioridad alta si es la vista de entrada
+    if (page === 'inicio') activateHero(currentPage === null ? 'high' : 'auto');
     currentPage = page;
     document.querySelectorAll('[data-page]').forEach(el => { el.hidden = el.dataset.page !== page; });
+    document.documentElement.removeAttribute('data-view');
     document.querySelectorAll('nav.primary a').forEach(a => {
       const isActive = a.getAttribute('href') === '#' + page;
       a.classList.toggle('active', isActive);
@@ -2089,12 +2159,15 @@
       });
     } else {
       revealEls.forEach(el => el.classList.remove('in'));
-      requestAnimationFrame(() => requestAnimationFrame(() => {
+      // la entrada arranca con las fuentes web ya cargadas (tope 1 s): si el texto cambia de fuente, ocurre mientras
+      // aún es invisible y no salta; en navegaciones posteriores las fuentes ya están y arranca como siempre
+      document.documentElement.offsetHeight; // fuerza el layout para que la carga de fuentes cuente en fonts.ready
+      Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1000))]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
         revealEls.forEach((el, i) => setTimeout(() => {
           el.classList.add('in');
           animateCount(el);
         }, Math.min(i * 35, 300)));
-      }));
+      })));
     }
     updateFab();
     setTimeout(updateFab, 900);
@@ -2137,6 +2210,9 @@
   }
   window.addEventListener('hashchange', routeFromHash);
   routeFromHash();
+  // tras la carga (y el salto inicial al ancla, si lo hay) vuelve el desplazamiento suave del sitio
+  const endLoadScroll = () => document.documentElement.classList.remove('cc-cargando');
+  window.addEventListener('load', () => { window.addEventListener('scroll', endLoadScroll, {once: true}); setTimeout(endLoadScroll, 1500); });
 
   // "Saltar al contenido": lleva el foco al contenido de la vista actual sin cambiar de página
   document.querySelector('.skip-link').addEventListener('click', (e) => {
