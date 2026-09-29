@@ -2477,10 +2477,18 @@
     let eagerCount = document.documentElement.getAttribute('data-view') === 'galeria' ? 6 : 0;
     const photoItem = (item, i) => `<button type="button" class="gal-item" data-index="${i}"><picture><source type="image/avif" srcset="${thumb(item.src)}.avif"><img src="${thumb(item.src)}.jpg" alt="${item.alt}" loading="${i < eagerCount ? 'eager' : 'lazy'}" decoding="async"></picture></button>`;
 
-    // "Cargar más" añade la siguiente página sin reconstruir lo ya mostrado (no corta videos en reproducción)
-    function appendItems(){
+    // columnas reales de la cuadrícula ahora (auto-fill: dependen del ancho); 0 mientras la vista está oculta
+    const gridColumns = () => grid.offsetWidth ? getComputedStyle(grid).gridTemplateColumns.split(' ').length : 0;
+
+    // "Cargar más" añade la siguiente página sin reconstruir lo ya mostrado (no corta videos en reproducción). El corte
+    // sube hasta completar la última fila con las columnas reales: solo queda a medias cuando ya no hay más contenido.
+    // Con count = 0 solo completa la fila actual (tras un cambio de ancho)
+    function appendItems(count = PAGE_SIZE){
       const data = SETS[activeSet];
-      const next = data.slice(shown, shown + PAGE_SIZE);
+      const cols = gridColumns() || 1;
+      const end = Math.min(data.length, Math.ceil((shown + count) / cols) * cols);
+      if (end <= shown) return;
+      const next = data.slice(shown, end);
       grid.insertAdjacentHTML('beforeend', activeSet === 'proceso'
         ? next.map((v, k) => videoCard(v, `Video del proceso ${shown + k + 1}`)).join('')
         : next.map((item, k) => photoItem(item, shown + k)).join(''));
@@ -2507,7 +2515,7 @@
       renderSet();
     }));
 
-    moreBtn.addEventListener('click', appendItems);
+    moreBtn.addEventListener('click', () => appendItems());
 
     grid.addEventListener('click', (e) => {
       const item = e.target.closest('.gal-item');
@@ -2516,6 +2524,22 @@
     });
 
     renderSet();
+
+    // Si cambia el ancho (resize, giro del móvil o la vista que pasa de oculta a visible) pueden cambiar las columnas y
+    // dejar la última fila a medias: se completa con los siguientes elementos, sin ocultar nada de lo ya mostrado.
+    // Solo reacciona al ancho (añadir elementos cambia la altura) y fuera del callback, para no encadenar observaciones
+    if ('ResizeObserver' in window) {
+      let gridWidth = 0, widthTimer = 0;
+      new ResizeObserver(([entry]) => {
+        const w = entry.contentRect.width;
+        if (w === gridWidth) return;
+        clearTimeout(widthTimer);
+        // al aparecer la vista, enseguida (la cuadrícula aún está invisible por la entrada .reveal); al redimensionar,
+        // cuando el ancho se estabiliza
+        if (w) widthTimer = setTimeout(() => appendItems(0), gridWidth ? 150 : 0);
+        gridWidth = w;
+      }).observe(grid);
+    }
 
     // ----- Lightbox (diálogo modal) -----
     const lightbox = document.getElementById('lightbox');
