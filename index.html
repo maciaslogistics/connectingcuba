@@ -2912,6 +2912,16 @@
   // cualquier otro caso (ambiguo, sin registro, año sin cobertura) y siempre remolques/chasis: "Requiere consulta en
   // oficina", fuera del total. Nunca se aproxima por modelo o año vecino.
   const CONSULTA = 'Requiere consulta en oficina';
+  // Interruptor del cálculo automático de impuestos del cotizador.
+  // false: no se consulta ni se muestra ni se suma ningún impuesto; resumen, WhatsApp y formulario indican "por confirmar".
+  // true: se usa la tabla fiscal incrustada tal cual (la tabla y su lógica no cambian).
+  const TAX_CALCULATION_ENABLED = false;
+  const TAX_PENDING = {
+    label: 'Impuestos en Cuba',
+    summary: 'Por confirmar con nuestro equipo',
+    text: 'Por confirmar con nuestro equipo',
+    total: online => fmtUSD(online) + ' + impuestos por confirmar'
+  };
   const CUBA_TAXES = (function(){
     try {
       const t = JSON.parse(document.getElementById('cc-impuestos-cuba').textContent);
@@ -2990,6 +3000,8 @@
     if (pricing.custom) return { pricing, marca, modelo, taxText: CONSULTA, totalText: CONSULTA };
     const ano = Number(cfgAno.value);
     if (!Number.isInteger(ano) || !yearsFor(currentTier, marca, modelo).includes(ano)) return null;
+    // Cálculo de impuestos desactivado: no se consulta la tabla; el total es solo el flete con promoción + "por confirmar"
+    if (!TAX_CALCULATION_ENABLED) return { pricing, marca, modelo, ano, taxPending: true, taxText: TAX_PENDING.text, totalText: TAX_PENDING.total(pricing.online) };
     const tax = cubaTaxCents(marca, modelo, ano);
     return {
       pricing, marca, modelo, ano,
@@ -3021,9 +3033,9 @@
         'Flete regular: ' + fmtUSD(q.pricing.base),
         'Promoción web: ' + fmtUSD(q.pricing.online),
         'Descuento: ' + fmtUSD(q.pricing.discount),
-        'Impuestos estimados en Cuba: ' + q.taxText,
+        (q.taxPending ? TAX_PENDING.label : 'Impuestos estimados en Cuba') + ': ' + q.taxText,
         'Total estimado: ' + q.totalText
-      ], ['Quisiera revisar esta cotización con su equipo.']);
+      ], [q.taxPending ? 'Quisiera completar esta cotización con su equipo.' : 'Quisiera revisar esta cotización con su equipo.']);
     } else {
       const partial = vehicleLines(null);
       if (partial.length) groups.push(partial);
@@ -3040,6 +3052,8 @@
     [e.base, e.online, e.save].forEach(el => { el.parentElement.hidden = custom; });
     e.fleteRow.hidden = !custom;
     e.totalLabel.textContent = 'Total estimado';
+    // Etiqueta "por confirmar" solo en vehículos con año; estado vacío y remolques/chasis quedan como siempre
+    e.tax.previousElementSibling.textContent = q && q.taxPending ? TAX_PENDING.label : 'Impuestos estimados en Cuba';
     if (!q) {
       e.vehicle.textContent = 'Selecciona tu vehículo para calcular';
       e.base.classList.remove('strike');
@@ -3059,7 +3073,7 @@
       e.base.textContent = fmtUSD(q.pricing.base);
       e.online.textContent = fmtUSD(q.pricing.online);
       e.save.textContent = '−' + fmtUSD(q.pricing.discount);
-      e.tax.textContent = q.taxText;
+      e.tax.textContent = q.taxPending ? TAX_PENDING.summary : q.taxText;
       e.total.textContent = q.totalText;
       e.disclaimer.textContent = SUMMARY_DISCLAIMER;
     }
