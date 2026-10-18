@@ -57,7 +57,7 @@ for (const w of WIDTHS) {
 // ===== C–F. Galería =====
 // Comportamiento aprobado (f9999ef / 912cdb5): cada carga revela ~12 y se redondea HACIA ARRIBA a filas completas según las
 // columnas reales de la cuadrícula; solo la última carga, sin más contenido, puede dejar la fila a medias. Entregas: 5 videos fijos.
-const PAGE = 12, TOTAL = { puerto: 82, entregas: 90, proceso: 52 }, VIDEOS_ENTREGAS = 5;
+const PAGE = 12, TOTAL = { puerto: 82, entregas: 90, proceso: 66 }, VIDEOS_ENTREGAS = 5;
 const firstPage = (total, cols) => Math.min(total, Math.ceil(PAGE / cols) * cols);
 const nextPage = (shown, total, cols) => Math.min(total, Math.ceil((shown + PAGE) / cols) * cols);
 const seqFrom = (start, total, cols) => { const s = []; for (let n = start; n < total;) { n = nextPage(n, total, cols); s.push(n); } return s; };

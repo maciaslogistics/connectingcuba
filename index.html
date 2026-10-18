@@ -2496,8 +2496,9 @@
       { src: 'video/proceso-4.mp4', poster: 'img/video-posters/proceso-4.jpg' },
       { src: 'video/proceso-5.mp4', poster: 'img/video-posters/proceso-5.jpg' },
     ];
-    const PROCESO = Array.from({ length: 52 }, (_, i) => {
-      const n = String(i + 1).padStart(2, '0');
+    // tanda nueva primero, de la más reciente (53) a la más antigua (66); detrás, las 52 anteriores en su orden
+    const PROCESO = [...Array.from({ length: 14 }, (_, i) => 53 + i), ...Array.from({ length: 52 }, (_, i) => i + 1)].map(i => {
+      const n = String(i).padStart(2, '0');
       return { src: `video/operaciones-${n}.mp4`, poster: `img/video-posters/operaciones-${n}.jpg` };
     });
     const SETS = { entregas: ENTREGAS, puerto: PUERTO, proceso: PROCESO };
