@@ -3269,4 +3269,35 @@
       });
     };
   })(document,"script");
+
+  // Burbuja del chat: se oculta (función oficial del SDK) con el menú móvil o el visor de fotos abiertos y mientras
+  // quedaría encima de los enlaces del pie, con el mismo criterio que el WhatsApp flotante; reaparece al terminar
+  window.addEventListener('chatwoot:ready', () => {
+    const footerLinks = document.querySelectorAll('.footer-grid > div:not(:first-child), .footer-bottom');
+    let caja = null, oculta = false, marco = 0;
+    const medir = () => {
+      const r = document.querySelector('.woot-widget-bubble:not(.woot--close)')?.getBoundingClientRect();
+      if (r && r.width) caja = { l: r.left, w: r.width, h: r.height, desdeAbajo: window.innerHeight - r.top };
+    };
+    // franja vertical de los enlaces del pie que cae en la columna de la burbuja (como en updateFab)
+    const sobrePie = () => {
+      if (!caja) return false;
+      const pad = 8, l = caja.l - pad, r = caja.l + caja.w + pad, t = window.innerHeight - caja.desdeAbajo - pad, b = t + caja.h + 2 * pad;
+      let top = Infinity, bottom = -Infinity;
+      footerLinks.forEach(el => { const rc = el.getBoundingClientRect(); if (rc.width && rc.left < r && rc.right > l) { top = Math.min(top, rc.top); bottom = Math.max(bottom, rc.bottom); } });
+      return top < b && bottom > t;
+    };
+    const actualizar = () => {
+      marco = 0;
+      if (window.$chatwoot.isOpen) return; // con el chat abierto no se toca su botón
+      if (!oculta) medir();
+      const ocultar = document.body.classList.contains('nav-open') || document.body.classList.contains('lb-open') || sobrePie();
+      if (ocultar !== oculta) { oculta = ocultar; window.$chatwoot.toggleBubbleVisibility(ocultar ? 'hide' : 'show'); }
+    };
+    const pedir = () => { if (!marco) marco = requestAnimationFrame(actualizar); };
+    new MutationObserver(pedir).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('scroll', pedir, {passive: true});
+    window.addEventListener('resize', pedir);
+    actualizar();
+  });
 </script>
