@@ -3243,3 +3243,30 @@
   wireQuoteForm(document.getElementById('cfg-contact-form'), quoteFormFields);
   wireQuoteForm(document.getElementById('contacto-form'));
 </script>
+
+<!-- ============ CHAT EN VIVO (widget oficial de Chatwoot) ============ -->
+<script>
+  window.chatwootSettings = {
+    "position": "left",
+    "type": "standard",
+    "launcherTitle": "Chatea con nosotros"
+  };
+
+  (function(d,t) {
+    var BASE_URL = "https://app.chatwoot.com";
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+
+    g.src = BASE_URL + "/packs/js/sdk.js";
+    g.async = true;
+
+    s.parentNode.insertBefore(g,s);
+
+    g.onload = function() {
+      window.chatwootSDK.run({
+        websiteToken: '7F7sPYVGArvHyEUXq322oEKh',
+        baseUrl: BASE_URL
+      });
+    };
+  })(document,"script");
+</script>
