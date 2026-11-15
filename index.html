@@ -629,7 +629,9 @@
 
   /* ============ WHATSAPP FAB ============ */
   .fab{position:fixed; right:calc(20px + env(safe-area-inset-right, 0px)); bottom:calc(20px + env(safe-area-inset-bottom, 0px)); z-index:50; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 0 rgba(37,211,102,.5); text-decoration:none; transition:transform .15s ease, filter .15s ease, opacity .2s ease, visibility 0s; animation:fab-pulse 2.8s ease-out infinite}
-  .fab.fab-away, body.nav-open .fab, body.lb-open .fab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s linear .2s}
+  /* con el chat en vivo en la página, WhatsApp sube y se alinea sobre su burbuja (esquina inferior derecha) */
+  body.chat-activo .fab{right:calc(24px + env(safe-area-inset-right, 0px)); bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+  .fab.fab-away, body.nav-open .fab, body.lb-open .fab, body.chat-oculto .fab, body.chat-abierto .fab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s linear .2s}
   .fab:hover{filter:brightness(1.06); transform:scale(1.06); animation-play-state:paused}
   .fab-badge{position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:50%; border:2px solid var(--paper); background:var(--navy); box-shadow:0 1px 3px rgba(0,0,0,.3)}
   @keyframes fab-pulse{
@@ -3247,7 +3249,7 @@
 <!-- ============ CHAT EN VIVO (widget oficial de Chatwoot) ============ -->
 <script>
   window.chatwootSettings = {
-    "position": "left",
+    "position": "right",
     "type": "standard",
     "launcherTitle": "Chatea con nosotros"
   };
@@ -3270,9 +3272,22 @@
     };
   })(document,"script");
 
+  {
+  // WhatsApp sube sobre la burbuja del chat mientras el chat está en la página; vuelve a su esquina si el chat no carga
+  document.body.classList.add('chat-activo');
+  const sinChat = () => document.body.classList.remove('chat-activo');
+  document.querySelector('script[src="https://app.chatwoot.com/packs/js/sdk.js"]')?.addEventListener('error', sinChat);
+  const esperaChat = setTimeout(sinChat, 15000);
+
   // Burbuja del chat: se oculta (función oficial del SDK) con el menú móvil o el visor de fotos abiertos y mientras
-  // quedaría encima de los enlaces del pie, con el mismo criterio que el WhatsApp flotante; reaparece al terminar
+  // quedaría encima de los enlaces del pie, con el mismo criterio que el WhatsApp flotante; reaparece al terminar.
+  // WhatsApp, apilado encima, se oculta con ella y mientras el chat está abierto
   window.addEventListener('chatwoot:ready', () => {
+    clearTimeout(esperaChat);
+    document.body.classList.add('chat-activo');
+    const holder = document.querySelector('.woot-widget-holder');
+    const chatAbierto = () => document.body.classList.toggle('chat-abierto', !!holder && !holder.classList.contains('woot--hide'));
+    if (holder) new MutationObserver(chatAbierto).observe(holder, { attributes: true, attributeFilter: ['class'] });
     const footerLinks = document.querySelectorAll('.footer-grid > div:not(:first-child), .footer-bottom');
     let caja = null, oculta = false, marco = 0;
     const medir = () => {
@@ -3292,7 +3307,7 @@
       if (window.$chatwoot.isOpen) return; // con el chat abierto no se toca su botón
       if (!oculta) medir();
       const ocultar = document.body.classList.contains('nav-open') || document.body.classList.contains('lb-open') || sobrePie();
-      if (ocultar !== oculta) { oculta = ocultar; window.$chatwoot.toggleBubbleVisibility(ocultar ? 'hide' : 'show'); }
+      if (ocultar !== oculta) { oculta = ocultar; window.$chatwoot.toggleBubbleVisibility(ocultar ? 'hide' : 'show'); document.body.classList.toggle('chat-oculto', ocultar); }
     };
     const pedir = () => { if (!marco) marco = requestAnimationFrame(actualizar); };
     new MutationObserver(pedir).observe(document.body, { attributes: true, attributeFilter: ['class'] });
@@ -3300,4 +3315,5 @@
     window.addEventListener('resize', pedir);
     actualizar();
   });
+  }
 </script>
